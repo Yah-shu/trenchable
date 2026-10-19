@@ -1,11 +1,12 @@
 /**
  * An effect's face: your own newest result made with it — a clip plays muted while the
- * pointer is over it, as the reference app's previews do — or, until you have one, a typographic
- * card that says what the effect does and that the first run becomes its cover. No stock
- * previews and no spend to make them.
+ * pointer is over it, as the reference app's previews do — or, until you have one, a sample animation of
+ * the effect drawn in code (EffectDemo.tsx) under its name, and a line saying your first run becomes
+ * its cover. No stock previews, no media files and no spend to make them.
  */
 import { useRef } from 'react'
 import type { Cover } from '../../presets.ts'
+import { EffectDemo } from './EffectDemo.tsx'
 
 /** Placeholder shapes, picked by id so the masonry has rhythm and a card never jumps. */
 const SHAPES = ['4 / 5', '1 / 1', '3 / 4', '5 / 6', '4 / 5']
@@ -54,11 +55,12 @@ export function EffectCover({
     )
   }
   return (
-    <span className={`ef-cover is-empty ${compact ? 'is-compact' : ''}`} style={compact ? undefined : { aspectRatio: shapeOf(id) }}>
+    <span className={`ef-cover is-empty has-demo ${compact ? 'is-compact' : ''}`} style={compact ? undefined : { aspectRatio: shapeOf(id) }}>
+      <EffectDemo id={id} />
       {kicker && <span className="ef-cover-kicker">{kicker}</span>}
       <span className="ef-cover-title">{title}</span>
       {note && !compact && <span className="ef-cover-note">{note}</span>}
-      {!compact && <span className="ef-cover-hint">No preview yet — your first run becomes the cover</span>}
+      {!compact && <span className="ef-cover-hint">Sample · your first run replaces it</span>}
     </span>
   )
 }

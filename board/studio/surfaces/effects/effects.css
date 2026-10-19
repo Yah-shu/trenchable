@@ -172,6 +172,32 @@
   line-height: 1.35;
   color: var(--pl-mute);
 }
+/* With a sample animation (EffectDemo.tsx) behind it: the words sit on a paper fade at the foot of the card. */
+.ef-cover.is-empty.has-demo {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  gap: 4px;
+  padding: 0 12px 12px;
+}
+.ef-cover.is-empty.has-demo::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 38%;
+  background: linear-gradient(180deg, transparent, var(--pl-paper) 58%);
+  z-index: 0;
+}
+.ef-cover.is-empty.has-demo > :not(.ef-demo) {
+  position: relative;
+  z-index: 1;
+}
+.ef-cover.is-empty.has-demo .ef-cover-title {
+  font-size: 19px;
+}
+.ef-cover.is-empty.has-demo .ef-cover-note {
+  font-size: 11.5px;
+}
 /* The rail's card: one short frame, name over it. */
 .ef-cover.is-compact {
   aspect-ratio: 16 / 10;
