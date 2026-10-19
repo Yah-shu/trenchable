@@ -1,6 +1,6 @@
 # Trenchable
 
-An AI image, video and audio studio that runs on your own computer and uses your own [Kie.ai](https://kie.ai) account.
+An AI image, video and audio studio that runs on your own computer and uses your own [Kie.ai](https://kie.ai?ref=d63ec5bbbb733f26cd5d4ced27d29ee0) account.
 One page, every model Kie offers, your results kept on your disk.
 
 > Unofficial. Trenchable is not made by, endorsed by or connected with kie.ai or any model provider.
