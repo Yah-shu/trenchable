@@ -1,0 +1,8 @@
+# Made by setup.ps1 / setup.sh (big, machine-specific: never commit)
+venv/
+cache/
+installed.json
+
+# Python caches
+__pycache__/
+*.pyc

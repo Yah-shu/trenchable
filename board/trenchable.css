@@ -1,0 +1,43 @@
+/* Trenchable's own bits on top of the shared Plinth look (theme/plinth.css): the first-run key banner. */
+
+.tr-key {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 16px 0;
+  padding: 10px 14px;
+  border: 2px solid var(--pl-ink);
+  border-radius: var(--pl-radius, 12px);
+  background: var(--pl-paper);
+  color: var(--pl-ink);
+  font-size: 13px;
+}
+.tr-key a {
+  color: inherit;
+  font-weight: 700;
+}
+.tr-key input {
+  flex: 1;
+  min-width: 220px;
+  min-height: 34px;
+  padding: 0 10px;
+  border: 2px solid var(--pl-ink);
+  border-radius: 10px;
+  background: var(--pl-canvas);
+  font: inherit;
+}
+.tr-key__error {
+  width: 100%;
+  color: var(--pl-coral);
+  font-weight: 600;
+}
+
+/* The credits pill is a link to top up on Kie. */
+a.tr-credits {
+  color: inherit;
+  text-decoration: none;
+}
+a.tr-credits:hover {
+  text-decoration: underline;
+}

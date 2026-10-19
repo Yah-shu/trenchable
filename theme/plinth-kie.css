@@ -1,0 +1,698 @@
+/*
+  Kie Studio in Plinth (from 2026-10-10). Replaces theme/dark.css and the solid skin
+  (theme/pixel-skin.ts + theme/solid-kie.css). Loaded after src/index.css by i18n/vite-plugin.mjs;
+  upstream files under src/ stay untouched.
+
+  theme/plinth.css brings the fonts, the tokens and the base, and remaps every upstream token
+  (src/index.css) to light values, so most of the form already reads Plinth. This file restyles what
+  the tokens can't reach: the pill controls, the category tabs, the favourite star, the popovers,
+  the gallery tiles, the sticky bars, the agent drawer. Applies always: the form only appears inside
+  Trenchable now, and on its own it should look the same.
+
+  Language: canvas / paper fills, 2px ink outline (1px hairline for quiet dividers), 12px radius
+  (10px for controls), coral accents, the press (ink base, face 4px up, 6px on hover, 0 pressed).
+
+  Sections:
+    1. Type
+    2. Panels, dialogs, popovers, menus
+    3. Buttons, the favourite star
+    4. Fields, labels, chips
+    5. Segments and the category tabs
+    6. Create form: sticky bars, model picker, links, drop tiles, generate bar
+    7. Top bar
+    8. Gallery
+    9. Agent
+*/
+
+@import './plinth.css';
+
+/* —— 1. Type —— */
+
+/* Kie's headings that aren't h1–h3: the display face. */
+.studio-display,
+.studio-empty-title,
+#viewer-title,
+.material-sheet .text-lg.font-bold {
+  font-family: var(--pl-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--pl-ink);
+}
+
+.gallery-toolbar h2 {
+  font-size: 1.125rem;
+  line-height: 1.2;
+}
+
+/* Kie's tiniest text a pixel up; faded text back to readable. */
+.text-\[9px\] {
+  font-size: 10px;
+}
+
+.text-\[10px\] {
+  font-size: 11px;
+}
+
+:is(p, span).opacity-70 {
+  opacity: 0.85;
+}
+
+::placeholder {
+  color: var(--pl-mute);
+  opacity: 1;
+}
+
+.studio-select option {
+  background: var(--pl-canvas);
+  color: var(--pl-ink);
+}
+
+.gallery-toolbar {
+  border-bottom: 1px solid var(--pl-hairline);
+}
+
+/* Spinners: an ink arc on a hairline track. */
+.studio-spinner.rounded-full {
+  border-color: var(--pl-hairline);
+  border-top-color: currentColor;
+}
+
+.studio-skeleton {
+  background: var(--pl-paper-deep);
+  border-radius: 8px;
+}
+
+/* —— 2. Panels, dialogs, popovers, menus —— */
+
+/* The two columns and the top bar: outlined, rounded, flat. */
+.material,
+.material-chrome,
+.material-panel {
+  border: var(--pl-edge) solid var(--pl-ink);
+  border-radius: var(--pl-radius);
+  background: var(--pl-canvas);
+  box-shadow: none;
+}
+
+.studio-card-surface {
+  background: var(--pl-canvas);
+  border: 1px solid var(--pl-hairline);
+  border-radius: var(--pl-radius);
+}
+
+/* Dialogs and heavy panels float: outlined, with the soft shadow. */
+.material-sheet,
+.material-panel-heavy {
+  border: var(--pl-edge) solid var(--pl-ink);
+  border-radius: var(--pl-radius);
+  background: var(--pl-canvas);
+  box-shadow: var(--shadow-lg);
+  color: var(--pl-ink);
+}
+
+/* Popovers: the model list and the "…" menus. */
+.model-picker > div,
+details:not(.model-picker) > div.absolute {
+  border: var(--pl-edge) solid var(--pl-ink);
+  border-radius: var(--pl-radius);
+  background: var(--pl-canvas);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+details:not(.model-picker) > div.absolute {
+  margin-top: 6px;
+}
+
+/* Menu items: paper on hover; the destructive one goes soft red. */
+details:not(.model-picker) > div.absolute > button {
+  font-weight: 600;
+  border-radius: 0;
+}
+
+details:not(.model-picker) > div.absolute > button:not([class*='--danger']) {
+  color: var(--pl-ink);
+}
+
+details:not(.model-picker) > div.absolute > button:hover {
+  background: var(--pl-paper);
+}
+
+details:not(.model-picker) > div.absolute > button[class*='--danger']:hover {
+  background: var(--pl-bad-soft);
+  color: var(--pl-bad);
+}
+
+/* The agent's conversation drawer. */
+aside.fixed {
+  border: var(--pl-edge) solid var(--pl-ink);
+  border-radius: var(--pl-radius);
+  background: var(--pl-canvas);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Dialog header icons: the small paper tile. */
+.material-sheet span.size-10.shrink-0 {
+  background: var(--pl-paper);
+  border: 1px solid var(--pl-ink);
+  border-radius: 8px;
+  color: var(--pl-ink);
+}
+
+/* —— 3. Buttons —— */
+
+/* The outlined press, small. Primary gets the coral face. */
+.studio-btn,
+.studio-btn-primary {
+  position: relative;
+  min-height: 36px;
+  padding: 0 14px;
+  background: var(--pl-canvas);
+  border: 2px solid var(--pl-ink);
+  border-radius: 10px;
+  color: var(--pl-ink);
+  font: 600 13px/1 var(--pl-body);
+  letter-spacing: -0.005em;
+  box-shadow: 0 var(--pl-rest) 0 var(--pl-ink);
+  transform: translateY(calc(-1 * var(--pl-rest) / 2));
+  transition:
+    transform 120ms var(--pl-ease),
+    box-shadow 120ms var(--pl-ease),
+    background-color 180ms var(--pl-ease);
+}
+
+/* The Generate CTA keeps its size; inline primaries (studio-btn-compact) keep upstream's compact size. */
+.studio-btn-primary {
+  min-height: 44px;
+  padding: 0 20px;
+  background: var(--pl-coral);
+  color: var(--pl-ink);
+  font-size: 15px;
+}
+
+.studio-btn-primary.studio-btn-compact {
+  font-size: 13px;
+}
+
+:is(.studio-btn, .studio-btn-primary):hover:not(:disabled) {
+  background: var(--pl-paper);
+  border-color: var(--pl-ink);
+  transform: translateY(calc(-1 * var(--pl-hover) / 2 - 1px));
+  box-shadow: 0 var(--pl-hover) 0 var(--pl-ink);
+}
+
+.studio-btn-primary:hover:not(:disabled) {
+  background: var(--pl-coral);
+}
+
+:is(.studio-btn, .studio-btn-primary):active:not(:disabled) {
+  transform: translateY(calc(var(--pl-rest) / 2));
+  box-shadow: 0 0 0 var(--pl-ink);
+}
+
+/* Text inside a button follows the button's own colour. */
+:is(.studio-btn, .studio-btn-primary):hover:not(:disabled) :is(span, svg) {
+  color: inherit;
+}
+
+/* Pressed toggles (Compare) sit in ink. */
+.studio-btn[aria-pressed='true'] {
+  background: var(--pl-ink);
+  color: var(--pl-canvas);
+}
+
+.studio-btn[aria-pressed='true']:hover:not(:disabled) {
+  background: #2a2a2a;
+}
+
+/* Destructive buttons keep their red and light up soft red. */
+.studio-btn[class*='text-[var(--danger)]'] {
+  color: var(--pl-bad);
+}
+
+.studio-btn[class*='text-[var(--danger)]']:hover:not(:disabled) {
+  border-color: var(--pl-bad);
+  background: var(--pl-bad-soft);
+  color: var(--pl-bad);
+  box-shadow: 0 var(--pl-hover) 0 var(--pl-bad);
+}
+
+/* Disabled: flat, resting, still readable. */
+:is(.studio-btn, .studio-btn-primary):disabled {
+  opacity: 1;
+  border-color: #b9b3a8;
+  background: var(--pl-paper-deep);
+  color: var(--pl-mute);
+  box-shadow: none;
+  transform: none;
+  cursor: not-allowed;
+}
+
+/* Favourite star: a control like the buttons; coral-soft when on. */
+.model-favorite-button {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 2px solid var(--pl-ink);
+  border-radius: 10px;
+  background: var(--pl-canvas);
+  color: var(--pl-ink);
+  font: 600 13px/1 var(--pl-body);
+  box-shadow: 0 var(--pl-rest) 0 var(--pl-ink);
+  transform: translateY(calc(-1 * var(--pl-rest) / 2));
+  transition:
+    transform 120ms var(--pl-ease),
+    box-shadow 120ms var(--pl-ease),
+    background-color 180ms var(--pl-ease);
+}
+
+.model-favorite-button.is-active {
+  background: var(--pl-coral-soft);
+  color: var(--pl-ink);
+  box-shadow: 0 var(--pl-rest) 0 var(--pl-ink);
+}
+
+.model-favorite-button:hover:not(:disabled) {
+  background: var(--pl-paper);
+  color: var(--pl-ink);
+  transform: translateY(calc(-1 * var(--pl-hover) / 2 - 1px));
+  box-shadow: 0 var(--pl-hover) 0 var(--pl-ink);
+}
+
+.model-favorite-button.is-active:hover:not(:disabled) {
+  background: var(--pl-coral);
+}
+
+.model-favorite-button:active:not(:disabled) {
+  transform: translateY(calc(var(--pl-rest) / 2));
+  box-shadow: 0 0 0 var(--pl-ink);
+}
+
+.model-favorite-button:disabled {
+  opacity: 1;
+  border-color: #b9b3a8;
+  background: var(--pl-paper-deep);
+  color: var(--pl-mute);
+  box-shadow: none;
+  transform: none;
+}
+
+/* —— 4. Fields, labels, chips —— */
+
+.studio-input,
+.studio-select {
+  padding: 0.6rem 0.75rem;
+  background: var(--pl-canvas);
+  border: 2px solid var(--pl-ink);
+  border-radius: 10px;
+  color: var(--pl-ink);
+  font-size: 14px;
+  box-shadow: none;
+}
+
+textarea.studio-input {
+  border-radius: var(--pl-radius);
+}
+
+:is(.studio-input, .studio-select):hover:not(:disabled) {
+  background: var(--pl-paper);
+  border-color: var(--pl-ink);
+}
+
+:is(.studio-input, .studio-select):focus {
+  background: var(--pl-canvas);
+  border-color: var(--pl-ink);
+  box-shadow: 0 0 0 3px var(--pl-coral);
+  outline: none;
+}
+
+:is(.studio-input, .studio-select)[aria-invalid='true'] {
+  border-color: var(--pl-bad);
+}
+
+:is(.studio-input, .studio-select):disabled {
+  opacity: 1;
+  border-color: #b9b3a8;
+  background: var(--pl-paper-deep);
+  color: var(--pl-mute);
+  cursor: not-allowed;
+}
+
+.studio-label {
+  color: var(--pl-ink);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.studio-field-error {
+  color: var(--pl-bad);
+  font-weight: 600;
+}
+
+/* Chips: outlined pills; the chosen one is ink. */
+.studio-chip {
+  background: var(--pl-canvas);
+  border: 1px solid var(--pl-ink);
+  border-radius: 999px;
+  color: var(--pl-ink);
+  font-weight: 600;
+}
+
+.studio-chip:hover {
+  background: var(--pl-paper);
+  border-color: var(--pl-ink);
+  color: var(--pl-ink);
+}
+
+.studio-chip.is-active {
+  background: var(--pl-ink);
+  border-color: var(--pl-ink);
+  color: var(--pl-canvas);
+}
+
+/* —— 5. Segments and the category tabs: the dark pill strip —— */
+
+.studio-segment,
+[role='tablist']:has(> #tab-image) {
+  gap: 2px;
+  padding: 3px;
+  background: var(--pl-ink);
+  border: 0;
+  border-radius: 10px;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.studio-segment-item,
+[role='tablist']:has(> #tab-image) > [role='tab'] {
+  min-height: 32px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 7px;
+  color: #fff;
+  font: 600 13px/1 var(--pl-body);
+  letter-spacing: 0;
+  overflow: hidden;
+}
+
+.studio-segment-item:hover:not(:disabled):not([aria-selected='true']),
+[role='tablist']:has(> #tab-image) > [role='tab']:hover:not(:disabled):not([aria-selected='true']) {
+  background: rgb(255 255 255 / 0.14);
+  color: #fff;
+}
+
+.studio-segment-item[aria-selected='true'],
+[role='tablist']:has(> #tab-image) > [role='tab'][aria-selected='true'] {
+  background: var(--pl-canvas);
+  color: var(--pl-ink);
+}
+
+/* The category tabs draw their active fill with an inner span: canvas, same radius. */
+[role='tablist']:has(> #tab-image) > [role='tab'] > span[aria-hidden] {
+  border-radius: 7px;
+  background: var(--pl-canvas);
+}
+
+[role='tablist']:has(> #tab-image) > [role='tab'][aria-selected='true'] {
+  background: transparent;
+}
+
+.studio-segment-item:disabled,
+[role='tablist']:has(> #tab-image) > [role='tab']:disabled {
+  opacity: 0.45;
+}
+
+/* —— 6. Create form —— */
+
+/*
+  Pin the tabs header and the Generate footer flush to the panel edges. Sticky elements stop at
+  the scroller's padding edge, so upstream's pt-5 / pb-3 left gaps where scrolled content showed
+  through. Move that spacing into the bars and make both opaque.
+*/
+[role='complementary'] > .overflow-y-auto {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+[role='complementary'] .sticky:has(> [role='tablist'] > #tab-image) {
+  margin-top: 0;
+  background: var(--pl-canvas);
+  border-bottom: 1px solid var(--pl-hairline);
+  box-shadow: none;
+}
+
+.studio-sticky-cta {
+  background: var(--pl-canvas);
+  border-top: 1px solid var(--pl-hairline);
+  box-shadow: none;
+  margin-bottom: 0;
+  padding-top: var(--space-3);
+  padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
+}
+
+@media (max-width: 1023px) {
+  .studio-sticky-cta {
+    background: var(--pl-canvas);
+    box-shadow: none;
+  }
+}
+
+/* Generate bar: model and batch labels in ink; the "needs attention" line as a coral tag. */
+.studio-sticky-cta > div:first-child > span:first-child,
+.studio-sticky-cta [role='group'] > span {
+  color: var(--pl-ink);
+  font-weight: 600;
+}
+
+.studio-sticky-cta > button:not(.studio-btn-primary) {
+  padding: 4px 10px;
+  border: 1px solid var(--pl-ink);
+  border-radius: 999px;
+  background: var(--pl-coral-soft);
+  color: var(--pl-ink);
+  font-weight: 600;
+}
+
+.studio-sticky-cta > button:not(.studio-btn-primary):hover {
+  background: var(--pl-coral);
+}
+
+/* Model selector: the chosen model in weight 600; the open list marks the current one coral-soft. */
+.model-picker > summary :is(.text-sm, .text-\[10px\]) {
+  font-weight: 600;
+}
+
+.model-picker > summary svg {
+  color: var(--pl-ink);
+}
+
+.model-picker[open] > summary {
+  box-shadow: 0 0 0 3px var(--pl-coral);
+}
+
+.model-picker li:has(> [aria-current='true']) {
+  background: var(--pl-coral-soft);
+}
+
+.model-picker li:has(> [aria-current='true']) :is(span, svg) {
+  color: var(--pl-ink);
+}
+
+/* Docs link and "view specs": the coral-underlined link. */
+[role='complementary'] a[target='_blank']:not(.studio-btn) {
+  color: var(--pl-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--pl-coral);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+[role='complementary'] a[target='_blank']:not(.studio-btn):hover {
+  background: var(--pl-coral-soft);
+}
+
+[role='complementary'] details:not(.model-picker) > summary {
+  color: var(--pl-ink);
+  font-weight: 600;
+}
+
+/* Add-file tiles: a dashed ink drop box; paper on hover. */
+button.border.border-dashed {
+  border: 2px dashed var(--pl-ink);
+  border-radius: var(--pl-radius);
+  background: var(--pl-canvas);
+  color: var(--pl-ink);
+  font-weight: 600;
+}
+
+button.border.border-dashed:hover:not(:disabled) {
+  border-style: solid;
+  background: var(--pl-paper);
+}
+
+/* Lines tinted with the accent (upload progress, selection) read ink. */
+:is([class*='border-[var(--accent)]/'], [class*='border-[var(--success']) {
+  border-color: var(--pl-ink);
+}
+
+/* —— 7. Top bar —— */
+
+/* Credits left / recent usage: the paper stat box. */
+[role='banner'] [class*='bg-[var(--surface-raised)]'] {
+  border: 1px solid var(--pl-ink);
+  border-radius: 10px;
+  background: var(--pl-paper);
+  box-shadow: none;
+}
+
+[role='banner'] .w-px {
+  background: var(--pl-hairline);
+}
+
+/* No API key: a warning tag. Credits error: a red one. */
+[role='banner'] [class*='bg-[var(--warning)]/'] {
+  border: 1px solid var(--pl-ink);
+  border-radius: 999px;
+  background: var(--pl-warn-soft);
+  color: var(--pl-ink);
+  font-weight: 600;
+}
+
+[role='banner'] [class*='bg-[var(--danger)]/'] {
+  border: 1px solid var(--pl-bad);
+  border-radius: 999px;
+  background: var(--pl-bad-soft);
+  color: var(--pl-bad);
+  font-weight: 600;
+}
+
+/* —— 8. Gallery —— */
+
+/*
+  Tiles: the edge is drawn over the tile (an outline would sit under the tile's positioned media,
+  and outside it the scroller clips it). Hairline at rest, ink on hover, coral ring when selected.
+*/
+.studio-tile {
+  isolation: isolate;
+  background: var(--pl-canvas);
+  border-radius: var(--pl-radius);
+  transition: transform 120ms var(--pl-ease);
+}
+
+.studio-tile,
+.studio-tile.is-selected {
+  outline: none;
+}
+
+.studio-tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 1px solid var(--pl-hairline);
+  border-radius: var(--pl-radius);
+  pointer-events: none;
+  transition: border-color 120ms var(--pl-ease), box-shadow 120ms var(--pl-ease);
+}
+
+.studio-tile.group:hover::after {
+  border: 2px solid var(--pl-ink);
+}
+
+.studio-tile.is-selected::after {
+  border: 2px solid var(--pl-ink);
+  box-shadow: inset 0 0 0 3px var(--pl-coral);
+}
+
+.studio-tile.group:hover {
+  transform: translateY(-2px);
+}
+
+/* Caption over the media: white on ink. */
+.studio-tile-scrim {
+  background: rgb(17 17 17 / 0.72);
+}
+
+/* Category badge. */
+.studio-tile span.absolute.left-2.top-2 {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Card actions: ink icons; paper on hover, soft red for delete. Pinned stays ink. */
+.studio-tile.group > .border-t {
+  border-top: 1px solid var(--pl-hairline);
+}
+
+.studio-tile.group > .border-t > button:not([aria-pressed='true'], [class*='--danger']) {
+  color: var(--pl-ink);
+}
+
+.studio-tile.group > .border-t > button:hover:not(:disabled) {
+  background: var(--pl-paper);
+  border-radius: 8px;
+}
+
+.studio-tile.group > .border-t > button.ml-auto:hover:not(:disabled) {
+  background: var(--pl-bad-soft);
+  color: var(--pl-bad);
+}
+
+/* —— 9. Agent —— */
+
+/* Conversation list: paper on hover, the open one in ink. */
+aside li > button {
+  color: var(--pl-ink);
+  border-radius: 8px;
+}
+
+aside li > button:hover {
+  background: var(--pl-paper);
+}
+
+aside li > button.font-medium {
+  background: var(--pl-ink);
+  color: var(--pl-canvas);
+}
+
+/* LLM provider choice: the chosen one gets the coral ring; unavailable ones dashed but readable. */
+[role='radio'] {
+  border-radius: 10px;
+}
+
+[role='radio'][aria-checked='true'] {
+  border-color: var(--pl-ink);
+  box-shadow: 0 0 0 3px var(--pl-coral);
+}
+
+[role='radio']:disabled {
+  opacity: 1;
+  border-style: dashed;
+  border-color: #b9b3a8;
+  background: var(--pl-paper-deep);
+  color: var(--pl-mute);
+  cursor: not-allowed;
+}
+
+/* Warning boxes ("no LLM providers"): the warning tag. */
+div[class*='border-[var(--warning)]'] {
+  border: 1px solid var(--pl-ink);
+  border-radius: var(--pl-radius);
+  background: var(--pl-warn-soft);
+  color: var(--pl-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .studio-btn,
+  .studio-btn-primary,
+  .model-favorite-button,
+  .studio-tile,
+  .studio-tile::after {
+    transition: none;
+  }
+
+  .studio-tile.group:hover {
+    transform: none;
+  }
+}

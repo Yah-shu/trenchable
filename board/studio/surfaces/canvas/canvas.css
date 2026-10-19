@@ -1,0 +1,398 @@
+/*
+  Canvas — the reference app's node board in Plinth: compact cards with 2px ink outlines, typed
+  handles coloured by what they carry (prompt = ink, picture = coral, video = info blue),
+  and a top bar over a full-height flow. Every colour is a Plinth token.
+*/
+
+.cv-root {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  color: var(--pl-ink);
+  font: 13px/1.4 var(--pl-body);
+}
+
+/* ---------- top bar ---------- */
+
+.cv-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--pl-hairline);
+  background: var(--pl-canvas);
+}
+.cv-bar-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cv-bar-title {
+  font: 600 15px/1 var(--pl-display);
+  margin-right: 4px;
+}
+.cv-bar-sep {
+  width: 1px;
+  height: 24px;
+  background: var(--pl-hairline);
+}
+.cv-bar-label {
+  color: var(--pl-mute);
+  font-size: 12px;
+  font-weight: 500;
+}
+.cv-bar-spacer {
+  flex: 1;
+}
+.cv-board-select,
+.cv-board-name {
+  min-width: 180px;
+  max-width: 240px;
+  height: 36px;
+}
+.cv-progress {
+  color: var(--pl-mute);
+  font-size: 12px;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cv-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-self: center;
+  max-width: min(720px, 92%);
+  margin: 8px 16px 0;
+  padding: 6px 8px 6px 14px;
+  background: var(--pl-coral-soft);
+  border: 1px solid var(--pl-ink);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.cv-notice.is-bad {
+  background: var(--pl-bad-soft);
+}
+.cv-notice button {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--pl-ink);
+  cursor: pointer;
+}
+.cv-notice button:hover {
+  background: var(--pl-canvas);
+}
+
+/* ---------- the flow ---------- */
+
+.cv-flow {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  background: var(--pl-paper);
+}
+.cv-flow > .react-flow {
+  position: absolute;
+  inset: 0;
+}
+.cv-flow .react-flow__controls {
+  border: 2px solid var(--pl-ink);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: none;
+}
+.cv-flow .react-flow__controls-button {
+  background: var(--pl-canvas);
+  border-bottom: 1px solid var(--pl-hairline);
+}
+.cv-flow .react-flow__controls-button:hover {
+  background: var(--pl-paper);
+}
+.cv-flow .react-flow__minimap {
+  border: 2px solid var(--pl-ink);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--pl-canvas);
+  /* Room underneath for React Flow's attribution: it asks non-Pro users to keep it visible. */
+  margin-bottom: 26px;
+}
+.cv-flow .react-flow__attribution {
+  padding: 2px 6px;
+  margin: 0 6px 4px 0;
+  border-radius: 999px;
+  background: transparent;
+  font: 500 9px/1.2 var(--pl-body);
+  opacity: 0.55;
+}
+.cv-flow .react-flow__attribution a {
+  color: var(--pl-mute);
+}
+.cv-flow .react-flow__node {
+  /* xyflow's default node chrome is replaced by the card. */
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+
+/* edges, coloured by what they carry */
+.cv-edge .react-flow__edge-path {
+  stroke-width: 2;
+}
+.cv-edge.is-text .react-flow__edge-path {
+  stroke: var(--pl-ink);
+  stroke-dasharray: 5 4;
+}
+.cv-edge.is-image .react-flow__edge-path {
+  stroke: var(--pl-coral);
+}
+.cv-edge.is-video .react-flow__edge-path {
+  stroke: var(--pl-info);
+}
+.cv-edge.selected .react-flow__edge-path {
+  stroke-width: 3.5;
+}
+
+/* ---------- cards ---------- */
+
+.cv-node {
+  position: relative;
+  width: 264px;
+  border: 2px solid var(--pl-ink);
+  border-radius: 12px;
+  background: var(--pl-canvas);
+  font: 13px/1.4 var(--pl-body);
+  color: var(--pl-ink);
+}
+.cv-node.is-wide {
+  width: 360px;
+}
+.cv-node.is-selected {
+  outline: 3px solid var(--pl-coral);
+  outline-offset: 2px;
+}
+.cv-node-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 40px;
+  padding: 0 8px 0 12px;
+  border-bottom: 1px solid var(--pl-hairline);
+}
+.cv-node-title {
+  flex: 1;
+  font: 600 14px/1 var(--pl-display);
+}
+.cv-x {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--pl-mute);
+  cursor: pointer;
+}
+.cv-x:hover {
+  background: var(--pl-paper);
+  color: var(--pl-ink);
+}
+.cv-node-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px 12px;
+}
+
+/* inputs: the handle sits on the card's left edge, level with its row */
+.cv-port {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0 -12px;
+  padding: 2px 12px;
+  font-size: 12px;
+}
+.cv-port-label {
+  font-weight: 600;
+}
+.cv-port-info {
+  min-width: 0;
+  color: var(--pl-mute);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cv-handle.react-flow__handle {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--pl-ink);
+  border-radius: 999px;
+  background: var(--pl-canvas);
+}
+.cv-handle.react-flow__handle.is-text {
+  background: var(--pl-ink);
+}
+.cv-handle.react-flow__handle.is-image {
+  background: var(--pl-coral);
+}
+.cv-handle.react-flow__handle.is-video {
+  background: var(--pl-info);
+}
+.cv-handle.react-flow__handle.is-media {
+  background: linear-gradient(90deg, var(--pl-coral) 50%, var(--pl-info) 50%);
+}
+.cv-handle.react-flow__handle.connectingto.valid,
+.cv-handle.react-flow__handle:hover {
+  box-shadow: 0 0 0 3px var(--pl-coral-soft);
+}
+
+.cv-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+.cv-field > span {
+  color: var(--pl-mute);
+  font-size: 11px;
+  font-weight: 600;
+}
+.cv-row {
+  display: flex;
+  gap: 8px;
+}
+.cv-row:empty {
+  display: none;
+}
+.cv-select.studio-input {
+  height: 34px;
+  padding: 0 8px;
+  font-size: 13px;
+  width: 100%;
+}
+.cv-text.studio-input {
+  width: 100%;
+  min-height: 64px;
+  padding: 8px 10px;
+  font: 13px/1.45 var(--pl-body);
+  resize: vertical;
+}
+.cv-hint {
+  margin: 0;
+  color: var(--pl-mute);
+  font-size: 12px;
+}
+.cv-msg {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: var(--pl-coral-soft);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.cv-msg.is-bad {
+  background: var(--pl-bad-soft);
+}
+.cv-msg svg {
+  flex: none;
+  margin-top: 2px;
+}
+
+.cv-run {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 2px;
+}
+.cv-run .pl-badge {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cv-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.cv-actions .st-pill {
+  height: 32px;
+  padding: 0 10px;
+  font-size: 12px;
+  text-decoration: none;
+}
+.cv-actions .st-pill.is-icon {
+  width: 32px;
+  padding: 0;
+}
+.cv-pick-wrap {
+  position: relative;
+}
+/* The history picker is wide; inside a card it opens upward and may overhang the card. */
+.cv-pick-wrap .st-pop {
+  z-index: 30;
+}
+
+.cv-drop {
+  border-radius: 10px;
+}
+.cv-drop > .cv-hint {
+  padding: 18px 10px;
+  border: 1px dashed var(--pl-mute);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.cv-media {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 1px solid var(--pl-hairline);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--pl-paper);
+  cursor: pointer;
+}
+div.cv-media {
+  cursor: default;
+}
+.cv-media img,
+.cv-media video {
+  display: block;
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+}
+.cv-media.is-big img,
+.cv-media.is-big video {
+  max-height: 420px;
+}
+
+.cv-empty {
+  padding: 40px 16px;
+  border: 1px dashed var(--pl-mute);
+  border-radius: 10px;
+  color: var(--pl-mute);
+  text-align: center;
+  font-size: 12px;
+}

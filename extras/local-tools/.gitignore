@@ -1,0 +1,20 @@
+# Made by setup.ps1 / setup.sh (big, machine-specific: never commit)
+venv/
+models/
+repos/
+dl/
+installed.json
+*.part
+
+# Python caches
+__pycache__/
+*.pyc
+
+# Test runs and their outputs
+test/
+out/
+*.mp4
+*.webm
+*.wav
+*.png
+*.err

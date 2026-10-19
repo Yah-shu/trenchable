@@ -1,0 +1,324 @@
+/*
+ * Video's three-tab rail: the text tabs, the preset / tool card, Edit Video's tool list,
+ * Motion Control's scene switch, the prompt chips and the duration slider, and the preset
+ * modal. Plinth at the compact tool scale (docs/PLINTH.md): ink edges, coral for the one
+ * active thing, paper for hover — never their dark/lime palette.
+ */
+
+/* ---------- Create Video · Edit Video · Motion Control ---------- */
+
+.st-vtabs {
+  display: flex;
+  gap: 2px;
+  border-bottom: 2px solid var(--pl-ink);
+}
+.st-vtabs > button {
+  flex: 1;
+  min-height: 34px;
+  padding: 0 6px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  background: none;
+  color: var(--pl-mute);
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.st-vtabs > button:hover {
+  color: var(--pl-ink);
+}
+.st-vtabs > button.is-active {
+  color: var(--pl-ink);
+  border-bottom-color: var(--pl-coral);
+}
+
+/* ---------- preset / tool card ---------- */
+
+.st-vcard {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border: 2px solid var(--pl-ink);
+  border-radius: 12px;
+  background: var(--pl-canvas);
+}
+.st-vcard.is-banner {
+  background: var(--pl-paper);
+}
+.st-vcard-thumb {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  overflow: hidden;
+  border: 1px solid var(--pl-ink);
+  border-radius: 9px;
+  background: var(--pl-coral-soft);
+  color: var(--pl-ink);
+}
+.st-vcard-thumb.has-cover img,
+.st-vcard-thumb.has-cover video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.st-vcard-text {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 1px;
+}
+.st-vcard-kicker {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pl-mute);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.st-vcard-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--pl-ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.st-vcard-sub {
+  font-size: 11.5px;
+  color: var(--pl-mute);
+}
+.st-vcard-change {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ---------- Edit Video's tool list ---------- */
+
+.st-tools {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.st-tool-list {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--pl-ink);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--pl-canvas);
+}
+.st-tool-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px;
+  border: 0;
+  border-top: 1px solid var(--pl-line, rgba(0, 0, 0, 0.12));
+  background: none;
+  color: var(--pl-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 120ms var(--pl-ease);
+}
+.st-tool-row:first-child {
+  border-top: 0;
+}
+.st-tool-row:hover {
+  background: var(--pl-paper);
+}
+.st-tool-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--pl-ink);
+  border-radius: 8px;
+  background: var(--pl-paper);
+}
+.st-tool-text {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 1px;
+}
+.st-tool-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.st-tool-desc {
+  font-size: 11.5px;
+  color: var(--pl-mute);
+}
+.st-tool-chev {
+  flex: none;
+  color: var(--pl-mute);
+}
+.st-tool-soon {
+  padding: 1px 6px;
+  border: 1px solid var(--pl-ink);
+  border-radius: 999px;
+  background: var(--pl-paper);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--pl-mute);
+}
+
+/* ---------- Motion Control: scene control ---------- */
+
+.st-scene {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px;
+  border: 1px solid var(--pl-ink);
+  border-radius: var(--pl-radius, 12px);
+  background: var(--pl-canvas);
+}
+.st-scene-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ---------- prompt chips + duration slider ---------- */
+
+.st-prompt-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: -4px;
+}
+.st-duration {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 230px;
+  padding: 10px 12px;
+}
+.st-duration-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--pl-mute);
+}
+.st-duration-head b {
+  color: var(--pl-ink);
+}
+.st-duration input[type='range'] {
+  width: 100%;
+  accent-color: var(--pl-coral);
+}
+.st-duration-ends {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--pl-mute);
+}
+
+/* ---------- preset modal ---------- */
+
+.st-vmodal-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  background: rgba(20, 20, 20, 0.35);
+}
+.st-vmodal {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: min(1040px, 100%);
+  max-height: 100%;
+  padding: 16px;
+  overflow: hidden;
+  background: var(--pl-canvas);
+}
+.st-vmodal-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.st-vmodal-head > div {
+  flex: 1;
+  min-width: 0;
+}
+.st-vmodal-title {
+  margin: 0 0 2px;
+  font-size: 18px;
+  font-weight: 800;
+}
+.st-vmodal-x {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--pl-ink);
+  border-radius: 999px;
+  background: var(--pl-canvas);
+  color: var(--pl-ink);
+  cursor: pointer;
+}
+.st-vmodal-x:hover {
+  background: var(--pl-paper);
+}
+.st-vmodal-body {
+  overflow: auto;
+  min-height: 0;
+}
+
+/* ---------- Create's references grid: compact tiles, a new one opens as you fill ---------- */
+
+.st-refgrid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.st-refgrid-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.st-slot-wrap.is-ref .st-slot {
+  min-height: 92px;
+  padding: 8px 6px;
+  gap: 2px;
+}
+.st-slot-wrap.is-ref .st-slot img {
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+.st-slot-wrap.is-ref .st-slot-sub,
+.st-slot-wrap.is-ref .st-slot-opt {
+  display: none;
+}
+.st-slot-wrap.is-ref .st-slot-title {
+  font-size: 11.5px;
+}
+.st-slot-wrap.is-ref .st-slot-file {
+  font-size: 10px;
+}

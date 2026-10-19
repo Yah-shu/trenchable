@@ -1,0 +1,32 @@
+# Dependencies and builds
+node_modules
+dist
+dist-ssr
+*.log
+
+# Your own data: history, generated media, uploads, the encrypted Kie key. Never commit it.
+/data/
+*.db
+*.db-shm
+*.db-wal
+*.key
+
+# Settings with your keys
+.env
+.env.local
+*.local
+
+# Optional extras: what their setup scripts install
+extras/*/venv/
+extras/*/models/
+extras/*/repos/
+extras/*/cache/
+extras/*/dl/
+__pycache__/
+
+# Editors and OS
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+i18n/missing.json

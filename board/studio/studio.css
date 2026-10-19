@@ -1,0 +1,2103 @@
+/*
+  Studio — the generation studio in Plinth (theme/plinth.css), at the compact scale a tool runs at.
+  Measured on a 1920x957 viewport; every colour
+  is a Plinth token, so nothing here hard-codes a palette. The shell's lane strip is the nav.
+*/
+
+.st-root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  color: var(--pl-ink);
+  font-family: var(--pl-body);
+  font-size: 13px;
+}
+
+/*
+  Advanced: the Kie Studio form is mounted by the shell (main.tsx) and fills the whole content
+  area. Studio's root comes later in the shell, so the frame has to be lifted over it.
+*/
+.ws-generate.st-advanced-frame {
+  z-index: 2;
+}
+
+/* ---------- surface frame ---------- */
+
+.st-surface {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+/* Archetype A: the feed scrolls under a composer that floats over it. */
+.st-feed {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  /* The rows reflow to the width: keep it still as the scrollbar comes and goes. */
+  scrollbar-gutter: stable;
+  /* Near edge to edge, like the reference app's feed (their rows span the window less 8 px). */
+  padding: 16px 8px 220px;
+}
+
+/*
+ * the reference app's justified rows (JustifiedFeed.tsx): every tile in an absolute box the layout
+ * sized (justified.ts), 2 px apart; the tile fills its box and its media covers it.
+ */
+.st-jfeed {
+  position: relative;
+  width: 100%;
+}
+.st-jf-cell {
+  position: absolute;
+}
+.st-jf-cell:hover,
+.st-jf-cell:focus-within {
+  z-index: 1;
+}
+.st-jf-cell > .st-tile,
+.st-jf-cell .st-tile-with-actions .st-tile {
+  height: 100%;
+  min-height: 0;
+  border-radius: 6px;
+}
+.st-jf-cell > .st-tile-with-actions {
+  height: 100%;
+}
+/* A failure's buttons stay reachable on a short row. */
+.st-jf-cell > .st-job .st-job-body {
+  overflow: auto;
+}
+
+.st-tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: var(--pl-radius);
+  overflow: hidden;
+  background: var(--pl-paper);
+  border: 1px solid var(--pl-hairline);
+  transition: border-color 120ms var(--pl-ease);
+}
+.st-tile:hover {
+  border-color: var(--pl-ink);
+}
+.st-tile img,
+.st-tile video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.st-tile-ph {
+  width: 100%;
+  background: var(--pl-paper-deep);
+}
+.st-tile-meta {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: var(--pl-canvas);
+  border-top: 1px solid var(--pl-hairline);
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--pl-ink);
+  opacity: 0;
+  transition: opacity 120ms var(--pl-ease);
+}
+.st-tile:hover .st-tile-meta {
+  opacity: 1;
+}
+
+/* ---------- composer ---------- */
+
+/* A .pl-panel (2px ink edge, 12px radius) floating over the feed. */
+.st-composer {
+  position: absolute;
+  /* Centred with auto margins, not translate: a transform would trap the Advanced
+     panel's fixed scrim inside the bar, so a click on the feed went through to a tile
+     instead of closing the panel. */
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  bottom: 20px;
+  width: min(1070px, calc(100% - 48px));
+  z-index: var(--z-sticky, 10);
+  padding: 12px;
+  box-shadow: var(--shadow-md);
+}
+.st-composer.is-inline {
+  position: static;
+  translate: none;
+  width: 100%;
+  box-shadow: none;
+}
+
+.st-composer-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.st-refs {
+  display: flex;
+  gap: 6px;
+  flex: none;
+}
+.st-ref {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--pl-ink);
+  border-radius: 10px;
+  background: var(--pl-paper);
+  color: var(--pl-mute);
+  cursor: pointer;
+  transition: background-color 120ms var(--pl-ease);
+}
+.st-ref:hover {
+  background: var(--pl-paper-deep);
+}
+.st-ref img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.st-ref-drop {
+  border-style: dashed;
+  background: var(--pl-canvas);
+}
+.st-ref-x {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 1px solid var(--pl-ink);
+  border-radius: 999px;
+  background: var(--pl-canvas);
+  color: var(--pl-ink);
+  cursor: pointer;
+}
+.st-ref-x:hover {
+  background: var(--pl-coral);
+}
+
+.st-prompt {
+  flex: 1;
+  min-width: 0;
+  min-height: 56px;
+  max-height: 180px;
+  padding: 6px 4px;
+  border: 0;
+  background: none;
+  color: var(--pl-ink);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.45;
+  resize: none;
+  outline: none;
+}
+.st-prompt::placeholder {
+  color: var(--pl-mute);
+}
+
+.st-composer-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--pl-hairline);
+  flex-wrap: wrap;
+}
+
+.st-message {
+  margin: 8px 0 0;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--pl-mute);
+}
+
+/* ---------- pills ---------- */
+
+/* The composer's pickers: outlined controls at the compact field height. */
+.st-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 12px;
+  border: 2px solid var(--pl-ink);
+  border-radius: 10px;
+  background: var(--pl-canvas);
+  color: var(--pl-ink);
+  font: 600 13px/1 var(--pl-body);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 120ms var(--pl-ease);
+}
+.st-pill:hover:not(:disabled) {
+  background: var(--pl-paper);
+}
+.st-pill:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.st-pill.is-icon {
+  width: 36px;
+  padding: 0;
+  justify-content: center;
+}
+.st-pill.is-model {
+  min-width: 200px;
+}
+.st-pill.is-on {
+  background: var(--pl-coral-soft);
+}
+.st-pill-label {
+  color: var(--pl-mute);
+  font-size: 11px;
+  font-weight: 500;
+}
+.st-pill-chev {
+  margin-left: auto;
+  color: var(--pl-mute);
+}
+
+.st-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 36px;
+  padding: 0 3px;
+  border: 2px solid var(--pl-ink);
+  border-radius: 10px;
+  background: var(--pl-canvas);
+}
+.st-stepper button {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  background: none;
+  color: var(--pl-mute);
+  cursor: pointer;
+  transition: background-color 120ms var(--pl-ease);
+}
+.st-stepper button:hover:not(:disabled) {
+  background: var(--pl-paper);
+  color: var(--pl-ink);
+}
+.st-stepper button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.st-stepper-value {
+  min-width: 34px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- generate button ---------- */
+
+/* A coral .plinth-btn--sm; the credit cost rides inside the face. */
+.st-go {
+  margin-left: auto;
+  font-size: 13px;
+}
+.st-go .plinth-btn__face {
+  min-height: 36px;
+  padding: 0 18px;
+}
+.st-go.is-wide {
+  margin-left: 0;
+}
+.st-cost {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--pl-ink);
+  opacity: 0.75;
+}
+
+/* ---------- archetype B: rail form + canvas ---------- */
+
+.st-split {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.st-rail {
+  width: 330px;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 16px;
+  gap: 10px;
+  overflow-y: auto;
+  border-right: 1px solid var(--pl-hairline);
+  background: var(--pl-canvas);
+}
+
+.st-rail-head {
+  margin-top: 4px;
+  font: 600 12px/1 var(--pl-body);
+  color: var(--pl-mute);
+}
+
+.st-card {
+  position: relative;
+  border: 2px solid var(--pl-ink);
+  border-radius: var(--pl-radius);
+  background: var(--pl-canvas);
+  overflow: hidden;
+}
+.st-card-cover {
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  background: var(--pl-paper);
+  color: var(--pl-ink);
+  font: 600 15px/1.2 var(--pl-display);
+  letter-spacing: -0.01em;
+}
+.st-card-cover img,
+.st-card-cover video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.st-card-change {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 9px;
+  border: 1px solid var(--pl-ink);
+  border-radius: 999px;
+  background: var(--pl-canvas);
+  color: var(--pl-ink);
+  font: 600 11px/1 var(--pl-body);
+  cursor: pointer;
+  transition: background-color 120ms var(--pl-ease);
+}
+.st-card-change:hover {
+  background: var(--pl-coral-soft);
+}
+
+/* Tab bars are .pl-tabs; inside a rail the items share the width. */
+.st-rail .st-tabs,
+.st-canvas-bar .st-tabs {
+  display: flex;
+}
+.st-rail .st-tabs > .pl-tab {
+  flex: 1;
+  justify-content: center;
+}
+/* A small pill after a tab's label — the reference app's "Styles · New". */
+.st-tab-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--pl-coral);
+  color: var(--pl-ink);
+  font: 700 9px/1.4 var(--pl-body);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.st-slots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.st-slot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 10px;
+  border: 1px solid var(--pl-ink);
+  border-radius: var(--pl-radius);
+  background: var(--pl-paper);
+  color: var(--pl-ink);
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 120ms var(--pl-ease);
+}
+.st-slot:hover {
+  background: var(--pl-paper-deep);
+}
+.st-slot.is-wide {
+  grid-column: 1 / -1;
+}
+.st-slot-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--pl-ink);
+  border-radius: 999px;
+  background: var(--pl-canvas);
+  color: var(--pl-ink);
+}
+.st-slot-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+.st-slot-sub {
+  font-size: 11px;
+  color: var(--pl-mute);
+  line-height: 1.35;
+}
+.st-slot-opt {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--pl-mute);
+}
+
+/* The rail's prompt box: the field shell. */
+.st-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 2px solid var(--pl-ink);
+  border-radius: 10px;
+  background: var(--pl-canvas);
+  transition: background-color 120ms var(--pl-ease), box-shadow 120ms var(--pl-ease);
+}
+.st-field:hover {
+  background: var(--pl-paper);
+}
+.st-field:focus-within {
+  background: var(--pl-canvas);
+  box-shadow: 0 0 0 3px var(--pl-coral);
+}
+.st-field-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--pl-ink);
+}
+.st-field textarea,
+.st-field input {
+  border: 0;
+  background: none;
+  color: var(--pl-ink);
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.45;
+  outline: none;
+  resize: none;
+}
+.st-field-count {
+  align-self: flex-end;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--pl-mute);
+  font-variant-numeric: tabular-nums;
+}
+
+.st-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 2px solid var(--pl-ink);
+  border-radius: 10px;
+  background: var(--pl-canvas);
+  color: var(--pl-ink);
+  font: 600 13px/1 var(--pl-body);
+  cursor: pointer;
+  transition: background-color 120ms var(--pl-ease);
+}
+.st-row:hover {
+  background: var(--pl-paper);
+}
+.st-row-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  color: var(--pl-mute);
+}
+.st-row-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
+  gap: 8px;
+}
+/* Three to a row in a 330 px rail: the label is a small caption over the value so "Quality 720p" never clips. */
+.st-row-grid .st-row {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 3px;
+  min-width: 0;
+  padding: 6px 10px;
+}
+.st-row-grid .st-row > span:first-child {
+  font: 500 11px/1 var(--pl-body);
+  color: var(--pl-mute);
+}
+.st-row-grid .st-row-value {
+  max-width: 100%;
+  font-weight: 600;
+  color: var(--pl-ink);
+  white-space: nowrap;
+}
+
+.st-rail-foot {
+  margin-top: auto;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* right canvas */
+
+.st-canvas {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.st-canvas-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--pl-hairline);
+  background: var(--pl-canvas);
+}
+.st-canvas-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 16px 24px;
+}
+
+.st-drop {
+  display: grid;
+  place-items: center;
+  gap: 10px;
+  margin: 0 auto;
+  padding: 24px;
+  max-width: 420px;
+  min-height: 320px;
+  border: 2px dashed var(--pl-ink);
+  border-radius: var(--pl-radius);
+  background: var(--pl-canvas);
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 120ms var(--pl-ease);
+}
+.st-drop:hover {
+  background: var(--pl-paper);
+}
+.st-drop-title {
+  font: 600 15px/1.2 var(--pl-display);
+  letter-spacing: -0.01em;
+}
+.st-drop-sub {
+  font-size: 12px;
+  color: var(--pl-mute);
+}
+
+/* ---------- archetype C: project sidebar ---------- */
+
+.st-side {
+  width: 190px;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 10px;
+  gap: 2px;
+  overflow-y: auto;
+  border-right: 1px solid var(--pl-hairline);
+  background: var(--pl-canvas);
+}
+.st-side-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 9px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--pl-mute);
+  font: 500 13px/1.2 var(--pl-body);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 120ms var(--pl-ease), color 120ms var(--pl-ease);
+}
+.st-side-item:hover:not(:disabled) {
+  background: var(--pl-paper);
+  color: var(--pl-ink);
+}
+.st-side-item.is-active {
+  background: var(--pl-coral-soft);
+  color: var(--pl-ink);
+  font-weight: 600;
+}
+.st-side-item:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.st-side-head {
+  margin: 12px 0 0;
+  padding: 0 9px 4px;
+  font: 600 12px/1 var(--pl-body);
+  color: var(--pl-mute);
+}
+.st-side-foot {
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+/* ---------- hero, chips, grids, empty states ---------- */
+
+.st-page {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  padding: 24px 24px 48px;
+}
+
+.st-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+.st-display {
+  margin: 0;
+  font: 600 clamp(22px, 2.4vw, 30px) / 1.1 var(--pl-display);
+  letter-spacing: -0.03em;
+  color: var(--pl-ink);
+  text-wrap: balance;
+}
+.st-display em {
+  display: block;
+  font-style: normal;
+  color: var(--pl-mute);
+}
+.st-lede {
+  max-width: 54ch;
+  margin: 0;
+  color: var(--pl-mute);
+  font-size: 14px;
+  line-height: 1.5;
+  text-wrap: balance;
+}
+
+.st-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  overflow: hidden;
+}
+.st-strip > * {
+  flex: none;
+  width: 130px;
+  aspect-ratio: 3 / 4;
+  border: 1px solid var(--pl-hairline);
+  border-radius: var(--pl-radius);
+  background: var(--pl-paper);
+}
+.st-strip > *:nth-child(3) {
+  width: 150px;
+  border: 2px solid var(--pl-ink);
+  background: var(--pl-coral-soft);
+  scale: 1.08;
+  z-index: 1;
+}
+
+.st-section {
+  margin-top: 24px;
+}
+.st-section-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.st-section-title {
+  margin: 0;
+  font: 600 15px/1.2 var(--pl-display);
+  letter-spacing: -0.01em;
+  color: var(--pl-ink);
+}
+.st-section-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Filter chips: outlined pills, the chosen one ink. */
+.st-chips {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.st-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 11px;
+  border: 1px solid var(--pl-ink);
+  border-radius: 999px;
+  background: var(--pl-canvas);
+  color: var(--pl-ink);
+  font: 600 12px/1 var(--pl-body);
+  cursor: pointer;
+  transition: background-color 120ms var(--pl-ease), color 120ms var(--pl-ease);
+}
+.st-chip:hover {
+  background: var(--pl-paper);
+}
+.st-chip.is-active {
+  background: var(--pl-ink);
+  color: var(--pl-canvas);
+}
+
+.st-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--st-card, 230px), 1fr));
+  gap: 16px;
+}
+.st-grid.is-wide {
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+}
+
+/* Cards: a button.pl-press around a .pl-panel face, so they lift like everything clickable. */
+.st-gcard {
+  color: inherit;
+}
+.st-gcard-face {
+  overflow: hidden;
+  text-align: left;
+}
+.st-gcard-cover {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  background: var(--pl-paper);
+  border-bottom: 1px solid var(--pl-hairline);
+  color: var(--pl-mute);
+}
+.st-gcard-cover img,
+.st-gcard-cover video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.st-gcard-body {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+}
+.st-gcard-title {
+  font-size: 13px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.st-gcard-sub {
+  font-size: 11px;
+  color: var(--pl-mute);
+}
+.st-gcard-tag {
+  margin-left: auto;
+  flex: none;
+}
+
+/* two big tool cards, as on their studio hubs */
+.st-tools {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+.st-tool {
+  color: inherit;
+}
+.st-tool-face {
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  min-height: 200px;
+  padding: 20px;
+  background: var(--pl-paper);
+  text-align: center;
+}
+.st-tool-title {
+  font: 600 17px/1.2 var(--pl-display);
+  letter-spacing: -0.02em;
+}
+.st-tool-sub {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--pl-mute);
+}
+.st-tool-cta {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 10px;
+  padding: 0 14px;
+  min-height: 32px;
+  border: 2px solid var(--pl-ink);
+  border-radius: 10px;
+  background: var(--pl-coral);
+  color: var(--pl-ink);
+  font: 600 13px/1 var(--pl-body);
+}
+
+/* Empty state: a paper panel. */
+.st-empty {
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  padding: 36px 20px;
+  text-align: center;
+}
+.st-empty-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--pl-ink);
+  border-radius: 10px;
+  background: var(--pl-canvas);
+  color: var(--pl-ink);
+}
+.st-empty-title {
+  margin: 0;
+  font: 600 15px/1.2 var(--pl-display);
+  letter-spacing: -0.01em;
+}
+.st-empty-sub {
+  max-width: 48ch;
+  margin: 0;
+  font-size: 13px;
+  color: var(--pl-mute);
+  line-height: 1.5;
+}
+
+/* Handover and shell surfaces: the shell's "Soon" card. */
+.st-soon {
+  max-width: 560px;
+}
+.st-soon-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0 0;
+}
+.st-soon-lede {
+  margin: 8px 0 0;
+}
+.st-soon-cta {
+  margin-top: 18px;
+}
+.st-soon-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--pl-ink);
+}
+
+/* numbered result columns, as on their 3D page */
+.st-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+.st-stepcol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border: 2px solid var(--pl-ink);
+  border-radius: var(--pl-radius);
+  background: var(--pl-canvas);
+}
+.st-stepnum {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--pl-ink);
+  border-radius: 999px;
+  background: var(--pl-paper);
+  font: 600 11px/1 var(--pl-body);
+  color: var(--pl-ink);
+}
+
+/* ---------- assets library ---------- */
+
+.st-daygroup {
+  margin-bottom: 24px;
+}
+.st-dayhead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+  font: 600 13px/1.2 var(--pl-display);
+  letter-spacing: -0.01em;
+  color: var(--pl-ink);
+}
+.st-daygrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
+}
+.st-daygrid > * {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--pl-paper);
+  border: 1px solid var(--pl-hairline);
+}
+
+/* ---------- popovers ---------- */
+
+.st-pop {
+  position: absolute;
+  z-index: var(--z-dropdown, 20);
+  min-width: 220px;
+  max-height: 340px;
+  overflow-y: auto;
+  padding: 5px;
+  border: 2px solid var(--pl-ink);
+  border-radius: var(--pl-radius);
+  background: var(--pl-canvas);
+  box-shadow: var(--shadow-md);
+}
+.st-pop-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 7px 9px;
+  border: 0;
+  border-radius: 7px;
+  background: none;
+  color: var(--pl-ink);
+  font: 500 13px/1.3 var(--pl-body);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 120ms var(--pl-ease);
+}
+.st-pop-item:hover {
+  background: var(--pl-paper);
+}
+.st-pop-item.is-on {
+  background: var(--pl-coral-soft);
+  font-weight: 600;
+}
+.st-pop-sub {
+  margin-left: auto;
+  color: var(--pl-mute);
+  font-size: 11px;
+}
+/* ---------- the model picker (ModelMenu.tsx) ---------- */
+
+.st-pop.is-models {
+  width: 392px;
+  max-width: calc(100vw - 16px);
+  padding-top: 0;
+}
+.st-mm-search {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  margin: 0 -5px;
+  padding: 6px 5px 2px;
+  background: var(--pl-canvas);
+}
+.st-mm-head {
+  margin: 8px 0 3px;
+  padding: 0 9px;
+  color: var(--pl-mute);
+  font: 700 10px/1.4 var(--pl-body);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.st-mm-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  margin: 0;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--pl-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 120ms var(--pl-ease);
+}
+.st-mm-row.is-active,
+.st-mm-row.is-open,
+.st-pop-item.is-active {
+  background: var(--pl-paper);
+}
+.st-mm-row.is-on {
+  background: var(--pl-coral-soft);
+}
+.st-mm-icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--pl-ink);
+  border-radius: 8px;
+  background: var(--pl-canvas);
+  font: 700 12px/1 var(--pl-body);
+}
+.st-mm-row.is-on .st-mm-icon {
+  background: var(--pl-coral);
+}
+.st-mm-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.st-mm-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font: 600 13px/1.3 var(--pl-body);
+}
+.st-mm-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.st-mm-badge {
+  flex: none;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--pl-coral);
+  color: var(--pl-ink);
+  font: 700 9px/1.4 var(--pl-body);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.st-mm-note {
+  overflow: hidden;
+  color: var(--pl-mute);
+  font: 500 11px/1.35 var(--pl-body);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.st-mm-chips {
+  display: flex;
+  flex: none;
+  gap: 3px;
+}
+.st-mm-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 5px;
+  border: 1px solid var(--pl-hairline);
+  border-radius: 6px;
+  background: var(--pl-canvas);
+  color: var(--pl-ink);
+  font: 600 10px/1.2 var(--pl-body);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.st-mm-chip.is-icon {
+  padding: 2px 4px;
+}
+.st-mm-end {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 14px;
+  color: var(--pl-mute);
+}
+.st-mm-row.is-on .st-mm-end {
+  color: var(--pl-ink);
+}
+/* The versions of a model line, beside the list (fixed, so the list's scroll can't clip it). */
+.st-mm-fly {
+  z-index: 61;
+  overflow-y: auto;
+  padding: 0 5px 5px;
+  border: 2px solid var(--pl-ink);
+  border-radius: var(--pl-radius);
+  background: var(--pl-canvas);
+  box-shadow: var(--shadow-md);
+}
+
+/* ---------- the media picker's Recent · All and Sort by (Mentions.tsx) ---------- */
+
+.sp-mention-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.sp-mention-top .sp-mention-tabs {
+  flex: 1;
+  min-width: 0;
+}
+.sp-mention-sub {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.sp-mention-scope {
+  display: inline-flex;
+  gap: 2px;
+}
+.sp-mention-scope > button,
+.sp-mention-sort-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: none;
+  color: var(--pl-mute);
+  font: 600 12px/1.2 var(--pl-body);
+  cursor: pointer;
+  transition: background-color 120ms var(--pl-ease), color 120ms var(--pl-ease);
+}
+.sp-mention-scope > button:hover,
+.sp-mention-sort-btn:hover {
+  color: var(--pl-ink);
+}
+.sp-mention-scope > button.is-active {
+  border-color: var(--pl-ink);
+  background: var(--pl-paper);
+  color: var(--pl-ink);
+}
+.sp-mention-sort {
+  position: relative;
+}
+.sp-mention-sort-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 2;
+  min-width: 130px;
+  padding: 4px;
+  border: 2px solid var(--pl-ink);
+  border-radius: 10px;
+  background: var(--pl-canvas);
+  box-shadow: var(--shadow-md);
+}
+.sp-mention-sort-menu > button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 7px;
+  background: none;
+  color: var(--pl-ink);
+  font: 500 12.5px/1.2 var(--pl-body);
+  text-align: left;
+  cursor: pointer;
+}
+.sp-mention-sort-menu > button:hover,
+.sp-mention-sort-menu > button[aria-checked='true'] {
+  background: var(--pl-paper);
+}
+/* The Elements tab's first tile: a dashed "New element". */
+.sp-el-pick.sp-el-pick-new {
+  border-style: dashed;
+}
+.sp-el-pick.sp-el-pick-new .sp-el-pick-cover {
+  display: grid;
+  place-items: center;
+  color: var(--pl-ink);
+}
+
+/* From a rail slot the picker is a large centred dialog (theirs does the same). */
+.sp-mentions-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 65;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(17, 17, 17, 0.32);
+}
+.st-pop.is-mentions.is-modal {
+  position: relative;
+  inset: auto;
+  display: flex;
+  flex-direction: column;
+  width: min(880px, 100%);
+  height: min(620px, calc(100vh - 48px));
+  max-height: none;
+  padding: 12px;
+  overflow: hidden;
+  font-family: var(--pl-body);
+  font-size: 13px;
+  color: var(--pl-ink);
+}
+.st-pop.is-mentions.is-modal .sp-mention-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+.st-pop.is-mentions.is-modal .st-mention-grid {
+  grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+  gap: 8px;
+}
+.sp-mention-x {
+  flex: none;
+}
+/* The element editor opened from the picker sits above it. */
+.sp-modal-scrim.sp-el-dialog-scrim {
+  z-index: 80;
+}
+
+/* the mention list (the @ button): a grid of your own work, wider than an ordinary menu */
+.st-pop.is-mentions {
+  width: 420px;
+  max-height: 380px;
+}
+
+.st-mention-search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 9px;
+  margin-bottom: 6px;
+  border: 1px solid var(--pl-hairline);
+  border-radius: 8px;
+  background: var(--pl-paper);
+  color: var(--pl-mute);
+}
+.st-mention-search:focus-within {
+  border-color: var(--pl-ink);
+  background: var(--pl-canvas);
+}
+.st-mention-search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  color: var(--pl-ink);
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+.st-mention-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));
+  gap: 5px;
+}
+.st-mention {
+  position: relative;
+  aspect-ratio: 1;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--pl-hairline);
+  border-radius: 8px;
+  background: var(--pl-paper);
+  cursor: pointer;
+  transition: border-color 120ms var(--pl-ease);
+}
+.st-mention:hover {
+  border-color: var(--pl-ink);
+}
+.st-mention.is-on {
+  outline: 2px solid var(--pl-coral);
+  outline-offset: -2px;
+}
+.st-mention img,
+.st-mention video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.st-mention-audio {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--pl-mute);
+}
+
+.st-ref-kind {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--pl-mute);
+}
+
+/* A search box in a popover or a canvas bar: the field shell, compact. */
+.st-pop-search {
+  width: 100%;
+  min-height: 34px;
+  padding: 0 10px;
+  margin-bottom: 4px;
+  border: 2px solid var(--pl-ink);
+  border-radius: 9px;
+  background: var(--pl-canvas);
+  color: var(--pl-ink);
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+  transition: background-color 120ms var(--pl-ease), box-shadow 120ms var(--pl-ease);
+}
+.st-pop-search:hover {
+  background: var(--pl-paper);
+}
+.st-pop-search:focus {
+  background: var(--pl-canvas);
+  box-shadow: 0 0 0 3px var(--pl-coral);
+}
+
+/* ---------- misc ---------- */
+
+.st-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--pl-hairline);
+  border-radius: 10px;
+  background: var(--pl-paper);
+  color: var(--pl-mute);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.st-spin {
+  animation: st-spin 900ms linear infinite;
+}
+@keyframes st-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@media (max-width: 900px) {
+  .st-rail,
+  .st-side {
+    display: none;
+  }
+}
+
+/* ---------- engine: queue tiles, advanced settings, slots (2026-10-11) ---------- */
+
+/* A job on its way: the result's shape before it exists, then Retry if it failed. */
+.st-job {
+  display: flex;
+  flex-direction: column;
+  min-height: 120px;
+  background: var(--pl-paper);
+  border-style: dashed;
+  border-color: var(--pl-ink);
+}
+.st-job.is-failed {
+  border-style: solid;
+  background: var(--pl-coral-soft);
+}
+.st-job-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 14px;
+  text-align: center;
+}
+.st-job-state {
+  font: 600 13px/1.2 var(--pl-body);
+}
+.st-job-clock {
+  font-size: 11px;
+  color: var(--pl-mute);
+  font-variant-numeric: tabular-nums;
+}
+.st-job-err {
+  max-width: 100%;
+  font-size: 11px;
+  line-height: 1.35;
+  color: var(--pl-ink);
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.st-job-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+.st-job-actions .st-pill {
+  height: 30px;
+}
+.st-job-actions .st-pill.is-icon {
+  width: 30px;
+}
+
+/* A finished tile is one button into the viewer. */
+.st-tile-open {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+.st-tile-open img,
+.st-tile-open video {
+  display: block;
+  width: 100%;
+}
+.st-tile-meta-btn {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: none;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+.st-tile-audio {
+  display: grid;
+  place-items: center;
+  padding: 14px 10px 4px;
+}
+.st-grid.is-list {
+  grid-template-columns: 1fr;
+}
+
+/* The composer while a file is dragged over it. */
+.st-composer.is-drop {
+  outline: 2px dashed var(--pl-ink);
+  outline-offset: 3px;
+  background: var(--pl-coral-soft);
+}
+
+/* Advanced settings: a wide popover from the composer, or rows inline in the rail. */
+.st-pop.is-adv {
+  width: 380px;
+  max-height: min(520px, 70vh);
+  padding: 10px;
+}
+.st-pop.is-wide {
+  min-width: 320px;
+}
+.st-adv-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-dropdown, 20) - 1);
+}
+.st-adv-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 2px 2px 8px;
+  font: 600 12px/1.3 var(--pl-body);
+  color: var(--pl-mute);
+}
+.st-adv-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border: 1px solid var(--pl-hairline);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.st-adv-reset:hover {
+  color: var(--pl-ink);
+}
+.st-adv {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.st-adv-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.st-adv-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+.st-adv-row.is-inline {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.st-adv-label {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font: 600 12px/1.3 var(--pl-body);
+  color: var(--pl-ink);
+}
+.st-adv-req {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--pl-mute);
+}
+.st-adv-input {
+  width: 100%;
+  min-height: 34px;
+  padding: 7px 10px;
+  border: 2px solid var(--pl-ink);
+  border-radius: 10px;
+  background: var(--pl-canvas);
+  color: var(--pl-ink);
+  font: 500 13px/1.4 var(--pl-body);
+  resize: vertical;
+  outline: none;
+}
+.st-adv-input:focus {
+  background: var(--pl-paper);
+}
+.st-adv-input.is-code {
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  font-size: 12px;
+}
+.st-adv-err {
+  font-size: 11px;
+  color: var(--pl-ink);
+  background: var(--pl-coral-soft);
+  border-radius: 6px;
+  padding: 4px 6px;
+}
+.st-adv-refs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.st-adv-row .st-row {
+  min-height: 34px;
+}
+
+.st-switch {
+  position: relative;
+  width: 38px;
+  height: 22px;
+  flex: none;
+  padding: 0;
+  border: 2px solid var(--pl-ink);
+  border-radius: 999px;
+  background: var(--pl-canvas);
+  cursor: pointer;
+  transition: background-color 120ms var(--pl-ease);
+}
+.st-switch > span {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--pl-ink);
+  transition: translate 120ms var(--pl-ease);
+}
+.st-switch.is-on {
+  background: var(--pl-coral);
+}
+.st-switch.is-on > span {
+  translate: 16px 0;
+}
+
+/* Rail slots: the tile plus a corner of small tools (pick from your work, remove). */
+.st-slot-wrap {
+  position: relative;
+  display: flex;
+}
+.st-slot-wrap .st-slot {
+  width: 100%;
+}
+.st-slot-wrap.is-wide {
+  grid-column: 1 / -1;
+}
+.st-slot-wrap.is-idle .st-slot {
+  opacity: 0.45;
+}
+.st-slot-tools {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  display: flex;
+  gap: 4px;
+}
+.st-slot-tool {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 1px solid var(--pl-ink);
+  border-radius: 999px;
+  background: var(--pl-canvas);
+  color: var(--pl-ink);
+  cursor: pointer;
+}
+.st-slot-tool:hover {
+  background: var(--pl-coral-soft);
+}
+.st-slot-file {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: var(--pl-coral-soft);
+}
+.st-slot-busy {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+.st-slot-wrap .st-pop.is-mentions {
+  top: calc(100% + 6px);
+  bottom: auto !important;
+  left: 0;
+  width: 300px;
+}
+
+.st-rail-go {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.st-rail-go .st-go {
+  flex: 1;
+}
+
+/* Menus render into <body> (parts.tsx Popover), outside .st-root, so they bring its type. */
+.st-pop.is-floating {
+  font-family: var(--pl-body);
+  font-size: 13px;
+  color: var(--pl-ink);
+  z-index: 60;
+}
+
+/* A result with surface-specific buttons under it (RailStudio tileActions). */
+.st-tile-with-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.st-tile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* The scroll trigger at the end of a paged feed (incremental.tsx); spans a grid row. */
+.st-sentinel {
+  height: 1px;
+  grid-column: 1 / -1;
+}
+
+/* The prompt box plus its # menu anchor (Composer hashItems). */
+.st-prompt-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+}
+.st-prompt-wrap .st-prompt {
+  width: 100%;
+}
+
+/* ---------- feed controls, job states, the List view (2026-10-16) ---------- */
+
+/* Filter / View (FeedBar.tsx): in a canvas bar, or floating top-right over the Image masonry. */
+.st-canvas-tools {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.st-feedbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.st-feedbar.is-floating {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  justify-content: flex-end;
+  margin: -8px 0 8px;
+  pointer-events: none;
+}
+.st-feedbar.is-floating > * {
+  pointer-events: auto;
+}
+.st-feedbar-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--pl-ink);
+  color: var(--pl-canvas);
+  font: 600 11px/1 var(--pl-body);
+}
+.st-feedpop {
+  width: 290px;
+  text-align: left;
+}
+
+/* Their state chips, top-left of a job: Queued (paper), Generating (accent), Failed + Credits refunded. */
+.st-state {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  pointer-events: none;
+}
+.st-state-chip.is-sending {
+  border-color: var(--pl-hairline);
+  color: var(--pl-mute);
+  background: var(--pl-canvas);
+}
+.st-state-chip.is-generating {
+  background: var(--pl-coral);
+}
+.st-state-chip.is-failed {
+  background: var(--pl-bad-soft);
+}
+/* Generating: a soft accent glow along the top edge (static — Plinth has no pulses). */
+.st-job.is-generating,
+.st-lcard-ph.is-generating {
+  border-color: var(--pl-coral);
+}
+.st-job.is-generating::before,
+.st-lcard-ph.is-generating::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 45%;
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--pl-coral) 45%, transparent), transparent);
+  pointer-events: none;
+}
+.st-job-body {
+  position: relative;
+}
+
+/* The List view: one card per job, the media large and a panel beside it. */
+.st-lfeed {
+  --st-list-h: calc(var(--st-card, 230px) * 2);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.st-lcard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  border: 1px solid var(--pl-hairline);
+  border-radius: var(--pl-radius);
+  background: var(--pl-canvas);
+  overflow: hidden;
+  transition: border-color 120ms var(--pl-ease);
+}
+.st-lcard:hover {
+  border-color: var(--pl-ink);
+}
+.st-lcard-media {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 200px;
+  padding: 12px;
+  background: var(--pl-paper);
+}
+.st-lcard-media.is-audio {
+  min-height: 120px;
+}
+.st-lcard-media > video,
+.st-lcard-open img {
+  display: block;
+  max-width: 100%;
+  max-height: var(--st-list-h);
+  width: auto;
+  height: auto;
+  border-radius: var(--pl-radius-sm);
+}
+.st-lcard-open {
+  display: block;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+.st-lcard-ph {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: var(--st-list-h);
+  max-width: 100%;
+  border: 1px dashed var(--pl-ink);
+  border-radius: var(--pl-radius-sm);
+  background: var(--pl-canvas);
+  overflow: hidden;
+}
+.st-lcard-ph:not([style]) {
+  width: 100%;
+}
+.st-lcard-ph.is-failed {
+  border-style: solid;
+  background: var(--pl-coral-soft);
+}
+.st-lcard:hover .vw-quick,
+.st-lcard:focus-within .vw-quick {
+  opacity: 1;
+}
+.st-lcard:hover .vw-pinmark,
+.st-lcard:focus-within .vw-pinmark {
+  opacity: 0;
+}
+.st-lcard-count {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+}
+.st-lcard-side {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding: 14px 16px;
+  border-left: 1px solid var(--pl-hairline);
+}
+.st-lcard-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.st-lcard-model {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.st-lcard-prompt {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.st-lcard-prompt.is-empty {
+  color: var(--pl-mute);
+}
+/* A reference token in the prompt (@image1 → "Image 1"), as their chip. */
+.st-ptoken {
+  display: inline-block;
+  margin: 0 1px;
+  padding: 0 7px;
+  border: 1px solid var(--pl-ink);
+  border-radius: 999px;
+  background: var(--pl-coral-soft);
+  font: 600 11px/1.6 var(--pl-body);
+  white-space: nowrap;
+}
+.st-lcard-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.st-lcard-foot {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--pl-hairline);
+}
+.st-lcard-date {
+  font-size: 11px;
+  color: var(--pl-mute);
+  font-variant-numeric: tabular-nums;
+}
+.st-lcard-actions {
+  margin-left: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+}
+.st-lcard-actions .st-job-actions {
+  margin-top: 0;
+}
+.st-lcard-actions .st-pill {
+  height: 30px;
+}
+.st-lcard-actions .st-pill.is-icon {
+  width: 30px;
+}
+@media (max-width: 1100px) {
+  .st-lcard {
+    grid-template-columns: 1fr;
+  }
+  .st-lcard-side {
+    border-left: 0;
+    border-top: 1px solid var(--pl-hairline);
+  }
+}
+
+/* ---------- the prompt's @Image 1 chips (Composer.tsx, 2026-10-16) ---------- */
+
+/* The overlay draws the prompt's own characters behind the textarea, so wrapping, the caret
+   and selection stay the textarea's; only the tokens get a chip. Both reserve the same
+   scrollbar gutter so they wrap at the same width. */
+.st-prompt-wrap .st-prompt.has-chips,
+.st-prompt-hl {
+  scrollbar-gutter: stable;
+}
+.st-prompt-hl {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  color: transparent;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: normal;
+  pointer-events: none;
+  user-select: none;
+}
+.st-prompt-wrap .st-prompt.has-chips {
+  position: relative;
+  z-index: 1;
+}
+.st-prompt-chip {
+  border-radius: 6px;
+  background: var(--pl-coral-soft);
+  /* Grows the chip without moving a single character. */
+  box-shadow: 0 0 0 2px var(--pl-coral-soft), 0 0 0 3px var(--pl-coral);
+}
+.st-prompt-chip.is-missing {
+  background: var(--pl-paper);
+  box-shadow: 0 0 0 2px var(--pl-paper), 0 0 0 3px var(--pl-hairline);
+}
+.st-ref-n {
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border: 1px solid var(--pl-ink);
+  border-radius: 999px;
+  background: var(--pl-canvas);
+  color: var(--pl-ink);
+  font: 600 10px/14px var(--pl-body);
+  text-align: center;
+  pointer-events: none;
+}
+
+/* The media picker's five tabs (Uploads · AI Influencer · Elements · Generations · Liked) fit its width. */
+.sp-mentions .sp-mention-tabs {
+  display: flex;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.sp-mentions .sp-mention-tabs .pl-tab {
+  flex: 0 0 auto;
+  padding: 7px 9px;
+  font-size: 12.5px;
+}

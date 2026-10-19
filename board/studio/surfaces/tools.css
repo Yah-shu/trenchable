@@ -1,0 +1,524 @@
+/*
+ * Edit and Layers: the stage a tool shows its picture on (brush, frame, light), the tool
+ * controls in the rail, and the layer list. Plinth at the compact scale (docs/PLINTH.md):
+ * 2px ink on things you work with, hairlines between rows, coral for what is marked.
+ */
+
+/* ---------- rail ---------- */
+
+.ed-root .st-rail .st-tabs {
+  flex-wrap: wrap;
+  row-gap: 4px;
+}
+.ed-root .st-rail .st-tabs > .pl-tab {
+  flex: 1 0 30%;
+}
+
+.ed-slot .st-slot img {
+  max-height: 220px;
+  object-fit: contain;
+  background: var(--pl-paper);
+}
+.ed-slot-size {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: var(--pl-canvas);
+  border: 1px solid var(--pl-hairline);
+  font: 600 11px/1 var(--pl-body);
+  font-variant-numeric: tabular-nums;
+  color: var(--pl-mute);
+}
+
+.ed-control {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ed-control-label,
+.ed-rail-title {
+  font: 600 12px/1.2 var(--pl-body);
+  color: var(--pl-mute);
+}
+.ed-rail-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 600 16px/1.2 var(--pl-display);
+  color: var(--pl-ink);
+}
+.ed-control .pl-tabs {
+  display: flex;
+}
+.ed-control .pl-tabs > .pl-tab {
+  flex: 1;
+  justify-content: center;
+}
+
+.ed-range {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 600 12px/1 var(--pl-body);
+  color: var(--pl-mute);
+}
+.ed-range input {
+  flex: 1;
+  min-width: 80px;
+  accent-color: var(--pl-coral);
+}
+.ed-range-v {
+  min-width: 32px;
+  text-align: right;
+  color: var(--pl-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.ed-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: var(--pl-ink);
+  cursor: pointer;
+}
+
+.ed-hint {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--pl-mute);
+}
+
+/* The 3×3 pad for where the light comes from. */
+.ed-dirpad {
+  display: grid;
+  grid-template-columns: repeat(3, 28px);
+  gap: 4px;
+  padding: 6px;
+  width: max-content;
+  border: 2px solid var(--pl-ink);
+  border-radius: 10px;
+  background: var(--pl-paper);
+}
+.ed-dir {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--pl-hairline);
+  border-radius: 7px;
+  background: var(--pl-canvas);
+  cursor: pointer;
+  transition: background-color 120ms var(--pl-ease);
+}
+.ed-dir:nth-child(5) {
+  border-radius: 999px;
+}
+.ed-dir:hover {
+  background: var(--pl-coral-soft);
+}
+.ed-dir.is-on {
+  background: var(--pl-coral);
+  border-color: var(--pl-ink);
+}
+
+/* ---------- stage ---------- */
+
+.ed-painter {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.ed-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.ed-toolbar-gap {
+  flex: 1;
+}
+.ed-toolbar .ed-range {
+  width: 220px;
+}
+.ed-iconbtn {
+  width: 32px;
+  height: 32px;
+}
+.ed-iconbtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.ed-stage {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 120px;
+}
+.ed-stage-frame {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--pl-ink);
+  border-radius: var(--pl-radius);
+  background: var(--pl-paper);
+}
+.ed-stage-frame > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  user-select: none;
+  pointer-events: none;
+}
+.ed-mask-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  cursor: none;
+  touch-action: none;
+}
+.ed-cursor {
+  position: absolute;
+  border: 2px solid var(--pl-ink);
+  border-radius: 999px;
+  box-shadow: 0 0 0 1px var(--pl-canvas);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Reframe: the new canvas, its empty border striped, the picture placed on it. */
+.ed-frame {
+  background: repeating-linear-gradient(45deg, var(--pl-paper) 0 10px, var(--pl-coral-soft) 10px 20px);
+}
+.ed-frame > img {
+  inset: auto;
+  outline: 2px dashed var(--pl-ink);
+  outline-offset: -1px;
+}
+
+.ed-glow {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+.is-checker {
+  background-color: var(--pl-canvas);
+  background-image:
+    linear-gradient(45deg, var(--pl-hairline) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--pl-hairline) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--pl-hairline) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--pl-hairline) 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+}
+
+/* ---------- results ---------- */
+
+.ed-results-title,
+.ed-bar-title {
+  margin: 4px 0 12px;
+  font: 600 15px/1.2 var(--pl-display);
+}
+.ed-bar-title {
+  margin: 0;
+}
+.ed-result {
+  position: relative;
+}
+.ed-result-use {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 9px;
+  border: 1px solid var(--pl-ink);
+  border-radius: 999px;
+  background: var(--pl-canvas);
+  font: 600 11px/1 var(--pl-body);
+  color: var(--pl-ink);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 120ms var(--pl-ease);
+}
+.ed-result:hover .ed-result-use,
+.ed-result-use:focus-visible {
+  opacity: 1;
+}
+
+.ed-how {
+  max-width: 640px;
+  padding: 16px 18px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+.ed-how ol {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+}
+.ed-how-note {
+  display: flex;
+  gap: 6px;
+  margin: 12px 0 0;
+  color: var(--pl-mute);
+}
+
+/* ---------- layers ---------- */
+
+.ly-runs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--pl-hairline);
+}
+.ly-run,
+.ly-run-job {
+  flex: none;
+  width: 64px;
+  height: 64px;
+}
+.ly-run {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--pl-hairline);
+  border-radius: 10px;
+  background: var(--pl-paper);
+  cursor: pointer;
+}
+.ly-run.is-on {
+  border: 2px solid var(--pl-ink);
+}
+.ly-run img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ly-run-job .st-tile {
+  height: 64px;
+  aspect-ratio: auto !important;
+}
+.ly-run-job .st-tile-meta,
+.ly-run-job .st-job-clock,
+.ly-run-job .st-job-err {
+  display: none;
+}
+
+.ly-board {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 16px;
+  align-items: start;
+  padding-top: 12px;
+}
+@media (max-width: 1100px) {
+  .ly-board {
+    grid-template-columns: 1fr;
+  }
+}
+.ly-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+.ly-canvas-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  border: 2px solid var(--pl-ink);
+  border-radius: var(--pl-radius);
+  overflow: hidden;
+}
+.ly-canvas {
+  display: block;
+  max-width: 100%;
+  max-height: 68vh;
+  object-fit: contain;
+}
+.ly-canvas-busy {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.ly-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ly-actions .plinth-btn__face {
+  gap: 6px;
+}
+
+.ly-list {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 0;
+}
+.ly-list-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 6px 12px 10px;
+  font: 600 15px/1.2 var(--pl-display);
+  border-bottom: 1px solid var(--pl-hairline);
+}
+.ly-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--pl-hairline);
+}
+.ly-row:last-child {
+  border-bottom: 0;
+}
+.ly-row.is-off .ly-thumb,
+.ly-row.is-off .ly-name {
+  opacity: 0.45;
+}
+.ly-thumb {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--pl-hairline);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.ly-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.ly-name {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  font-weight: 600;
+}
+.ly-tools {
+  display: flex;
+  gap: 3px;
+}
+.ly-tools .ed-iconbtn {
+  width: 28px;
+  height: 28px;
+  border-width: 1px;
+}
+.ly-send {
+  position: relative;
+}
+.ly-send-pop {
+  top: calc(100% + 6px);
+  right: 0;
+}
+.ly-failed {
+  margin-bottom: 12px;
+}
+.ly-source {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.ly-source img {
+  max-width: 100%;
+  max-height: 60vh;
+  border: 2px solid var(--pl-ink);
+  border-radius: var(--pl-radius);
+}
+.ed-frame > img.is-movable {
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+.ed-frame > img.is-movable:active {
+  cursor: grabbing;
+}
+
+/* Edit's extra pictures. */
+.ed-refs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.ed-ref {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--pl-hairline);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--pl-paper);
+}
+.ed-ref img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ed-ref-n {
+  position: absolute;
+  left: 3px;
+  bottom: 3px;
+  padding: 2px 5px;
+  border-radius: 999px;
+  background: var(--pl-canvas);
+  font: 600 10px/1 var(--pl-body);
+}
+.ed-ref-x {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 1px solid var(--pl-ink);
+  border-radius: 999px;
+  background: var(--pl-canvas);
+  cursor: pointer;
+}
+.ed-ref-add {
+  position: relative;
+  display: flex;
+  gap: 4px;
+}
+.ed-ref-add .st-pop.is-mentions {
+  width: 300px;
+}
+
+/* Reframe's "Fill with AI" switch heads the rail; off, the rail ends in two local actions. */
+.ed-fill {
+  padding: 8px 10px;
+  border: 1px solid var(--pl-hairline);
+  border-radius: 10px;
+  background: var(--pl-paper);
+}
+.ed-offline-go {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}

@@ -1,0 +1,288 @@
+/* The shell's own pages: Home. Everything else is theme/plinth.css. */
+
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.home-greeting {
+  margin: 0 0 -12px;
+  font-size: 14px;
+  color: var(--pl-mute);
+}
+
+/* —— Brand —— */
+
+.home-brand {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.home-brand__main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.home-brand__name {
+  margin-top: 4px;
+}
+
+
+
+
+
+
+.home-brand__side {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  align-items: flex-end;
+  gap: 10px;
+  padding-top: 22px;
+}
+
+.home-brand__count {
+  font-size: 13px;
+  color: var(--pl-mute);
+}
+
+/* —— Quick links —— */
+
+.home-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 34px;
+  margin-bottom: 12px;
+}
+
+.home-links__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+}
+
+.home-link {
+  display: inline-block;
+}
+
+.home-link__face {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  font: 600 14px/1 var(--pl-body);
+  color: var(--pl-ink);
+}
+
+.home-link__out {
+  color: var(--pl-mute);
+}
+
+.home-link:hover .home-link__out {
+  color: var(--pl-ink);
+}
+
+.home-link__x {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  margin-right: -4px;
+  padding: 0;
+  background: var(--pl-paper);
+  border: 1px solid var(--pl-ink);
+  border-radius: 999px;
+  color: var(--pl-ink);
+  cursor: pointer;
+}
+
+.home-link__x:hover {
+  background: var(--pl-coral);
+}
+
+.home-links__empty {
+  font-size: 13px;
+  color: var(--pl-mute);
+}
+
+.home-links__form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  margin-top: 14px;
+  padding: 16px;
+  background: var(--pl-paper);
+  border: 1px solid var(--pl-hairline);
+  border-radius: var(--pl-radius);
+}
+
+.home-links__form .plinth-field {
+  width: 220px;
+}
+
+.home-links__form .plinth-field--full {
+  flex: 1;
+  width: auto;
+  min-width: 260px;
+}
+
+.home-links__form .plinth-field__input {
+  font-size: 14px;
+  padding: 0.7em 0.5em;
+}
+
+/* —— Tools and To do —— */
+
+
+
+.home-areas {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.home-area__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--pl-radius) var(--pl-radius) 0 0;
+}
+
+.home-area__head:hover {
+  background: var(--pl-paper);
+}
+
+.home-area__head:hover .pl-row__arrow {
+  background: var(--pl-coral);
+  transform: translateX(2px);
+}
+
+.home-area__lanes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  padding: 10px 18px 14px 60px;
+  border-top: 1px solid var(--pl-hairline);
+}
+
+.home-lane {
+  padding-bottom: 1px;
+  border-bottom: 2px solid transparent;
+  color: var(--pl-ink);
+  font: 600 13px/1.4 var(--pl-body);
+  text-decoration: none;
+  transition: border-color 120ms var(--pl-ease);
+}
+
+.home-lane:hover {
+  border-bottom-color: var(--pl-coral);
+}
+
+.home-lane.is-soon {
+  color: var(--pl-mute);
+  font-weight: 500;
+  cursor: default;
+}
+
+.home-todo {
+  /* Sits under the brand name, where its description used to be. */
+  width: 100%;
+  max-width: 720px;
+  margin-top: 10px;
+}
+
+.home-todo__add {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--pl-hairline);
+}
+
+.home-todo__add .plinth-field__shell {
+  padding-right: 0.6em;
+}
+
+.home-todo__add .plinth-field__input {
+  font-size: 14px;
+  padding: 0.7em 0.4em;
+}
+
+.home-todo__list {
+  max-height: 480px;
+  overflow: auto;
+}
+
+.home-todo__item {
+  padding: 10px 14px;
+}
+
+.home-todo__item .plinth-check {
+  flex: 1;
+  min-width: 0;
+}
+
+.home-todo__item .plinth-check__label {
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.home-todo__x {
+  display: inline-grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  color: var(--pl-mute);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 120ms var(--pl-ease), background-color 120ms var(--pl-ease);
+}
+
+.home-todo__item:hover .home-todo__x,
+.home-todo__x:focus-visible {
+  opacity: 1;
+}
+
+.home-todo__x:hover {
+  background: var(--pl-bad-soft);
+  color: var(--pl-bad);
+}
+
+.home-todo__clear {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* —— Inside the areas —— */
+
+/* Kie credits in the lane bar. */
+.pl-credits {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 600 13px/1 var(--pl-body);
+  color: var(--pl-mute);
+}
+
+.pl-credits b {
+  color: var(--pl-ink);
+}

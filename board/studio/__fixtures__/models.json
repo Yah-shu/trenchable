@@ -1,0 +1,1908 @@
+[
+ {
+  "id": "flux-2/pro-image-to-image",
+  "model": "flux-2/pro-image-to-image",
+  "title": "Flux-2 - Pro Image to Image",
+  "category": "image",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/flux2/pro-image-to-image",
+  "fields": [
+   {
+    "name": "input_urls",
+    "type": "reference",
+    "label": "Input Urls",
+    "description": "Input reference images (1-8 images). (File URL after upload, not file content; A",
+    "required": true,
+    "maxItems": 8,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxFileSizeMb": 10
+   },
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "Must be between 3 and 5000 characters. (Max length: 5000 characters)",
+    "required": true,
+    "maxLength": 5000
+   },
+   {
+    "name": "aspect_ratio",
+    "type": "enum",
+    "label": "Aspect Ratio",
+    "description": "Required. Aspect ratio for the generated image. Select 'auto' to match the first",
+    "required": true,
+    "enum": [
+     "1:1",
+     "4:3",
+     "3:4",
+     "16:9",
+     "9:16",
+     "3:2",
+     "2:3",
+     "auto"
+    ]
+   },
+   {
+    "name": "resolution",
+    "type": "enum",
+    "label": "Resolution",
+    "description": "Required. Output image resolution.",
+    "required": true,
+    "enum": [
+     "1K",
+     "2K"
+    ]
+   },
+   {
+    "name": "nsfw_checker",
+    "type": "boolean",
+    "label": "Nsfw Checker",
+    "description": "Defaults to false. When false, no additional content filtering is applied and re",
+    "required": false
+   }
+  ],
+  "useCase": "Image editing"
+ },
+ {
+  "id": "flux-2/pro-text-to-image",
+  "model": "flux-2/pro-text-to-image",
+  "title": "Flux-2 - Pro Text to Image",
+  "category": "image",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/flux2/pro-text-to-image",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "Must be between 3 and 5000 characters. (Max length: 5000 characters)",
+    "required": true,
+    "maxLength": 5000
+   },
+   {
+    "name": "aspect_ratio",
+    "type": "enum",
+    "label": "Aspect Ratio",
+    "description": "Required. Aspect ratio for the generated image.",
+    "required": true,
+    "enum": [
+     "1:1",
+     "4:3",
+     "3:4",
+     "16:9",
+     "9:16",
+     "3:2",
+     "2:3"
+    ]
+   },
+   {
+    "name": "resolution",
+    "type": "enum",
+    "label": "Resolution",
+    "description": "Required. Output image resolution.",
+    "required": true,
+    "enum": [
+     "1K",
+     "2K"
+    ]
+   },
+   {
+    "name": "nsfw_checker",
+    "type": "boolean",
+    "label": "Nsfw Checker",
+    "description": "Defaults to false. When false, no additional content filtering is applied and re",
+    "required": false
+   }
+  ],
+  "useCase": "Image generation"
+ },
+ {
+  "id": "google/nano-banana",
+  "model": "google/nano-banana",
+  "title": "Google - Nano Banana",
+  "category": "image",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/google/nano-banana",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "The prompt for image generation (Max length: 20000 characters)",
+    "required": true,
+    "maxLength": 20000
+   },
+   {
+    "name": "output_format",
+    "type": "enum",
+    "label": "Output Format",
+    "description": "Output format for the images",
+    "required": false,
+    "default": "png",
+    "enum": [
+     "png",
+     "jpeg"
+    ]
+   },
+   {
+    "name": "aspect_ratio",
+    "type": "enum",
+    "label": "Aspect Ratio",
+    "description": "Aspect ratio of the output image. Set this field explicitly.",
+    "required": false,
+    "enum": [
+     "1:1",
+     "9:16",
+     "16:9",
+     "3:4",
+     "4:3",
+     "3:2",
+     "2:3",
+     "5:4",
+     "4:5",
+     "21:9",
+     "auto"
+    ]
+   },
+   {
+    "name": "image_size",
+    "type": "enum",
+    "label": "Image Size",
+    "description": "The aspect ratio of the generated image (this parameter has been replaced by asp",
+    "required": false,
+    "default": "1:1",
+    "enum": [
+     "1:1",
+     "9:16",
+     "16:9",
+     "3:4",
+     "4:3",
+     "3:2",
+     "2:3",
+     "5:4",
+     "4:5",
+     "21:9",
+     "auto"
+    ]
+   },
+   {
+    "name": "nsfw_checker",
+    "type": "boolean",
+    "label": "Nsfw Checker",
+    "description": "Defaults to false. When false, no additional content filtering is applied and re",
+    "required": false
+   }
+  ],
+  "useCase": "Image generation"
+ },
+ {
+  "id": "google/nano-banana-edit",
+  "model": "google/nano-banana-edit",
+  "title": "Google - Nano Banana Edit",
+  "category": "image",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/google/nano-banana-edit",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "The prompt for image editing (Max length: 20000 characters)",
+    "required": true,
+    "maxLength": 20000
+   },
+   {
+    "name": "image_urls",
+    "type": "reference",
+    "label": "Image Urls",
+    "description": "List of URLs of input images for editing,up to 10 images. (File URL after upload",
+    "required": true,
+    "maxItems": 10,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxFileSizeMb": 10
+   },
+   {
+    "name": "output_format",
+    "type": "enum",
+    "label": "Output Format",
+    "description": "Output format for the images",
+    "required": false,
+    "default": "png",
+    "enum": [
+     "png",
+     "jpeg"
+    ]
+   },
+   {
+    "name": "aspect_ratio",
+    "type": "enum",
+    "label": "Aspect Ratio",
+    "description": "Aspect ratio of the output image. Set this field explicitly.",
+    "required": false,
+    "enum": [
+     "1:1",
+     "9:16",
+     "16:9",
+     "3:4",
+     "4:3",
+     "3:2",
+     "2:3",
+     "5:4",
+     "4:5",
+     "21:9",
+     "auto"
+    ]
+   },
+   {
+    "name": "image_size",
+    "type": "enum",
+    "label": "Image Size",
+    "description": "The aspect ratio of the generated image (this parameter has been replaced by asp",
+    "required": false,
+    "default": "1:1",
+    "enum": [
+     "1:1",
+     "9:16",
+     "16:9",
+     "3:4",
+     "4:3",
+     "3:2",
+     "2:3",
+     "5:4",
+     "4:5",
+     "21:9",
+     "auto"
+    ]
+   }
+  ],
+  "useCase": "Image editing"
+ },
+ {
+  "id": "nano-banana-pro",
+  "model": "nano-banana-pro",
+  "title": "Google - Nano Banana Pro",
+  "category": "image",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/google/pro-image-to-image",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "A text description of the image you want to generate (Max length: 20000 characte",
+    "required": true,
+    "maxLength": 20000
+   },
+   {
+    "name": "image_input",
+    "type": "reference",
+    "label": "Image Input",
+    "description": "Input images to transform or use as reference (supports up to 8 images) (File UR",
+    "required": false,
+    "maxItems": 8,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxFileSizeMb": 30
+   },
+   {
+    "name": "aspect_ratio",
+    "type": "enum",
+    "label": "Aspect Ratio",
+    "description": "Aspect ratio of the generated image",
+    "required": false,
+    "default": "1:1",
+    "enum": [
+     "1:1",
+     "2:3",
+     "3:2",
+     "3:4",
+     "4:3",
+     "4:5",
+     "5:4",
+     "9:16",
+     "16:9",
+     "21:9",
+     "auto"
+    ]
+   },
+   {
+    "name": "resolution",
+    "type": "enum",
+    "label": "Resolution",
+    "description": "Resolution of the generated image",
+    "required": false,
+    "default": "1K",
+    "enum": [
+     "1K",
+     "2K",
+     "4K"
+    ]
+   },
+   {
+    "name": "output_format",
+    "type": "enum",
+    "label": "Output Format",
+    "description": "Output image format: png or jpg. Set this field explicitly.",
+    "required": false,
+    "enum": [
+     "png",
+     "jpg"
+    ]
+   }
+  ],
+  "useCase": "Image generation"
+ },
+ {
+  "id": "gpt-image-2-image-to-image",
+  "model": "gpt-image-2-image-to-image",
+  "title": "GPT Image 2 - Image To Image",
+  "category": "image",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/gpt/gpt-image-2-image-to-image",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "Text prompts, up to 20,000 characters.",
+    "required": true
+   },
+   {
+    "name": "input_urls",
+    "type": "reference",
+    "label": "Input Urls",
+    "description": "Array of input image URLs.",
+    "required": true,
+    "maxItems": 16,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image"
+   },
+   {
+    "name": "aspect_ratio",
+    "type": "enum",
+    "label": "Aspect Ratio",
+    "description": "The aspect ratio of the generated image is set to auto by default.",
+    "required": false,
+    "enum": [
+     "auto",
+     "1:1",
+     "3:2",
+     "2:3",
+     "4:3",
+     "3:4",
+     "5:4",
+     "4:5",
+     "16:9",
+     "9:16",
+     "2:1",
+     "1:2",
+     "3:1",
+     "1:3",
+     "21:9",
+     "9:21"
+    ]
+   },
+   {
+    "name": "resolution",
+    "type": "enum",
+    "label": "Resolution",
+    "description": "Output resolution: 1K, 2K or 4K. Set this field explicitly. 2K does not support ",
+    "required": false,
+    "enum": [
+     "1K",
+     "2K",
+     "4K"
+    ]
+   },
+   {
+    "name": "background",
+    "type": "enum",
+    "label": "Background",
+    "description": "Image background",
+    "required": false,
+    "enum": [
+     "transparent",
+     "opaque",
+     "auto"
+    ]
+   }
+  ],
+  "useCase": "Image editing"
+ },
+ {
+  "id": "gpt-image-2-text-to-image",
+  "model": "gpt-image-2-text-to-image",
+  "title": "GPT Image-2 - Text to Image",
+  "category": "image",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/gpt/gpt-image-2-text-to-image",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "Text prompt. Required, maximum 20,000 characters.",
+    "required": true,
+    "maxLength": 20000
+   },
+   {
+    "name": "aspect_ratio",
+    "type": "enum",
+    "label": "Aspect Ratio",
+    "description": "The aspect ratio of the generated image is set to auto by default.",
+    "required": false,
+    "enum": [
+     "auto",
+     "1:1",
+     "3:2",
+     "2:3",
+     "4:3",
+     "3:4",
+     "5:4",
+     "4:5",
+     "16:9",
+     "9:16",
+     "2:1",
+     "1:2",
+     "3:1",
+     "1:3",
+     "21:9",
+     "9:21"
+    ]
+   },
+   {
+    "name": "resolution",
+    "type": "enum",
+    "label": "Resolution",
+    "description": "Output resolution: 1K, 2K or 4K. Set this field explicitly. 2K does not support ",
+    "required": false,
+    "enum": [
+     "1K",
+     "2K",
+     "4K"
+    ]
+   },
+   {
+    "name": "background",
+    "type": "enum",
+    "label": "Background",
+    "description": "Image background",
+    "required": false,
+    "enum": [
+     "transparent",
+     "opaque",
+     "auto"
+    ]
+   }
+  ],
+  "useCase": "Image generation"
+ },
+ {
+  "id": "ideogram/v3-edit",
+  "model": "ideogram/v3-edit",
+  "title": "Ideogram V3 Edit",
+  "category": "image",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/ideogram/v3-edit",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "The prompt to fill the masked part of the image. Maximum length: 5000 characters",
+    "required": true,
+    "maxLength": 5000
+   },
+   {
+    "name": "image_url",
+    "type": "reference",
+    "label": "Image Url",
+    "description": "The image URL to generate an image from. Needs to match the dimensions of the ma",
+    "required": true,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "mask_url",
+    "type": "reference",
+    "label": "Mask Url",
+    "description": "The mask URL to inpaint the image. Needs to match the dimensions of the input im",
+    "required": true,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "rendering_speed",
+    "type": "enum",
+    "label": "Rendering Speed",
+    "description": "The rendering speed to use. Default value: `BALANCED`.",
+    "required": false,
+    "default": "BALANCED",
+    "enum": [
+     "TURBO",
+     "BALANCED",
+     "QUALITY"
+    ]
+   },
+   {
+    "name": "expand_prompt",
+    "type": "boolean",
+    "label": "Expand Prompt",
+    "description": "Determine if MagicPrompt should be used in generating the request or not. Defaul",
+    "required": false,
+    "default": true
+   },
+   {
+    "name": "seed",
+    "type": "number",
+    "label": "Seed",
+    "description": "Seed for the random number generator.",
+    "required": false,
+    "step": 1
+   }
+  ],
+  "useCase": "Image editing"
+ },
+ {
+  "id": "ideogram/v3-remix",
+  "model": "ideogram/v3-remix",
+  "title": "Ideogram V3 Remix",
+  "category": "image",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/ideogram/v3-remix",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "The prompt to remix the image with. Maximum length: 5000 characters.",
+    "required": true,
+    "maxLength": 5000
+   },
+   {
+    "name": "image_url",
+    "type": "reference",
+    "label": "Image Url",
+    "description": "The image URL to remix.",
+    "required": true,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "rendering_speed",
+    "type": "enum",
+    "label": "Rendering Speed",
+    "description": "The rendering speed to use.",
+    "required": false,
+    "enum": [
+     "TURBO",
+     "BALANCED",
+     "QUALITY"
+    ]
+   },
+   {
+    "name": "style",
+    "type": "enum",
+    "label": "Style",
+    "description": "The style type to generate with.",
+    "required": false,
+    "enum": [
+     "AUTO",
+     "GENERAL",
+     "REALISTIC",
+     "DESIGN"
+    ]
+   },
+   {
+    "name": "expand_prompt",
+    "type": "boolean",
+    "label": "Expand Prompt",
+    "description": "Determine if MagicPrompt should be used in generating the request or not.",
+    "required": false
+   },
+   {
+    "name": "image_size",
+    "type": "enum",
+    "label": "Image Size",
+    "description": "The resolution of the generated image.",
+    "required": false,
+    "enum": [
+     "square",
+     "square_hd",
+     "portrait_4_3",
+     "portrait_16_9",
+     "landscape_4_3",
+     "landscape_16_9"
+    ]
+   },
+   {
+    "name": "num_images",
+    "type": "enum",
+    "label": "Num Images",
+    "description": "Number of images to generate.",
+    "required": false,
+    "enum": [
+     "1",
+     "2",
+     "3",
+     "4"
+    ]
+   },
+   {
+    "name": "seed",
+    "type": "number",
+    "label": "Seed",
+    "description": "Seed for the random number generator.",
+    "required": false,
+    "step": 1
+   },
+   {
+    "name": "strength",
+    "type": "number",
+    "label": "Strength",
+    "description": "Strength of the input image in the remix.",
+    "required": false,
+    "min": 0.01,
+    "max": 1,
+    "step": 0.1
+   },
+   {
+    "name": "negative_prompt",
+    "type": "textarea",
+    "label": "Negative Prompt",
+    "description": "Description of what to exclude from the generated image. If the positive prompt ",
+    "required": false,
+    "maxLength": 5000
+   }
+  ],
+  "useCase": "Image generation"
+ },
+ {
+  "id": "ideogram/v3-text-to-image",
+  "model": "ideogram/v3-text-to-image",
+  "title": "Ideogram V3 Text to Image",
+  "category": "image",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/ideogram/v3-text-to-image",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "Description of the image to generate. Maximum length: 5000 characters.",
+    "required": true,
+    "maxLength": 5000
+   },
+   {
+    "name": "rendering_speed",
+    "type": "enum",
+    "label": "Rendering Speed",
+    "description": "The rendering speed to use.",
+    "required": false,
+    "enum": [
+     "TURBO",
+     "BALANCED",
+     "QUALITY"
+    ]
+   },
+   {
+    "name": "style",
+    "type": "enum",
+    "label": "Style",
+    "description": "The style type to generate with.",
+    "required": false,
+    "enum": [
+     "AUTO",
+     "GENERAL",
+     "REALISTIC",
+     "DESIGN"
+    ]
+   },
+   {
+    "name": "expand_prompt",
+    "type": "boolean",
+    "label": "Expand Prompt",
+    "description": "Determines whether MagicPrompt should be used to enhance the generation request.",
+    "required": false
+   },
+   {
+    "name": "image_size",
+    "type": "enum",
+    "label": "Image Size",
+    "description": "The resolution of the generated image.",
+    "required": false,
+    "enum": [
+     "square",
+     "square_hd",
+     "portrait_4_3",
+     "portrait_16_9",
+     "landscape_4_3",
+     "landscape_16_9"
+    ]
+   },
+   {
+    "name": "seed",
+    "type": "number",
+    "label": "Seed",
+    "description": "Seed for the random number generator.",
+    "required": false,
+    "step": 1
+   },
+   {
+    "name": "negative_prompt",
+    "type": "textarea",
+    "label": "Negative Prompt",
+    "description": "Description of what to exclude from the generated image. If the positive prompt ",
+    "required": false,
+    "maxLength": 5000
+   }
+  ],
+  "useCase": "Image generation"
+ },
+ {
+  "id": "qwen/image-edit",
+  "model": "qwen/image-edit",
+  "title": "Qwen - Image Edit",
+  "category": "image",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/qwen/image-edit",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "The prompt to generate the image with (Max length: 2000 characters)",
+    "required": true,
+    "maxLength": 2000
+   },
+   {
+    "name": "image_url",
+    "type": "reference",
+    "label": "Image Url",
+    "description": "The URL of the image to edit. (File URL after upload, not file content; Accepted",
+    "required": true,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxFileSizeMb": 10,
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "acceleration",
+    "type": "enum",
+    "label": "Acceleration",
+    "description": "Acceleration level for image generation. Options: 'none', 'regular', 'high'. Hig",
+    "required": false,
+    "default": "none",
+    "enum": [
+     "none",
+     "regular",
+     "high"
+    ]
+   },
+   {
+    "name": "image_size",
+    "type": "enum",
+    "label": "Image Size",
+    "description": "The size of the generated image. Default value: landscape_4_3",
+    "required": false,
+    "default": "landscape_4_3",
+    "enum": [
+     "square",
+     "square_hd",
+     "portrait_4_3",
+     "portrait_16_9",
+     "landscape_4_3",
+     "landscape_16_9"
+    ]
+   },
+   {
+    "name": "num_inference_steps",
+    "type": "number",
+    "label": "Num Inference Steps",
+    "description": "The number of inference steps to perform. Default value: 30 (Min: 2, Max: 49, St",
+    "required": false,
+    "default": 25,
+    "min": 2,
+    "max": 49,
+    "step": 0.1
+   },
+   {
+    "name": "seed",
+    "type": "number",
+    "label": "Seed",
+    "description": "The same seed and the same prompt given to the same version of the model will ou",
+    "required": false,
+    "step": 1
+   },
+   {
+    "name": "guidance_scale",
+    "type": "number",
+    "label": "Guidance Scale",
+    "description": "The CFG (Classifier Free Guidance) scale is a measure of how close you want the ",
+    "required": false,
+    "default": 4,
+    "min": 0,
+    "max": 20,
+    "step": 0.1
+   },
+   {
+    "name": "num_images",
+    "type": "enum",
+    "label": "Num Images",
+    "description": "num_images",
+    "required": false,
+    "enum": [
+     "1",
+     "2",
+     "3",
+     "4"
+    ]
+   },
+   {
+    "name": "enable_safety_checker",
+    "type": "boolean",
+    "label": "Enable Safety Checker",
+    "description": "If set to true, the safety checker will be enabled. Default value: true (Boolean",
+    "required": false
+   },
+   {
+    "name": "output_format",
+    "type": "enum",
+    "label": "Output Format",
+    "description": "The format of the generated image. Default value: \"png\"",
+    "required": false,
+    "default": "png",
+    "enum": [
+     "jpeg",
+     "png"
+    ]
+   },
+   {
+    "name": "negative_prompt",
+    "type": "textarea",
+    "label": "Negative Prompt",
+    "description": "The negative prompt for the generation Default value: \" \" (Max length: 500 chara",
+    "required": false,
+    "maxLength": 500
+   },
+   {
+    "name": "nsfw_checker",
+    "type": "boolean",
+    "label": "Nsfw Checker",
+    "description": "Defaults to false. When false, no additional content filtering is applied and re",
+    "required": false
+   }
+  ],
+  "useCase": "Image editing"
+ },
+ {
+  "id": "bytedance/seedream-v4-text-to-image",
+  "model": "bytedance/seedream-v4-text-to-image",
+  "title": "Seedream4.0 - Text to Image",
+  "category": "image",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/seedream/seedream-v4-text-to-image",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "The text prompt used to generate the image (Max length: 5000 characters)",
+    "required": true,
+    "maxLength": 5000
+   },
+   {
+    "name": "image_size",
+    "type": "enum",
+    "label": "Image Size",
+    "description": "The size of the generated image.",
+    "required": false,
+    "default": "square_hd",
+    "enum": [
+     "square",
+     "square_hd",
+     "portrait_4_3",
+     "portrait_3_2",
+     "portrait_16_9",
+     "landscape_4_3",
+     "landscape_3_2",
+     "landscape_16_9",
+     "landscape_21_9"
+    ]
+   },
+   {
+    "name": "image_resolution",
+    "type": "enum",
+    "label": "Image Resolution",
+    "description": "Final image resolution is determined by combining image_size (aspect ratio) and ",
+    "required": false,
+    "default": "1K",
+    "enum": [
+     "1K",
+     "2K",
+     "4K"
+    ]
+   },
+   {
+    "name": "max_images",
+    "type": "number",
+    "label": "Max Images",
+    "description": "Set this value (1–6) to cap how many images a single generation run can produce ",
+    "required": false,
+    "default": 1,
+    "min": 1,
+    "max": 6,
+    "step": 0.1
+   },
+   {
+    "name": "seed",
+    "type": "number",
+    "label": "Seed",
+    "description": "Random seed for reproducible results. Integer, up to 1000000. Omit for a random ",
+    "required": false,
+    "max": 1000000,
+    "step": 1
+   },
+   {
+    "name": "nsfw_checker",
+    "type": "boolean",
+    "label": "Nsfw Checker",
+    "description": "Defaults to false. When false, no additional content filtering is applied and re",
+    "required": false
+   }
+  ],
+  "useCase": "Image generation"
+ },
+ {
+  "id": "topaz/image-upscale",
+  "model": "topaz/image-upscale",
+  "title": "Topaz - Image Upscale",
+  "category": "image",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/topaz/image-upscale",
+  "fields": [
+   {
+    "name": "image_url",
+    "type": "reference",
+    "label": "Image Url",
+    "description": "Url of the image to be upscaled (File URL after upload, not file content; Accept",
+    "required": true,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxFileSizeMb": 10,
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "upscale_factor",
+    "type": "enum",
+    "label": "Upscale Factor",
+    "description": "Factor to upscale the image by (e.g. 2 doubles width and height).",
+    "required": true,
+    "default": "2",
+    "enum": [
+     "1",
+     "2",
+     "4"
+    ]
+   }
+  ],
+  "useCase": "Image generation"
+ },
+ {
+  "id": "veo/generate",
+  "model": "veo",
+  "title": "Veo — Create a video",
+  "category": "video",
+  "provider": "veo",
+  "operation": "generate",
+  "useCase": "Video generation",
+  "tags": [
+   "veo",
+   "video"
+  ],
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Video instructions",
+    "required": true
+   },
+   {
+    "name": "imageUrls",
+    "type": "reference",
+    "label": "Reference image",
+    "accept": "image/*",
+    "maxItems": 3,
+    "mentionStyle": "none"
+   },
+   {
+    "name": "model",
+    "type": "enum",
+    "label": "Veo model",
+    "enum": [
+     "veo3_fast",
+     "veo3"
+    ],
+    "default": "veo3_fast"
+   },
+   {
+    "name": "aspectRatio",
+    "type": "enum",
+    "label": "Aspect ratio",
+    "enum": [
+     "16:9",
+     "9:16"
+    ],
+    "default": "16:9"
+   }
+  ]
+ },
+ {
+  "id": "veo/extend",
+  "model": "veo/extend",
+  "title": "Veo — Extend a video",
+  "category": "video",
+  "provider": "veo",
+  "operation": "extend",
+  "useCase": "Video editing",
+  "tags": [
+   "veo",
+   "extend"
+  ],
+  "fields": [
+   {
+    "name": "taskId",
+    "type": "string",
+    "label": "Source task ID",
+    "required": true
+   },
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Continuation instructions",
+    "required": true
+   }
+  ]
+ },
+ {
+  "id": "runway/generate",
+  "model": "runway",
+  "title": "Runway — Create a video",
+  "category": "video",
+  "provider": "runway",
+  "operation": "generate",
+  "useCase": "Video generation",
+  "tags": [
+   "runway",
+   "video"
+  ],
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Video instructions",
+    "required": true
+   },
+   {
+    "name": "imageUrl",
+    "type": "reference",
+    "label": "Start image",
+    "accept": "image/*",
+    "scalar": true,
+    "maxItems": 1,
+    "mentionStyle": "none"
+   },
+   {
+    "name": "duration",
+    "type": "enum",
+    "label": "Duration",
+    "enum": [
+     "5",
+     "10"
+    ],
+    "default": "5"
+   },
+   {
+    "name": "quality",
+    "type": "enum",
+    "label": "Quality",
+    "enum": [
+     "720p",
+     "1080p"
+    ],
+    "default": "720p"
+   },
+   {
+    "name": "aspectRatio",
+    "type": "enum",
+    "label": "Aspect ratio",
+    "enum": [
+     "16:9",
+     "9:16",
+     "1:1"
+    ],
+    "default": "16:9"
+   }
+  ]
+ },
+ {
+  "id": "bytedance/seedance-1.5-pro",
+  "model": "bytedance/seedance-1.5-pro",
+  "title": "Bytedance Seedance 1.5 Pro",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/bytedance/seedance-1-5-pro",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "The text prompt used to generate the video. Required field. (Min length: 3, Max ",
+    "required": true,
+    "maxLength": 20000
+   },
+   {
+    "name": "input_urls",
+    "type": "reference",
+    "label": "Input Urls",
+    "description": "URLs of input images for image-to-video generation. Optional field.",
+    "required": false,
+    "maxItems": 2,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image"
+   },
+   {
+    "name": "aspect_ratio",
+    "type": "enum",
+    "label": "Aspect Ratio",
+    "description": "Required. One of 1:1, 4:3, 3:4, 16:9, 9:16, 21:9.",
+    "required": true,
+    "enum": [
+     "1:1",
+     "4:3",
+     "3:4",
+     "16:9",
+     "9:16",
+     "21:9"
+    ]
+   },
+   {
+    "name": "resolution",
+    "type": "enum",
+    "label": "Resolution",
+    "description": "Video resolution - 480p for faster generation, 720p for balance, 1080p for highe",
+    "required": false,
+    "default": "720p",
+    "enum": [
+     "480p",
+     "720p",
+     "1080p"
+    ]
+   },
+   {
+    "name": "duration",
+    "type": "number",
+    "label": "Duration",
+    "description": "Required. Output length in whole seconds, 4–12.",
+    "required": true,
+    "step": 0.1
+   },
+   {
+    "name": "fixed_lens",
+    "type": "boolean",
+    "label": "Fixed Lens",
+    "description": "Seedance adds dynamic camera movement. Enable this feature to lock the camera fo",
+    "required": false,
+    "default": false
+   },
+   {
+    "name": "generate_audio",
+    "type": "boolean",
+    "label": "Generate Audio",
+    "description": "Whether to generate synchronized audio. Default: true. Pass false for a silent v",
+    "required": false,
+    "default": true
+   },
+   {
+    "name": "nsfw_checker",
+    "type": "boolean",
+    "label": "Nsfw Checker",
+    "description": "Defaults to false. When false, no additional content filtering is applied and re",
+    "required": false
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "bytedance/seedance-2",
+  "model": "bytedance/seedance-2",
+  "title": "bytedance-seedance-2",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/bytedance/seedance-2",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "The text prompt used to generate the video. Required field. (Min length: 3, Max ",
+    "required": true,
+    "maxLength": 20000
+   },
+   {
+    "name": "first_frame_url",
+    "type": "reference",
+    "label": "First Frame Url",
+    "description": "First frame image url or asset://{assetId}",
+    "required": false,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "last_frame_url",
+    "type": "reference",
+    "label": "Last Frame Url",
+    "description": "End frame image url or asset://{assetId}",
+    "required": false,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "reference_image_urls",
+    "type": "reference",
+    "label": "Reference Image Urls",
+    "description": "Enter a list of image URLs or asset://{assetId} (for example: asset://asset-2026",
+    "required": false,
+    "maxItems": 9,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image"
+   },
+   {
+    "name": "reference_video_urls",
+    "type": "reference",
+    "label": "Reference Video Urls",
+    "description": "Enter a list of video URLs or asset://{assetId} (for example: asset://asset-2026",
+    "required": false,
+    "maxItems": 3,
+    "accept": "video/*,image/*",
+    "mentionStyle": "at-video"
+   },
+   {
+    "name": "reference_audio_urls",
+    "type": "reference",
+    "label": "Reference Audio Urls",
+    "description": "Enter a list of audio URLs or asset://{assetId} (for example: asset://asset-2026",
+    "required": false,
+    "maxItems": 3,
+    "accept": "audio/*",
+    "mentionStyle": "at-audio"
+   },
+   {
+    "name": "return_last_frame",
+    "type": "boolean",
+    "label": "Return Last Frame",
+    "description": "Whether to return the last frame of the video as an image.",
+    "required": false,
+    "default": false
+   },
+   {
+    "name": "generate_audio",
+    "type": "boolean",
+    "label": "Generate Audio",
+    "description": "Whether to generate audio for the video.",
+    "required": false,
+    "default": true
+   },
+   {
+    "name": "resolution",
+    "type": "enum",
+    "label": "Resolution",
+    "description": "Video resolution - 480p for faster generation, 720p for balance, 1080p for High-",
+    "required": false,
+    "default": "720p",
+    "enum": [
+     "480p",
+     "720p",
+     "1080p",
+     "4k"
+    ]
+   },
+   {
+    "name": "aspect_ratio",
+    "type": "enum",
+    "label": "Aspect Ratio",
+    "description": "Video aspect ratio configuration. Required field.",
+    "required": true,
+    "default": "16:9",
+    "enum": [
+     "1:1",
+     "4:3",
+     "3:4",
+     "16:9",
+     "9:16",
+     "21:9",
+     "adaptive"
+    ]
+   },
+   {
+    "name": "duration",
+    "type": "number",
+    "label": "Duration",
+    "description": "Video duration in 4-15 seconds or -1.",
+    "required": false,
+    "default": 5,
+    "step": 1,
+    "min": 4,
+    "max": 15
+   },
+   {
+    "name": "web_search",
+    "type": "boolean",
+    "label": "Web Search",
+    "description": "Use online search. Text-to-video only.",
+    "required": false
+   },
+   {
+    "name": "nsfw_checker",
+    "type": "boolean",
+    "label": "Nsfw Checker",
+    "description": "Defaults to false. When false, no additional content filtering is applied and re",
+    "required": false
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "hailuo/2-3-image-to-video-pro",
+  "model": "hailuo/2-3-image-to-video-pro",
+  "title": "Hailuo 2.3 Pro Image to Video",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/hailuo/2-3-image-to-video-pro",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "Text prompt describing the desired video animation (Max length: 5000 characters)",
+    "required": true,
+    "maxLength": 5000
+   },
+   {
+    "name": "image_url",
+    "type": "reference",
+    "label": "Image Url",
+    "description": "Input image to animate (File URL after upload, not file content; Accepted types:",
+    "required": true,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxFileSizeMb": 10,
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "duration",
+    "type": "enum",
+    "label": "Duration",
+    "description": "Required. The duration of the video in seconds. 10 seconds videos are not suppor",
+    "required": true,
+    "enum": [
+     "6",
+     "10"
+    ]
+   },
+   {
+    "name": "resolution",
+    "type": "enum",
+    "label": "Resolution",
+    "description": "Required. The resolution of the generated video.",
+    "required": true,
+    "enum": [
+     "768P",
+     "1080P"
+    ]
+   },
+   {
+    "name": "nsfw_checker",
+    "type": "boolean",
+    "label": "Nsfw Checker",
+    "description": "Defaults to false. When false, no additional content filtering is applied and re",
+    "required": false
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "kling-2.6/image-to-video",
+  "model": "kling-2.6/image-to-video",
+  "title": "Kling 2.6 Image to Video",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/kling/image-to-video",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "Text prompt (max 2,500 characters).",
+    "required": true,
+    "maxLength": 2500
+   },
+   {
+    "name": "image_urls",
+    "type": "reference",
+    "label": "Image Urls",
+    "description": "Image URLs for video generation. (Uploaded file URLs, not file content; supporte",
+    "required": true,
+    "maxItems": 1,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image"
+   },
+   {
+    "name": "sound",
+    "type": "boolean",
+    "label": "Sound",
+    "description": "Required. This parameter specifies whether the generated video contains sound (b",
+    "required": true
+   },
+   {
+    "name": "duration",
+    "type": "enum",
+    "label": "Duration",
+    "description": "Required. Video duration (unit: seconds)",
+    "required": true,
+    "enum": [
+     "5",
+     "10"
+    ]
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "kling-2.6/text-to-video",
+  "model": "kling-2.6/text-to-video",
+  "title": "Kling 2.6 Text to Video",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/kling/text-to-video",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "Text prompt (max 2,500 characters).",
+    "required": true,
+    "maxLength": 2500
+   },
+   {
+    "name": "sound",
+    "type": "boolean",
+    "label": "Sound",
+    "description": "Required. This parameter specifies whether the generated video contains sound (b",
+    "required": true
+   },
+   {
+    "name": "aspect_ratio",
+    "type": "enum",
+    "label": "Aspect Ratio",
+    "description": "Required. This parameter defines the video aspect ratio",
+    "required": true,
+    "enum": [
+     "1:1",
+     "16:9",
+     "9:16"
+    ]
+   },
+   {
+    "name": "duration",
+    "type": "enum",
+    "label": "Duration",
+    "description": "Required. Video duration (unit: seconds)",
+    "required": true,
+    "enum": [
+     "5",
+     "10"
+    ]
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "kling-3.0-omni/image-to-video",
+  "model": "kling-3.0-omni/image-to-video",
+  "title": "Kling 3.0 Omni Image To Video",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/kling/v3-omni-image-to-video",
+  "fields": [],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "kling/ai-avatar-pro",
+  "model": "kling/ai-avatar-pro",
+  "title": "Kling AI Avatar Pro",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/kling/ai-avatar-pro",
+  "fields": [
+   {
+    "name": "image_url",
+    "type": "reference",
+    "label": "Image Url",
+    "description": "The URL of the image to use as your avatar (File URL after upload, not file cont",
+    "required": true,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxFileSizeMb": 10,
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "audio_url",
+    "type": "reference",
+    "label": "Audio Url",
+    "description": "The URL of the audio file (must be the URL of the uploaded file, not the file co",
+    "required": true,
+    "accept": "audio/*",
+    "mentionStyle": "at-audio",
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "Required, non-empty. Describe the avatar's expression, movement and camera; the ",
+    "required": true,
+    "maxLength": 5000
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "wan/2-7-text-to-video",
+  "model": "wan/2-7-text-to-video",
+  "title": "Wan 2.7 - Text to Video",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/wan/2-7-text-to-video",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "Positive prompt. Minimum length: 1 character. Maximum length: 5000 characters.",
+    "required": true,
+    "maxLength": 5000
+   },
+   {
+    "name": "negative_prompt",
+    "type": "textarea",
+    "label": "Negative Prompt",
+    "description": "Negative prompt. Maximum length: 500 characters.",
+    "required": false,
+    "maxLength": 500
+   },
+   {
+    "name": "audio_url",
+    "type": "reference",
+    "label": "Audio Url",
+    "description": "Optional custom audio URL.",
+    "required": false,
+    "accept": "audio/*",
+    "mentionStyle": "at-audio",
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "resolution",
+    "type": "enum",
+    "label": "Resolution",
+    "description": "Video resolution.",
+    "required": false,
+    "default": "1080p",
+    "enum": [
+     "720p",
+     "1080p"
+    ]
+   },
+   {
+    "name": "ratio",
+    "type": "enum",
+    "label": "Ratio",
+    "description": "Video aspect ratio.",
+    "required": false,
+    "default": "16:9",
+    "enum": [
+     "16:9",
+     "9:16",
+     "1:1",
+     "4:3",
+     "3:4"
+    ]
+   },
+   {
+    "name": "duration",
+    "type": "number",
+    "label": "Duration",
+    "description": "Video duration in seconds.",
+    "required": false,
+    "default": 5,
+    "min": 2,
+    "max": 15,
+    "step": 1
+   },
+   {
+    "name": "prompt_extend",
+    "type": "boolean",
+    "label": "Prompt Extend",
+    "description": "Whether to enable intelligent prompt rewriting. Default value: `true`.",
+    "required": false,
+    "default": true
+   },
+   {
+    "name": "watermark",
+    "type": "boolean",
+    "label": "Watermark",
+    "description": "Whether to add an AI-generated watermark. Default value: `false`.",
+    "required": false,
+    "default": false
+   },
+   {
+    "name": "seed",
+    "type": "number",
+    "label": "Seed",
+    "description": "Random seed.",
+    "required": false,
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+   },
+   {
+    "name": "nsfw_checker",
+    "type": "boolean",
+    "label": "Nsfw Checker",
+    "description": "Defaults to false. When false, no additional content filtering is applied and re",
+    "required": false
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "suno/music",
+  "model": "suno/music",
+  "title": "Suno — Create a song",
+  "category": "audio",
+  "provider": "suno",
+  "operation": "generate",
+  "useCase": "Music",
+  "tags": [
+   "music",
+   "lyrics",
+   "instrumental"
+  ],
+  "docsUrl": "https://docs.kie.ai/suno-api/generate-music",
+  "fields": [
+   {
+    "name": "customMode",
+    "type": "boolean",
+    "label": "Specify lyrics and style",
+    "default": true
+   },
+   {
+    "name": "instrumental",
+    "type": "boolean",
+    "label": "Instrumental",
+    "default": false
+   },
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Lyrics / song idea",
+    "maxLength": 5000
+   },
+   {
+    "name": "style",
+    "type": "textarea",
+    "label": "Style",
+    "description": "Genre, tempo, instruments, vocal tone, etc.",
+    "maxLength": 1000
+   },
+   {
+    "name": "title",
+    "type": "string",
+    "label": "Title",
+    "maxLength": 100
+   },
+   {
+    "name": "model",
+    "type": "enum",
+    "label": "Suno model",
+    "enum": [
+     "V5",
+     "V4_5PLUS",
+     "V4_5",
+     "V4"
+    ],
+    "default": "V5"
+   },
+   {
+    "name": "negativeTags",
+    "type": "string",
+    "label": "Elements to avoid",
+    "maxLength": 500
+   },
+   {
+    "name": "personaId",
+    "type": "string",
+    "label": "Persona ID",
+    "description": "Filled in automatically when you pick a Persona from the asset shelf"
+   }
+  ]
+ },
+ {
+  "id": "market/elevenlabs-tts",
+  "model": "elevenlabs/text-to-speech-multilingual-v2",
+  "title": "ElevenLabs — Narration",
+  "category": "audio",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/elevenlabs/text-to-speech-multilingual-v2",
+  "fields": [
+   {
+    "name": "text",
+    "type": "textarea",
+    "label": "Script",
+    "description": "Blank lines split the text into segments of up to 5000 characters",
+    "required": true,
+    "maxLength": 20000
+   },
+   {
+    "name": "voice",
+    "type": "enum",
+    "label": "Voice",
+    "description": "Voice ID from the list below. You can preview a voice by opening https://static.",
+    "required": true,
+    "default": "EkK5I93UQWFDigLMpZcX",
+    "enum": [
+     "EkK5I93UQWFDigLMpZcX",
+     "Z3R5wn05IrDiVCyEkUrK",
+     "NNl6r8mD7vthiJatiJt1",
+     "YOq2y2Up4RgXP2HyXjE5",
+     "B8gJV1IhpuegLxdpXFOE",
+     "2zRM7PkgwBPiau2jvVXc",
+     "1SM7GgM6IMuvQlz2BwM3",
+     "5l5f8iK3YPeGga21rQIX",
+     "scOwDtmlUjD3prqpp97I",
+     "NOpBlnGInO9m6vDvFkFC",
+     "BZgkqPqms7Kj9ulSkVzn",
+     "wo6udizrrtpIxWGp2qJk",
+     "gU0LNdkMOQCOrPrwtbee",
+     "DGzg6RaUqxGRTHSBjfgF",
+     "x70vRnQBMBu4FAYhjJbO",
+     "Sm1seazb4gs7RSlUVw7c",
+     "P1bg08DkjqiVEzOn76yG",
+     "qDuRKMlYmrm8trt5QyBn",
+     "qXpMhyvQqiRxWQs4qSSB",
+     "TX3LPaxmHKxFdv7VOQHJ"
+    ]
+   },
+   {
+    "name": "stability",
+    "type": "number",
+    "label": "Stability",
+    "description": "Voice stability (0-1) (Min: 0, Max: 1, Step: 0.01) (step: 0.01)",
+    "required": false,
+    "default": 0.5,
+    "min": 0,
+    "max": 1,
+    "step": 0.1
+   },
+   {
+    "name": "similarity_boost",
+    "type": "number",
+    "label": "Similarity Boost",
+    "description": "Similarity boost (0-1) (Min: 0, Max: 1, Step: 0.01) (step: 0.01)",
+    "required": false,
+    "default": 0.75,
+    "min": 0,
+    "max": 1,
+    "step": 0.1
+   },
+   {
+    "name": "style",
+    "type": "number",
+    "label": "Style",
+    "description": "Style exaggeration (0-1) (Min: 0, Max: 1, Step: 0.01) (step: 0.01)",
+    "required": false,
+    "default": 0,
+    "min": 0,
+    "max": 1,
+    "step": 0.1
+   },
+   {
+    "name": "speed",
+    "type": "number",
+    "label": "Speed",
+    "description": "Speech speed (0.7-1.2). Values below 1.0 slow down the speech, above 1.0 speed i",
+    "required": false,
+    "default": 1,
+    "min": 0.7,
+    "max": 1.2,
+    "step": 0.1
+   },
+   {
+    "name": "timestamps",
+    "type": "boolean",
+    "label": "Timestamps",
+    "description": "Whether to return timestamps for each word in the generated speech (Boolean valu",
+    "required": false
+   },
+   {
+    "name": "previous_text",
+    "type": "textarea",
+    "label": "Previous Text",
+    "description": "The text that came before the text of the current request. Can be used to improv",
+    "required": false,
+    "maxLength": 5000
+   },
+   {
+    "name": "next_text",
+    "type": "textarea",
+    "label": "Next Text",
+    "description": "The text that comes after the text of the current request. Can be used to improv",
+    "required": false,
+    "maxLength": 5000
+   },
+   {
+    "name": "language_code",
+    "type": "string",
+    "label": "Language Code",
+    "description": "Language code (ISO 639-1) used to enforce a language for the model. Currently on",
+    "required": false,
+    "maxLength": 500
+   }
+  ],
+  "operation": "generate",
+  "useCase": "Narration",
+  "tags": [
+   "speech",
+   "tts",
+   "multilingual"
+  ]
+ }
+]

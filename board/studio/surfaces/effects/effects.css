@@ -1,0 +1,401 @@
+/*
+ * Effects: the home (hero, name cloud, masonry), an effect's page, and its form. Plinth at the
+ * compact scale (docs/PLINTH.md): ink edges, hairlines between rows, coral as the one accent,
+ * Space Grotesk for titles. Everything here is ef-*; the shared pieces stay st-* and sp-*.
+ */
+
+/* ---------- home ---------- */
+
+.ef-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 0 20px;
+  text-align: center;
+}
+.ef-kicker {
+  font: 600 11px/1 var(--pl-body);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pl-mute);
+}
+.ef-hero-title {
+  margin: 0;
+  font: 700 44px/1 var(--pl-display);
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--pl-ink);
+}
+.ef-hero-sub {
+  margin: 0;
+  max-width: 560px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--pl-mute);
+}
+
+/* Every effect's name, as theirs: a loose cloud of small pills under the hero. */
+.ef-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  max-width: 1080px;
+  margin: 0 auto 22px;
+}
+.ef-cloud-chip {
+  padding: 5px 10px;
+  border: 1px solid var(--pl-hairline);
+  border-radius: 999px;
+  background: var(--pl-paper);
+  color: var(--pl-ink);
+  font: 500 12px/1 var(--pl-body);
+  cursor: pointer;
+  transition: background-color 120ms var(--pl-ease), border-color 120ms var(--pl-ease);
+}
+.ef-cloud-chip:hover {
+  border-color: var(--pl-ink);
+  background: var(--pl-coral-soft);
+}
+/* An effect you have already made something with: a small coral dot. */
+.ef-cloud-chip.has-cover::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 6px;
+  border-radius: 999px;
+  background: var(--pl-coral);
+  vertical-align: 1px;
+}
+
+.ef-filters-end {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* The masonry: columns, each card its own height (its preview's shape). */
+.ef-masonry {
+  columns: 5 210px;
+  column-gap: 12px;
+}
+.ef-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0 0 12px;
+  padding: 0;
+  border: 2px solid var(--pl-ink);
+  border-radius: var(--pl-radius);
+  background: var(--pl-canvas);
+  overflow: hidden;
+  break-inside: avoid;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: translate 120ms var(--pl-ease), box-shadow 120ms var(--pl-ease);
+}
+.ef-card:hover {
+  translate: 0 -2px;
+  box-shadow: 0 4px 0 var(--pl-ink);
+}
+.ef-card-kind {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border: 1px solid var(--pl-ink);
+  border-radius: 999px;
+  background: var(--pl-canvas);
+  font: 600 11px/1 var(--pl-body);
+  color: var(--pl-ink);
+}
+
+/* ---------- a cover: your result, or the typographic placeholder ---------- */
+
+.ef-cover {
+  position: relative;
+  display: block;
+  width: 100%;
+  background: var(--pl-paper);
+}
+.ef-cover img,
+.ef-cover video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.ef-cover-name {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 28px 12px 10px;
+  background: linear-gradient(180deg, transparent, rgb(0 0 0 / 0.62));
+  color: #fff;
+  font: 600 15px/1.15 var(--pl-display);
+  letter-spacing: -0.01em;
+}
+.ef-cover.is-empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 40px 14px 14px;
+  background:
+    linear-gradient(180deg, transparent 50%, var(--pl-coral-soft) 100%),
+    var(--pl-paper);
+}
+.ef-cover-kicker {
+  font: 600 11px/1 var(--pl-body);
+  color: var(--pl-mute);
+}
+.ef-cover-title {
+  font: 600 22px/1.05 var(--pl-display);
+  letter-spacing: -0.02em;
+  color: var(--pl-ink);
+}
+.ef-cover-note {
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--pl-ink);
+}
+.ef-cover-hint {
+  margin-top: 4px;
+  font-size: 11px;
+  line-height: 1.35;
+  color: var(--pl-mute);
+}
+/* The rail's card: one short frame, name over it. */
+.ef-cover.is-compact {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+.ef-cover.is-compact img,
+.ef-cover.is-compact video {
+  height: 100%;
+  object-fit: cover;
+}
+.ef-cover.is-compact.is-empty {
+  padding: 14px;
+}
+
+/* ---------- an effect's page ---------- */
+
+.ef-page-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(200px, 260px);
+  gap: 28px;
+  align-items: start;
+  margin: 10px 0 28px;
+}
+.ef-page-text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+.ef-page-title {
+  margin: 0;
+  font: 700 40px/1.02 var(--pl-display);
+  letter-spacing: -0.03em;
+  color: var(--pl-ink);
+}
+.ef-page-about {
+  margin: 0;
+  max-width: 620px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--pl-ink);
+}
+.ef-page-actions {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+.ef-generate .plinth-btn__face {
+  min-height: 38px;
+  padding: 0 22px;
+}
+.ef-recipe {
+  max-width: 420px;
+}
+.ef-page-cover {
+  display: block;
+  padding: 0;
+  border: 2px solid var(--pl-ink);
+  border-radius: var(--pl-radius);
+  overflow: hidden;
+  background: var(--pl-canvas);
+  cursor: pointer;
+}
+/* One steady frame beside the text, whatever shape the result or placeholder is. */
+.ef-page-cover .ef-cover {
+  aspect-ratio: 4 / 5 !important;
+  overflow: hidden;
+}
+.ef-page-cover .ef-cover img,
+.ef-page-cover .ef-cover video {
+  height: 100%;
+  object-fit: cover;
+}
+.ef-examples-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--pl-hairline);
+}
+
+/* ---------- the form ---------- */
+
+.ef-rail-card {
+  flex: none;
+}
+/* A tall photo in the Image tile stays a tile, not half the rail. */
+.ef-use .st-slot img {
+  max-height: 170px;
+  object-fit: contain;
+}
+.ef-rail-about {
+  align-self: flex-start;
+  margin-top: -4px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--pl-mute);
+  font: 500 12px/1.35 var(--pl-body);
+  text-align: left;
+  cursor: pointer;
+}
+.ef-rail-about:hover {
+  color: var(--pl-ink);
+  text-decoration: underline;
+}
+/* "Prompt  Off  (switch)": one line, as theirs. */
+.ef-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 2px solid var(--pl-ink);
+  border-radius: 10px;
+  background: var(--pl-canvas);
+}
+.ef-line-label {
+  font: 600 13px/1 var(--pl-body);
+  color: var(--pl-ink);
+}
+.ef-line-value {
+  margin-left: auto;
+  font: 500 12px/1 var(--pl-body);
+  color: var(--pl-mute);
+}
+.ef-prompt textarea {
+  width: 100%;
+}
+.ef-rows {
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+}
+.ef-more {
+  border: 1px solid var(--pl-hairline);
+  border-radius: 10px;
+  background: var(--pl-paper);
+  font-size: 12px;
+}
+.ef-more > summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ef-more-value {
+  margin-left: auto;
+  font-weight: 500;
+  color: var(--pl-mute);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 170px;
+}
+.ef-more[open] {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 10px;
+}
+.ef-more[open] > :not(summary) {
+  margin: 0 10px;
+}
+
+/* How it works: three still steps (Upload → aspect and resolution → Generate). */
+.ef-how {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  max-width: 880px;
+  margin: 8px auto 20px;
+  padding: 0;
+  list-style: none;
+}
+.ef-how-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 16px;
+  border: 2px solid var(--pl-ink);
+  border-radius: var(--pl-radius);
+  background: var(--pl-paper);
+}
+.ef-how-num {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font: 700 26px/1 var(--pl-display);
+  color: var(--pl-coral);
+}
+.ef-how-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--pl-ink);
+  border-radius: 999px;
+  background: var(--pl-canvas);
+  color: var(--pl-ink);
+}
+.ef-how-title {
+  font: 600 15px/1.2 var(--pl-display);
+  color: var(--pl-ink);
+}
+.ef-how-sub {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--pl-mute);
+}
+
+@media (max-width: 900px) {
+  .ef-page-head {
+    grid-template-columns: 1fr;
+  }
+  .ef-how {
+    grid-template-columns: 1fr;
+  }
+  .ef-hero-title {
+    font-size: 32px;
+  }
+}

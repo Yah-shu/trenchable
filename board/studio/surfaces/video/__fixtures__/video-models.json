@@ -1,0 +1,1416 @@
+[
+ {
+  "id": "grok-imagine/image-to-video",
+  "model": "grok-imagine/image-to-video",
+  "title": "Grok Imagine Image to Video",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/grok-imagine/image-to-video",
+  "fields": [
+   {
+    "name": "image_urls",
+    "type": "reference",
+    "label": "Image Urls",
+    "description": "Provide an external image URL as a reference for video generation. Up to 7 images are supported. Do not use it simultaneously with task_id. In your prompt, reference an uploaded image by typing @image(n) followed by a space (for example: @image1 a sunset over the ocean).",
+    "required": false,
+    "maxItems": 7,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image"
+   },
+   {
+    "name": "task_id",
+    "type": "string",
+    "label": "Task Id",
+    "description": "Task ID from a previously generated Grok image. Use with index to select a specific image. Do not use with image_urls.",
+    "required": false,
+    "maxLength": 100
+   },
+   {
+    "name": "index",
+    "type": "number",
+    "label": "Index",
+    "description": "When using task_id, the 0-based index of the image to use. A grok-imagine/text-to-image task returns 2 images, so valid values are 0 and 1. Default 0.",
+    "required": false,
+    "default": 0,
+    "min": 0,
+    "max": 1,
+    "step": 1
+   },
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "Text prompt describing the desired video motion. Optional field.",
+    "required": false
+   },
+   {
+    "name": "mode",
+    "type": "enum",
+    "label": "Mode",
+    "description": "Specifies the generation mode affecting the style and intensity of motion. Note: Spicy mode is not available for external image inputs.",
+    "required": false,
+    "default": "normal",
+    "enum": [
+     "fun",
+     "normal",
+     "spicy"
+    ]
+   },
+   {
+    "name": "duration",
+    "type": "string",
+    "label": "Duration",
+    "description": "The duration of the generated video (in seconds) (6-30). (Minimum: 6, Maximum: 30, Step: 1)",
+    "required": false
+   },
+   {
+    "name": "resolution",
+    "type": "enum",
+    "label": "Resolution",
+    "description": "The resolution of the generated video.",
+    "required": false,
+    "default": "480p",
+    "enum": [
+     "480p",
+     "720p",
+     "1080p"
+    ]
+   },
+   {
+    "name": "aspect_ratio",
+    "type": "enum",
+    "label": "Aspect Ratio",
+    "description": "Image ratio selection only applies to multi-image generation mode. In single-image mode, the video width and height are referenced to the image width and height.",
+    "required": false,
+    "default": "16:9",
+    "enum": [
+     "2:3",
+     "3:2",
+     "1:1",
+     "16:9",
+     "9:16"
+    ]
+   },
+   {
+    "name": "nsfw_checker",
+    "type": "boolean",
+    "label": "Nsfw Checker",
+    "description": "Defaults to false. When false, no additional content filtering is applied and results are returned directly by the model.",
+    "required": false
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "grok-imagine/text-to-video",
+  "model": "grok-imagine/text-to-video",
+  "title": "Grok Imagine Text to Video",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/grok-imagine/text-to-video",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "Text prompt describing the desired video motion. Required field.",
+    "required": true
+   },
+   {
+    "name": "aspect_ratio",
+    "type": "enum",
+    "label": "Aspect Ratio",
+    "description": "Specifies the width-to-height ratio of the generated video. Controls the aspect ratio of the output.",
+    "required": false,
+    "default": "2:3",
+    "enum": [
+     "2:3",
+     "3:2",
+     "1:1",
+     "16:9",
+     "9:16"
+    ]
+   },
+   {
+    "name": "mode",
+    "type": "enum",
+    "label": "Mode",
+    "description": "Specifies the generation mode affecting the style and intensity of motion.",
+    "required": false,
+    "default": "normal",
+    "enum": [
+     "fun",
+     "normal",
+     "spicy"
+    ]
+   },
+   {
+    "name": "duration",
+    "type": "number",
+    "label": "Duration",
+    "description": "The duration of the generated video (in seconds) (6-30). (Minimum: 6, Maximum: 30, Step: 1)",
+    "required": false,
+    "step": 0.1
+   },
+   {
+    "name": "resolution",
+    "type": "enum",
+    "label": "Resolution",
+    "description": "The resolution of the generated video.",
+    "required": false,
+    "default": "480p",
+    "enum": [
+     "480p",
+     "720p",
+     "1080p"
+    ]
+   },
+   {
+    "name": "nsfw_checker",
+    "type": "boolean",
+    "label": "Nsfw Checker",
+    "description": "Defaults to false. When false, no additional content filtering is applied and results are returned directly by the model.",
+    "required": false
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "bytedance/seedance-2-5",
+  "model": "bytedance/seedance-2-5",
+  "title": "Bytedance Seedance 2.5",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/bytedance/seedance-2-5",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "The text prompt used to generate the video.. ( Max length: 20480 characters)",
+    "required": false,
+    "maxLength": 20480
+   },
+   {
+    "name": "first_frame_url",
+    "type": "reference",
+    "label": "First Frame Url",
+    "description": "First frame image url or asset://{assetId}",
+    "required": false,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "last_frame_url",
+    "type": "reference",
+    "label": "Last Frame Url",
+    "description": "End frame image url or asset://{assetId}",
+    "required": false,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "reference_image_urls",
+    "type": "reference",
+    "label": "Reference Image Urls",
+    "description": "Enter a list of image URLs or asset://{assetId} (for example: asset://asset-20260404242101-76djj).",
+    "required": false,
+    "maxItems": 30,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image"
+   },
+   {
+    "name": "reference_video_urls",
+    "type": "reference",
+    "label": "Reference Video Urls",
+    "description": "Enter a list of video URLs or asset://{assetId} (for example: asset://asset-20260404242101-76djj) .",
+    "required": false,
+    "maxItems": 10,
+    "accept": "video/*,image/*",
+    "mentionStyle": "at-video"
+   },
+   {
+    "name": "reference_audio_urls",
+    "type": "reference",
+    "label": "Reference Audio Urls",
+    "description": "Enter a list of audio URLs or asset://{assetId} (for example: asset://asset-20260404242101-76djj) .",
+    "required": false,
+    "maxItems": 10,
+    "accept": "audio/*",
+    "mentionStyle": "at-audio"
+   },
+   {
+    "name": "return_last_frame",
+    "type": "boolean",
+    "label": "Return Last Frame",
+    "description": "Whether to also return the last frame of the generated video as a JPEG (in resultJson.lastFrameUrl). Default false.",
+    "required": false,
+    "default": false
+   },
+   {
+    "name": "generate_audio",
+    "type": "boolean",
+    "label": "Generate Audio",
+    "description": "Whether to generate audio synchronized with the video. Default: true.",
+    "required": false,
+    "default": true
+   },
+   {
+    "name": "resolution",
+    "type": "enum",
+    "label": "Resolution",
+    "description": "Video resolution - 480p for faster generation, 720p for balance.",
+    "required": false,
+    "default": "720p",
+    "enum": [
+     "480p",
+     "720p",
+     "1080p"
+    ]
+   },
+   {
+    "name": "aspect_ratio",
+    "type": "enum",
+    "label": "Aspect Ratio",
+    "description": "Video aspect ratio configuration.",
+    "required": false,
+    "default": "adaptive",
+    "enum": [
+     "1:1",
+     "4:3",
+     "3:4",
+     "16:9",
+     "9:16",
+     "21:9",
+     "adaptive"
+    ]
+   },
+   {
+    "name": "duration",
+    "type": "number",
+    "label": "Duration",
+    "description": "Video duration in 4-30 seconds.",
+    "required": false,
+    "default": 5,
+    "step": 1,
+    "min": 4,
+    "max": 30
+   },
+   {
+    "name": "output_format",
+    "type": "enum",
+    "label": "Output Format",
+    "description": "Video output format.",
+    "required": false,
+    "default": "mp4",
+    "enum": [
+     "mp4",
+     "mov"
+    ]
+   },
+   {
+    "name": "web_search",
+    "type": "boolean",
+    "label": "Web Search",
+    "description": "Enable online search.",
+    "required": false
+   },
+   {
+    "name": "draft",
+    "type": "boolean",
+    "label": "Draft",
+    "description": "Enable draft mode. When enabled, only 480p resolution is allowed. Draft task ID is valid for 7 days from draft creation.",
+    "required": false,
+    "default": false
+   },
+   {
+    "name": "nsfw_checker",
+    "type": "boolean",
+    "label": "Nsfw Checker",
+    "description": "Defaults to false. When false, no additional content filtering is applied and results are returned directly by the model.",
+    "required": false
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "kling-2.6/image-to-video",
+  "model": "kling-2.6/image-to-video",
+  "title": "Kling 2.6 Image to Video",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/kling/image-to-video",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "Text prompt (max 2,500 characters).",
+    "required": true,
+    "maxLength": 2500
+   },
+   {
+    "name": "image_urls",
+    "type": "reference",
+    "label": "Image Urls",
+    "description": "Image URLs for video generation. (Uploaded file URLs, not file content; supported types: image/jpeg, image/png; maximum file size: 10.0MB)",
+    "required": true,
+    "maxItems": 1,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image"
+   },
+   {
+    "name": "sound",
+    "type": "boolean",
+    "label": "Sound",
+    "description": "Required. This parameter specifies whether the generated video contains sound (boolean: true/false)",
+    "required": true
+   },
+   {
+    "name": "duration",
+    "type": "enum",
+    "label": "Duration",
+    "description": "Required. Video duration (unit: seconds)",
+    "required": true,
+    "enum": [
+     "5",
+     "10"
+    ]
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "kling-2.6/text-to-video",
+  "model": "kling-2.6/text-to-video",
+  "title": "Kling 2.6 Text to Video",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/kling/text-to-video",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "Text prompt (max 2,500 characters).",
+    "required": true,
+    "maxLength": 2500
+   },
+   {
+    "name": "sound",
+    "type": "boolean",
+    "label": "Sound",
+    "description": "Required. This parameter specifies whether the generated video contains sound (boolean: true/false)",
+    "required": true
+   },
+   {
+    "name": "aspect_ratio",
+    "type": "enum",
+    "label": "Aspect Ratio",
+    "description": "Required. This parameter defines the video aspect ratio",
+    "required": true,
+    "enum": [
+     "1:1",
+     "16:9",
+     "9:16"
+    ]
+   },
+   {
+    "name": "duration",
+    "type": "enum",
+    "label": "Duration",
+    "description": "Required. Video duration (unit: seconds)",
+    "required": true,
+    "enum": [
+     "5",
+     "10"
+    ]
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "happyhorse/reference-to-video",
+  "model": "happyhorse/reference-to-video",
+  "title": "happyhorse/reference-to-video",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/happyhorse/reference-to-video",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "Text prompt describing the video to generate (any language). Up to 5,000 characters.",
+    "required": true,
+    "maxLength": 5000
+   },
+   {
+    "name": "reference_image",
+    "type": "reference",
+    "label": "Reference Image",
+    "description": "Reference image URL list. Provide 1–9 images. The order defines which image is character1, character2, etc.",
+    "required": true,
+    "maxItems": 9,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "none"
+   },
+   {
+    "name": "resolution",
+    "type": "enum",
+    "label": "Resolution",
+    "description": "Output video resolution: 720p or 1080p (default).",
+    "required": false,
+    "default": "1080p",
+    "enum": [
+     "720p",
+     "1080p"
+    ]
+   },
+   {
+    "name": "aspect_ratio",
+    "type": "enum",
+    "label": "Aspect Ratio",
+    "description": "Output aspect ratio. Valid values: 16:9 (default), 9:16, 1:1, 4:3, 3:4.",
+    "required": false,
+    "default": "16:9",
+    "enum": [
+     "16:9",
+     "9:16",
+     "1:1",
+     "4:3",
+     "3:4"
+    ]
+   },
+   {
+    "name": "duration",
+    "type": "number",
+    "label": "Duration",
+    "description": "Output duration in seconds (integer). Must be between 3 and 15. Defaults to 5.",
+    "required": false,
+    "default": 5,
+    "min": 3,
+    "max": 15,
+    "step": 1
+   },
+   {
+    "name": "seed",
+    "type": "number",
+    "label": "Seed",
+    "description": "Random seed for reproducibility.",
+    "required": false,
+    "default": 0,
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "google/gemini-omni-flash-1-1",
+  "model": "google/gemini-omni-flash-1-1",
+  "title": "Gemini Omni 1.1 Flash",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/google/gemini-omni-flash-1-1",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "The video prompt, used to describe the visual content, style, cinematography, or character actions of the target video.",
+    "required": true,
+    "maxLength": 20000
+   },
+   {
+    "name": "image_urls",
+    "type": "reference",
+    "label": "Image Urls",
+    "description": "An array of image URLs. Multiple reference images can be uploaded to provide references for characters, scenes, styles, or storyboards.",
+    "required": false,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxItems": 8
+   },
+   {
+    "name": "first_frame_url",
+    "type": "reference",
+    "label": "First Frame Url",
+    "description": "The URL of the first-frame image. Used to specify the starting frame of the generated video. Note: This field is mutually exclusive with `image_urls`, `audio_ids`, `video_list`, and `character_ids` and cannot be provided at the same time.",
+    "required": false,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "last_frame_url",
+    "type": "reference",
+    "label": "Last Frame Url",
+    "description": "The URL of the last-frame image. Used to specify the ending frame of the generated video. Note: The last-frame image cannot be used alone and must be provided together with the first-frame image (`first_frame_url`).",
+    "required": false,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "audio_ids",
+    "type": "reference",
+    "label": "Audio Ids",
+    "description": "An array of audio IDs generated by the `gemini-omni-audio` interface. Used to provide narration, dialogue, background music, or sound references for the video. Up to 3 items. Note: This field is mutually exclusive with the first-frame image (`first_frame_url`) and cannot be provided at the same time.",
+    "required": false,
+    "accept": "audio/*",
+    "mentionStyle": "at-audio",
+    "maxItems": 8
+   },
+   {
+    "name": "video_list",
+    "type": "json",
+    "label": "Video List",
+    "description": "An array of video clips. Each element describes a video asset that can be used for generation and its trimming time range.",
+    "required": false
+   },
+   {
+    "name": "character_ids",
+    "type": "reference",
+    "label": "Character Ids",
+    "description": "An array of character IDs generated by the `gemini-omni-character` interface. Used to provide character appearance, identity, or person references for the video. Up to 3 character IDs. Each uses 1 image slot (2 if created with portrait + body images). Total slots (images + videos × 2 + character slots) ≤ 7. Note: This field is mutually exclusive with the first-frame image (`first_frame_url`) and cannot be provided at the same time.",
+    "required": false,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "none",
+    "maxItems": 8
+   },
+   {
+    "name": "duration",
+    "type": "enum",
+    "label": "Duration",
+    "description": "The duration of the generated video, in seconds. Valid values are 4, 6, 8, and 10.",
+    "required": true,
+    "enum": [
+     "4",
+     "6",
+     "8",
+     "10"
+    ]
+   },
+   {
+    "name": "aspect_ratio",
+    "type": "enum",
+    "label": "Aspect Ratio",
+    "description": "The aspect ratio of the generated video. `16:9` is landscape, and `9:16` is portrait.",
+    "required": false,
+    "enum": [
+     "16:9",
+     "9:16"
+    ]
+   },
+   {
+    "name": "resolution",
+    "type": "enum",
+    "label": "Resolution",
+    "description": "The resolution of the generated video. Valid values are 360p, 720p, 1080p, and 4k.",
+    "required": false,
+    "default": "720p",
+    "enum": [
+     "360p",
+     "720p",
+     "1080p",
+     "4k"
+    ]
+   },
+   {
+    "name": "seed",
+    "type": "number",
+    "label": "Seed",
+    "description": "The random seed. Valid range: [0, 2147483647]. If not specified, the system will automatically generate a seed. A fixed seed can improve result reproducibility, but because the model itself is stochastic, results may still vary.",
+    "required": false,
+    "step": 1
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "kling-3.0/motion-control",
+  "model": "kling-3.0/motion-control",
+  "title": "Kling-3.0 motion-control",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/kling/motion-control-v3",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "(Optional) Text prompt words, used to guide the generation of animation content. Can be empty or 0 - 2500 characters long.",
+    "required": false
+   },
+   {
+    "name": "input_urls",
+    "type": "reference",
+    "label": "Input Urls",
+    "description": "(Required) Include a URL of an image",
+    "required": true,
+    "maxItems": 1,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image"
+   },
+   {
+    "name": "video_urls",
+    "type": "reference",
+    "label": "Video Urls",
+    "description": "(Required) Include a video URL",
+    "required": true,
+    "maxItems": 1,
+    "accept": "video/*,image/*",
+    "mentionStyle": "at-video"
+   },
+   {
+    "name": "mode",
+    "type": "enum",
+    "label": "Mode",
+    "description": "Optional. Output resolution: \"720p\" (default) or \"1080p\".",
+    "required": false,
+    "default": "720p",
+    "enum": [
+     "720p",
+     "1080p"
+    ]
+   },
+   {
+    "name": "character_orientation",
+    "type": "string",
+    "label": "Character Orientation",
+    "description": "(Optional) Reference source for character orientation. video: Refer to video (recommended); image: Refer to image. Default value: video",
+    "required": false
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "kling-2.6/motion-control",
+  "model": "kling-2.6/motion-control",
+  "title": "Kling 2.6 motion-control",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/kling/motion-control",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "A text description of the desired output. Maximum length is 2500 characters. (Max length: 2500 characters)",
+    "required": false,
+    "maxLength": 2500
+   },
+   {
+    "name": "input_urls",
+    "type": "reference",
+    "label": "Input Urls",
+    "description": "An array containing a single image URL. The photo must clearly show the subject's head, shoulders, and torso. (File URL after upload, not file content; Accepted types: image/jpeg, image/png, image/jpg; Max size: 10.0MB,size needs to be greater than 300px, aspect ratio 2:5 to 5:2.)",
+    "required": true,
+    "maxItems": 1,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxFileSizeMb": 10
+   },
+   {
+    "name": "video_urls",
+    "type": "reference",
+    "label": "Video Urls",
+    "description": "An array containing a single video URL. The duration must be between 3 to 30 seconds, and the video must clearly show the subject's head, shoulders, and torso. (File URL after upload, not file content; Accepted types: video/mp4, video/quicktime; Max size: 100.0MB)",
+    "required": true,
+    "maxItems": 1,
+    "accept": "video/*,image/*",
+    "mentionStyle": "at-video",
+    "maxFileSizeMb": 100
+   },
+   {
+    "name": "character_orientation",
+    "type": "enum",
+    "label": "Character Orientation",
+    "description": "Required. Generate the orientation of the characters in the video. 'image': same orientation as the person in the picture (max 10s video). 'video': consistent with the orientation of the characters in the video (max 30s video).",
+    "required": true,
+    "enum": [
+     "image",
+     "video"
+    ]
+   },
+   {
+    "name": "mode",
+    "type": "enum",
+    "label": "Mode",
+    "description": "Required. Output resolution: \"720p\" or \"1080p\".",
+    "required": true,
+    "enum": [
+     "720p",
+     "1080p"
+    ]
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "wan/2-2-animate-move",
+  "model": "wan/2-2-animate-move",
+  "title": "Wan - Animate Move",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/wan/2-2-animate-move",
+  "fields": [
+   {
+    "name": "video_url",
+    "type": "reference",
+    "label": "Video Url",
+    "description": "URL of the input video. (File URL after upload, not file content; Accepted types: video/mp4, video/quicktime, video/x-matroska; Max size: 10.0MB)",
+    "required": true,
+    "accept": "video/*,image/*",
+    "mentionStyle": "at-video",
+    "maxFileSizeMb": 10,
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "image_url",
+    "type": "reference",
+    "label": "Image Url",
+    "description": "URL of the input image. (File URL after upload, not file content; Accepted types: image/jpeg, image/png, image/webp; Max size: 10.0MB)",
+    "required": true,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxFileSizeMb": 10,
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "resolution",
+    "type": "enum",
+    "label": "Resolution",
+    "description": "Resolution of the generated video (480p, 580p, or 720p).",
+    "required": false,
+    "default": "480p",
+    "enum": [
+     "480p",
+     "580p",
+     "720p"
+    ]
+   },
+   {
+    "name": "nsfw_checker",
+    "type": "boolean",
+    "label": "Nsfw Checker",
+    "description": "Defaults to false. When false, no additional content filtering is applied and results are returned directly by the model.",
+    "required": false
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "wan/2-2-animate-replace",
+  "model": "wan/2-2-animate-replace",
+  "title": "Wan - Animate Replace",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/wan/2-2-animate-replace",
+  "fields": [
+   {
+    "name": "video_url",
+    "type": "reference",
+    "label": "Video Url",
+    "description": "URL of the input video. (File URL after upload, not file content; Accepted types: video/mp4, video/quicktime, video/x-matroska; Max size: 10.0MB)",
+    "required": true,
+    "accept": "video/*,image/*",
+    "mentionStyle": "at-video",
+    "maxFileSizeMb": 10,
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "image_url",
+    "type": "reference",
+    "label": "Image Url",
+    "description": "URL of the input image. (File URL after upload, not file content; Accepted types: image/jpeg, image/png, image/webp; Max size: 10.0MB)",
+    "required": true,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxFileSizeMb": 10,
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "resolution",
+    "type": "enum",
+    "label": "Resolution",
+    "description": "Resolution of the generated video (480p, 580p, or 720p).",
+    "required": false,
+    "default": "480p",
+    "enum": [
+     "480p",
+     "580p",
+     "720p"
+    ]
+   },
+   {
+    "name": "nsfw_checker",
+    "type": "boolean",
+    "label": "Nsfw Checker",
+    "description": "Defaults to false. When false, no additional content filtering is applied and results are returned directly by the model.",
+    "required": false
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "wan/2-7-r2v",
+  "model": "wan/2-7-r2v",
+  "title": "Wan 2.7 - Reference to Video",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/wan/2-7-r2v",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "Text prompt. Required. Describes the desired elements and visual features in the generated video. Supports Chinese and English. Maximum length: 5000 characters.",
+    "required": true,
+    "maxLength": 5000
+   },
+   {
+    "name": "negative_prompt",
+    "type": "textarea",
+    "label": "Negative Prompt",
+    "description": "Optional negative prompt describing what should not appear in the video. Supports Chinese and English. Maximum length: 500 characters.",
+    "required": false,
+    "maxLength": 500
+   },
+   {
+    "name": "reference_image",
+    "type": "reference",
+    "label": "Reference Image",
+    "description": "Array of reference image URLs. At least one of `reference_image` or `reference_video` must be provided. The total number of images and videos cannot exceed 5.",
+    "required": false,
+    "maxItems": 5,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "none"
+   },
+   {
+    "name": "reference_video",
+    "type": "reference",
+    "label": "Reference Video",
+    "description": "Array of reference video URLs. At least one of `reference_image` or `reference_video` must be provided. The total number of images and videos cannot exceed 5.",
+    "required": false,
+    "maxItems": 5,
+    "accept": "video/*,image/*",
+    "mentionStyle": "at-video"
+   },
+   {
+    "name": "first_frame",
+    "type": "reference",
+    "label": "First Frame",
+    "description": "First frame image URL. At most one image can be provided. If supplied, `aspect_ratio` is ignored and the output uses a ratio close to the first frame image.",
+    "required": false,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "reference_voice",
+    "type": "string",
+    "label": "Reference Voice",
+    "description": "Audio URL used to specify the voice timbre of the subject in the reference material.",
+    "required": false
+   },
+   {
+    "name": "resolution",
+    "type": "enum",
+    "label": "Resolution",
+    "description": "Output video resolution tier. Available values: `720p`, `1080p`. Default value: `1080p`.",
+    "required": false,
+    "default": "1080p",
+    "enum": [
+     "720p",
+     "1080p"
+    ]
+   },
+   {
+    "name": "aspect_ratio",
+    "type": "enum",
+    "label": "Aspect Ratio",
+    "description": "Output video aspect ratio.",
+    "required": false,
+    "default": "16:9",
+    "enum": [
+     "16:9",
+     "9:16",
+     "1:1",
+     "4:3",
+     "3:4"
+    ]
+   },
+   {
+    "name": "duration",
+    "type": "number",
+    "label": "Duration",
+    "description": "Output video duration in seconds. Valid range is an integer from `2` to `10`. Default value: `5`.",
+    "required": false,
+    "default": 5,
+    "min": 2,
+    "max": 10,
+    "step": 1
+   },
+   {
+    "name": "prompt_extend",
+    "type": "boolean",
+    "label": "Prompt Extend",
+    "description": "Whether to enable prompt rewriting. When enabled, the model expands the input prompt. This usually works better for short prompts but increases processing time.",
+    "required": false,
+    "default": true
+   },
+   {
+    "name": "watermark",
+    "type": "boolean",
+    "label": "Watermark",
+    "description": "Whether to add a watermark. The watermark is placed in the lower-right corner of the video with the fixed text \"AI generated\".",
+    "required": false,
+    "default": false
+   },
+   {
+    "name": "seed",
+    "type": "number",
+    "label": "Seed",
+    "description": "Random seed. Range: `0-2147483647`. If omitted, the system generates one automatically.",
+    "required": false,
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+   },
+   {
+    "name": "nsfw_checker",
+    "type": "boolean",
+    "label": "Nsfw Checker",
+    "description": "Defaults to false. When false, no additional content filtering is applied and results are returned directly by the model.",
+    "required": false
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "wan/2-7-image-to-video",
+  "model": "wan/2-7-image-to-video",
+  "title": "Wan 2.7 - Image to Video",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/wan/2-7-image-to-video",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "Positive prompt. Maximum length: 5000 characters.",
+    "required": true,
+    "maxLength": 5000
+   },
+   {
+    "name": "negative_prompt",
+    "type": "textarea",
+    "label": "Negative Prompt",
+    "description": "Negative prompt. Maximum length: 500 characters.",
+    "required": false,
+    "maxLength": 500
+   },
+   {
+    "name": "first_frame_url",
+    "type": "reference",
+    "label": "First Frame Url",
+    "description": "First frame image URL.",
+    "required": false,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "last_frame_url",
+    "type": "reference",
+    "label": "Last Frame Url",
+    "description": "Last frame image URL.",
+    "required": false,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "first_clip_url",
+    "type": "string",
+    "label": "First Clip Url",
+    "description": "First clip video URL, used for video continuation.",
+    "required": false
+   },
+   {
+    "name": "driving_audio_url",
+    "type": "reference",
+    "label": "Driving Audio Url",
+    "description": "Driving audio URL.",
+    "required": false,
+    "accept": "audio/*",
+    "mentionStyle": "at-audio",
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "resolution",
+    "type": "enum",
+    "label": "Resolution",
+    "description": "Video resolution.",
+    "required": false,
+    "default": "1080p",
+    "enum": [
+     "720p",
+     "1080p"
+    ]
+   },
+   {
+    "name": "duration",
+    "type": "number",
+    "label": "Duration",
+    "description": "Total output video duration in seconds.",
+    "required": false,
+    "default": 5,
+    "min": 2,
+    "max": 15,
+    "step": 1
+   },
+   {
+    "name": "prompt_extend",
+    "type": "boolean",
+    "label": "Prompt Extend",
+    "description": "Whether to enable intelligent prompt rewriting. Default value: `true`.",
+    "required": false,
+    "default": true
+   },
+   {
+    "name": "watermark",
+    "type": "boolean",
+    "label": "Watermark",
+    "description": "Whether to add an AI-generated watermark. Default value: `false`.",
+    "required": false,
+    "default": false
+   },
+   {
+    "name": "seed",
+    "type": "number",
+    "label": "Seed",
+    "description": "Random seed.",
+    "required": false,
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+   },
+   {
+    "name": "nsfw_checker",
+    "type": "boolean",
+    "label": "Nsfw Checker",
+    "description": "Defaults to false. When false, no additional content filtering is applied and results are returned directly by the model.",
+    "required": false
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "wan/2-7-text-to-video",
+  "model": "wan/2-7-text-to-video",
+  "title": "Wan 2.7 - Text to Video",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/wan/2-7-text-to-video",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "Positive prompt. Minimum length: 1 character. Maximum length: 5000 characters.",
+    "required": true,
+    "maxLength": 5000
+   },
+   {
+    "name": "negative_prompt",
+    "type": "textarea",
+    "label": "Negative Prompt",
+    "description": "Negative prompt. Maximum length: 500 characters.",
+    "required": false,
+    "maxLength": 500
+   },
+   {
+    "name": "audio_url",
+    "type": "reference",
+    "label": "Audio Url",
+    "description": "Optional custom audio URL.",
+    "required": false,
+    "accept": "audio/*",
+    "mentionStyle": "at-audio",
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "resolution",
+    "type": "enum",
+    "label": "Resolution",
+    "description": "Video resolution.",
+    "required": false,
+    "default": "1080p",
+    "enum": [
+     "720p",
+     "1080p"
+    ]
+   },
+   {
+    "name": "ratio",
+    "type": "enum",
+    "label": "Ratio",
+    "description": "Video aspect ratio.",
+    "required": false,
+    "default": "16:9",
+    "enum": [
+     "16:9",
+     "9:16",
+     "1:1",
+     "4:3",
+     "3:4"
+    ]
+   },
+   {
+    "name": "duration",
+    "type": "number",
+    "label": "Duration",
+    "description": "Video duration in seconds.",
+    "required": false,
+    "default": 5,
+    "min": 2,
+    "max": 15,
+    "step": 1
+   },
+   {
+    "name": "prompt_extend",
+    "type": "boolean",
+    "label": "Prompt Extend",
+    "description": "Whether to enable intelligent prompt rewriting. Default value: `true`.",
+    "required": false,
+    "default": true
+   },
+   {
+    "name": "watermark",
+    "type": "boolean",
+    "label": "Watermark",
+    "description": "Whether to add an AI-generated watermark. Default value: `false`.",
+    "required": false,
+    "default": false
+   },
+   {
+    "name": "seed",
+    "type": "number",
+    "label": "Seed",
+    "description": "Random seed.",
+    "required": false,
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+   },
+   {
+    "name": "nsfw_checker",
+    "type": "boolean",
+    "label": "Nsfw Checker",
+    "description": "Defaults to false. When false, no additional content filtering is applied and results are returned directly by the model.",
+    "required": false
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "kling/v2-5-turbo-image-to-video-pro",
+  "model": "kling/v2-5-turbo-image-to-video-pro",
+  "title": "Kling - V2.5 Turbo Image to Video Pro",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/kling/v25-turbo-image-to-video-pro",
+  "fields": [
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "The text prompt describing the video to generate (Max length: 2500 characters)",
+    "required": true,
+    "maxLength": 2500
+   },
+   {
+    "name": "image_url",
+    "type": "reference",
+    "label": "Image Url",
+    "description": "URL of the image to be used for the video (File URL after upload, not file content; Accepted types: image/jpeg, image/png; Max size: 10.0MB)",
+    "required": true,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxFileSizeMb": 10,
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "tail_image_url",
+    "type": "reference",
+    "label": "Tail Image Url",
+    "description": "Tail frame image of video (File URL after upload, not file content; Accepted types: image/jpeg, image/png; Max size: 10.0MB)",
+    "required": false,
+    "accept": "image/jpeg,image/png,image/webp,image/*",
+    "mentionStyle": "at-image",
+    "maxFileSizeMb": 10,
+    "maxItems": 1,
+    "scalar": true
+   },
+   {
+    "name": "duration",
+    "type": "enum",
+    "label": "Duration",
+    "description": "Required. \"5\" or \"10\" (seconds).",
+    "required": true,
+    "enum": [
+     "5",
+     "10"
+    ]
+   },
+   {
+    "name": "negative_prompt",
+    "type": "textarea",
+    "label": "Negative Prompt",
+    "description": "Negative prompt to exclude certain elements from the video (Max length: 2,496 characters)",
+    "required": false,
+    "maxLength": 2496
+   },
+   {
+    "name": "cfg_scale",
+    "type": "number",
+    "label": "Cfg Scale",
+    "description": "The CFG (Classifier Free Guidance) scale is a measure of how close you want the model to stick to your prompt (Min: 0, Max: 1, Step: 0.1) (step: 0.1)",
+    "required": false,
+    "default": 0.5,
+    "min": 0,
+    "max": 1,
+    "step": 0.1
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "veo/extend",
+  "model": "veo/extend",
+  "title": "Veo — Extend a video",
+  "category": "video",
+  "provider": "veo",
+  "operation": "extend",
+  "useCase": "Video editing",
+  "tags": [
+   "veo",
+   "extend"
+  ],
+  "fields": [
+   {
+    "name": "taskId",
+    "type": "string",
+    "label": "Source task ID",
+    "required": true
+   },
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Continuation instructions",
+    "required": true
+   }
+  ]
+ },
+ {
+  "id": "grok-imagine/extend",
+  "model": "grok-imagine/extend",
+  "title": "Grok Imagine - Video Extend",
+  "category": "video",
+  "provider": "market",
+  "docsUrl": "https://docs.kie.ai/market/grok-imagine/extend",
+  "fields": [
+   {
+    "name": "task_id",
+    "type": "string",
+    "label": "Task Id",
+    "description": "Task ID from a previously successful video generation task. Required field.",
+    "required": true,
+    "maxLength": 100
+   },
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Prompt",
+    "description": "Text instructions describing the required movement of the video. Required field.",
+    "required": true
+   },
+   {
+    "name": "extend_at",
+    "type": "number",
+    "label": "Extend At",
+    "description": "Required. Time point in the source video, in seconds (minimum 2), from which the extension starts.",
+    "required": true,
+    "default": 2,
+    "min": 2,
+    "step": 0.1
+   },
+   {
+    "name": "extend_times",
+    "type": "enum",
+    "label": "Extend Times",
+    "description": "6 or 10 (seconds).",
+    "required": true,
+    "enum": [
+     "6",
+     "10"
+    ]
+   }
+  ],
+  "useCase": "Video generation"
+ },
+ {
+  "id": "runway/extend",
+  "model": "runway/extend",
+  "title": "Runway — Extend a video",
+  "category": "video",
+  "provider": "runway",
+  "operation": "extend",
+  "useCase": "Video editing",
+  "tags": [
+   "runway",
+   "extend"
+  ],
+  "fields": [
+   {
+    "name": "taskId",
+    "type": "string",
+    "label": "Source task ID",
+    "required": true
+   },
+   {
+    "name": "videoId",
+    "type": "string",
+    "label": "Source video ID",
+    "required": true
+   },
+   {
+    "name": "prompt",
+    "type": "textarea",
+    "label": "Continuation instructions",
+    "required": true
+   }
+  ]
+ }
+]

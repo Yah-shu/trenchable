@@ -1,0 +1,328 @@
+/* Edit Video's local tools and Genjutsu's Guided swap (LocalTools.tsx, ClickSelect.tsx, genjutsu/GuidedSwap.tsx).
+   Plinth tokens only (theme/plinth.css); the rail pieces reuse st-* from studio.css. */
+
+.st-tool-tag {
+  padding: 1px 6px;
+  border: 1px solid var(--pl-hairline);
+  border-radius: 999px;
+  background: var(--pl-paper);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--pl-mute);
+  white-space: nowrap;
+}
+.st-tool-tag.is-free {
+  border-color: var(--pl-ok);
+  background: var(--pl-ok-soft);
+  color: var(--pl-ok);
+}
+
+.lt-clip {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.lt-upload:disabled {
+  opacity: 0.7;
+}
+.lt-opt {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.lt-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--pl-ink);
+  cursor: pointer;
+}
+.lt-where {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 6px;
+  font-size: 12px;
+  color: var(--pl-mute);
+}
+.lt-spin {
+  animation: lt-spin 0.9s linear infinite;
+}
+@keyframes lt-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* a run in the rail */
+.lt-run {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 1px solid var(--pl-hairline);
+  border-radius: var(--pl-radius-sm);
+  background: var(--pl-paper);
+  font-size: 12px;
+  color: var(--pl-ink);
+}
+.lt-run.is-failed {
+  border-color: var(--pl-bad);
+  background: var(--pl-bad-soft);
+}
+.lt-run-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.lt-run-step {
+  flex: 1;
+  min-width: 0;
+}
+.lt-run-acts {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.lt-bar {
+  display: block;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--pl-hairline);
+  overflow: hidden;
+}
+.lt-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--pl-coral);
+  transition: width 0.4s var(--pl-ease, ease);
+}
+
+/* click to select */
+.lt-canvas {
+  overflow: auto;
+}
+.lt-select {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 4px 0 16px;
+}
+.lt-select-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.lt-select-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  color: var(--pl-ink);
+}
+.lt-select-tools {
+  display: flex;
+  gap: 6px;
+}
+.lt-select-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 1100px) {
+  .lt-select-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.lt-frame {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.lt-frame-box {
+  position: relative;
+  width: 100%;
+  max-height: 64vh;
+  border: 1px solid var(--pl-hairline);
+  border-radius: var(--pl-radius-sm);
+  overflow: hidden;
+  background: var(--pl-paper-deep);
+  cursor: crosshair;
+  touch-action: none;
+  user-select: none;
+}
+.lt-frame-box img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+.lt-frame-msg {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 40px 16px;
+  justify-content: center;
+  border: 1px dashed var(--pl-hairline);
+  border-radius: var(--pl-radius-sm);
+  color: var(--pl-mute);
+  font-size: 13px;
+}
+.lt-frame-msg.is-warn {
+  border-color: var(--pl-warn);
+  background: var(--pl-warn-soft);
+  color: var(--pl-ink);
+}
+.lt-frame-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--pl-mute);
+}
+.lt-dot {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border: 2px solid var(--pl-paper);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--pl-ink);
+  pointer-events: none;
+}
+.lt-dot.is-in {
+  background: var(--pl-ok);
+}
+.lt-dot.is-out {
+  background: var(--pl-bad);
+}
+.lt-box {
+  position: absolute;
+  border: 2px solid var(--pl-coral);
+  background: var(--pl-coral-soft);
+  opacity: 0.8;
+  pointer-events: none;
+}
+.lt-box.is-live {
+  border-style: dashed;
+}
+
+/* previews */
+.lt-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.lt-preview-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.lt-video {
+  width: 100%;
+  max-height: 64vh;
+  border: 1px solid var(--pl-hairline);
+  border-radius: var(--pl-radius-sm);
+  background: var(--pl-ink);
+}
+
+/* Guided swap */
+.gs-pics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+.gs-pic {
+  position: relative;
+  aspect-ratio: 1;
+  border: 1px dashed var(--pl-hairline);
+  border-radius: var(--pl-radius-sm);
+  background: var(--pl-paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pl-mute);
+  cursor: pointer;
+  overflow: hidden;
+}
+.gs-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.gs-pic .gj-x {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: var(--pl-paper);
+}
+.gs-review {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 4px 0 16px;
+}
+.gs-pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+}
+.gs-pair figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.gs-pair figcaption {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--pl-ink);
+}
+.gs-gate {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 12px;
+  border: 1px solid var(--pl-warn);
+  border-radius: var(--pl-radius-sm);
+  background: var(--pl-warn-soft);
+  font-size: 13px;
+  color: var(--pl-ink);
+}
+.gs-gate.is-ok {
+  border-color: var(--pl-ok);
+  background: var(--pl-ok-soft);
+}
+.gs-gate > span {
+  flex: 1;
+  min-width: 200px;
+}
+.gs-steps {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  color: var(--pl-mute);
+}
+.gs-steps b {
+  color: var(--pl-ink);
+}
+.gs-prompt {
+  width: 100%;
+  min-height: 70px;
+  resize: vertical;
+  padding: 8px 10px;
+  border: 1px solid var(--pl-hairline);
+  border-radius: var(--pl-radius-sm);
+  background: var(--pl-paper);
+  font: inherit;
+  font-size: 13px;
+  color: var(--pl-ink);
+}

@@ -1,0 +1,28 @@
+# Python packages for the local tools, except PyTorch. Pinned to the set the tools were tested with.
+#
+# PyTorch (torch + torchvision) is NOT here: setup.ps1 / setup.sh install it first, from the index that matches
+# your graphics card (NVIDIA, AMD or CPU). MediaPipe is in requirements-nodeps.txt (installed with --no-deps).
+# Python 3.10, 3.11 or 3.12 (MediaPipe 0.10.21 and numpy 1.26 have no wheels for 3.13).
+
+numpy==1.26.4
+opencv-python-headless==4.11.0.86
+
+# MediaPipe's real runtime needs (its own dependency list is skipped, see requirements-nodeps.txt)
+absl-py==2.5.1
+attrs==26.1.0
+flatbuffers==25.12.19
+protobuf==4.25.9
+matplotlib==3.10.9
+
+# SAM 2.1 (run from repos/sam2, not pip-installed)
+hydra-core==1.3.7
+omegaconf==2.3.1
+iopath==0.1.10
+
+# Video Depth Anything (run from repos/Video-Depth-Anything)
+einops==0.8.2
+easydict==1.13
+
+tqdm==4.70.1
+# CA certificates for the model downloads (python.org Python on macOS has none until you add them)
+certifi==2026.7.22

@@ -1,0 +1,6 @@
+# Installed with:  pip install --no-deps -r requirements-nodeps.txt
+#
+# MediaPipe's own dependency list pulls in opencv-contrib-python, jax and sounddevice. The face mesh needs none of
+# them, and the contrib OpenCV would clash with opencv-python-headless. What it really needs is in requirements.txt.
+# (No wheel for Linux on ARM.)
+mediapipe==0.10.21
