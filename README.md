@@ -29,7 +29,7 @@ click it to top up on Kie.
 ## What you need
 
 - A **Kie.ai API key**: [sign up on Kie.ai](https://kie.ai?ref=d63ec5bbbb733f26cd5d4ced27d29ee0), add credits, copy your key from
-  [kie.ai/api-key](https://kie.ai/api-key). Generations are paid with your Kie credits.
+  [kie.ai/api-key](https://kie.ai/api-key?ref=d63ec5bbbb733f26cd5d4ced27d29ee0). Generations are paid with your Kie credits.
 - **Node.js** 20.19+ or 22.12+ (with npm): [nodejs.org](https://nodejs.org)
 - **Bun** 1.2+ (runs the local server): [bun.sh](https://bun.sh)
 - **ffmpeg** on your PATH, for downloads of edited clips, Voice change and the local tools

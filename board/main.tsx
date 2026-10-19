@@ -25,6 +25,9 @@ import { KIE_CREDITS_URL } from '../src/lib/kie.ts'
 
 const Studio = lazy(async () => ({ default: (await import('./studio/Studio.tsx')).Studio }))
 
+/** Kie's API key page, carrying the same referral as the sign-up link (src/lib/kie.ts), for anyone who signs up there. */
+const KIE_KEY_URL = `https://kie.ai/api-key${new URL(KIE_CREDITS_URL).search}`
+
 /** The lanes: every surface that runs here (the hand-over kinds belong to the app this was taken from). */
 const LANES = SURFACES.filter((s) => s.kind === 'kie')
 
@@ -86,7 +89,7 @@ function KeyBanner() {
     <div className="tr-key">
       <KeyRound size={16} />
       <span>
-        Add your <a href="https://kie.ai/api-key" target="_blank" rel="noreferrer">Kie.ai API key</a> to start. It is saved on this computer only, encrypted. No account yet?{' '}
+        Add your <a href={KIE_KEY_URL} target="_blank" rel="noreferrer">Kie.ai API key</a> to start. It is saved on this computer only, encrypted. No account yet?{' '}
         <a href={KIE_CREDITS_URL} target="_blank" rel="noreferrer">
           Sign up on Kie.ai
         </a>
