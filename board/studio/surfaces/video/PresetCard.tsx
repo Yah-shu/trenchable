@@ -66,7 +66,7 @@ export function PresetCard({ preset, model, onChange }: { preset: Preset | null;
 }
 
 /**
- * The video preset catalogue in a modal; General (no recipe) comes first. Genjutsu is not in
+ * The video preset catalogue in a modal; General (no recipe) comes first. GenShitSu is not in
  * it: since 2026-10-19 it is its own lane (GenjutsuSurface.tsx).
  */
 export function PresetPicker({ current, onPick, onClose }: { current: Preset | null; onPick: (p: Preset | null) => void; onClose: () => void }) {

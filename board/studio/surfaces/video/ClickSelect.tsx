@@ -1,5 +1,5 @@
 /**
- * The clip slot and the click-to-select step the local tools share (Remove Background, Genjutsu's
+ * The clip slot and the click-to-select step the local tools share (Remove Background, GenShitSu's
  * Guided swap).
  *
  * `ClipPick`: upload a clip (it goes to Kie's file host through uploadMedia, like every pick) or take one

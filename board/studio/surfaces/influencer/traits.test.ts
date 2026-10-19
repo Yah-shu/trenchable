@@ -97,7 +97,7 @@ describe('sheet and motion prompts', () => {
     expect(sheetPrompt('nope')).toContain('turnaround')
   })
 
-  it('Genjutsu prompts cite @image1 and carry the notes', () => {
+  it('GenShitSu prompts cite @image1 and carry the notes', () => {
     expect(genjutsuPrompt('transfer', 'copy')).toContain('character from @image1')
     expect(genjutsuPrompt('swap', 'product', 'ceramic mug with a chunky handle.')).toContain('About @image1: ceramic mug with a chunky handle.')
     expect(genjutsuPrompt('swap', 'nope')).toContain('Replace the person')

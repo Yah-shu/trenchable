@@ -1,5 +1,5 @@
 """MediaPipe Face Landmarker (Apache-2.0) face mesh: landmarks JSON + mesh drawn over a video. CPU only; the model is
-models/face_landmarker.task (setup downloads it). Drawing style follows the Genjutsu workflow's mesh_worker.py (MIT,
+models/face_landmarker.task (setup downloads it). Drawing style follows the Genjustsu workflow's mesh_worker.py (MIT,
 Sirio Berati).
 usage: facemesh.py --in clip.mp4 --out DIR [--over DIR/composite.mp4] [--max-side 960] [--fps 24]
 -> RESULT {"landmarks": "DIR/face-landmarks.json", "overlay": "DIR/mesh.mp4", "frames": N, "tracked": k,

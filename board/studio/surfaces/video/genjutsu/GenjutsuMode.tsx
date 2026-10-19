@@ -1,5 +1,5 @@
 /**
- * Genjutsu ("Reality manipulation"): the form behind its Motion transfer and Objects swap tabs.
+ * GenShitSu ("Reality manipulation"): the form behind its Motion transfer and Objects swap tabs.
  * GenjutsuSurface.tsx owns the tabs, the remembered state and the handoffs; Guided swap, the
  * third tab, is a rail of its own (GuidedSwap.tsx). Theirs began as a special preset inside
  * Create Video; here it has been its own lane, apart from Video, since 2026-10-19. The rail:
@@ -17,7 +17,7 @@
  * genjutsu.css, since RailStudio puts its header above the slots.
  *
  * Its jobs run as surface `genjutsu` and are tracked under GENJUTSU_TAG, so they show in
- * Genjutsu's History and not in Video's (mine.ts).
+ * GenShitSu's History and not in Video's (mine.ts).
  */
 import { useCallback, useEffect, useMemo, useRef, useState, type Dispatch, type ReactNode, type SetStateAction } from 'react'
 import { ImagePlus, Palette, Plus, Video, X } from 'lucide-react'
@@ -182,7 +182,7 @@ export function GenjutsuMode({ header, state, setState }: { header: ReactNode; s
   }
   const tag = state.style ? styleTag(state.style) : null
   const onSubmitted = useCallback((ids: string[]) => trackJobs(ids, tag ? [GENJUTSU_TAG, tag] : GENJUTSU_TAG), [tag])
-  const meta = useMemo(() => ({ label: state.style ? `Genjutsu · ${styleName(state.style)}` : state.mode === 'swap' ? 'Genjutsu · Objects swap' : 'Genjutsu · Motion transfer' }), [state.style, state.mode])
+  const meta = useMemo(() => ({ label: state.style ? `GenShitSu · ${styleName(state.style)}` : state.mode === 'swap' ? 'GenShitSu · Objects swap' : 'GenShitSu · Motion transfer' }), [state.style, state.mode])
   const prefer = useMemo(() => preferFor(route, state.models), [route, state.models])
 
   const name = styleName(state.style)
@@ -265,7 +265,7 @@ export function GenjutsuMode({ header, state, setState }: { header: ReactNode; s
 
 const explain = (
   <How
-    title="Genjutsu"
+    title="GenShitSu"
     steps={[
       'Add a reference video — upload one, pick one from the Motion Library, or press Use the motion on any clip.',
       'Add your characters, products or clothes (up to 30). Each model takes as many as it can, in order; the rail says when some are not sent. Cite them in the prompt as @image1, @image2…',
@@ -274,6 +274,6 @@ const explain = (
       'A Style redraws every frame in a look while the motion, camera and framing stay as filmed. Custom uses your own style image, sent first as @image1.',
       'The Prompt switch is off by default: the references carry the detail. Turn it on to describe the new scene.',
     ]}
-    foot="the reference app runs all of this on one model; on Kie each job goes to the model built for it, so the model row changes with the tab and the style. Clips made here stay in Genjutsu's History, apart from Video's."
+    foot="the reference app runs all of this on one model; on Kie each job goes to the model built for it, so the model row changes with the tab and the style. Clips made here stay in GenShitSu's History, apart from Video's."
   />
 )

@@ -358,7 +358,7 @@ const TOOLS: Record<ResultKind, ToolSpec[]> = {
     { id: 'upscale-video', label: 'Upscale', hint: 'Make the clip sharper and larger' },
     { id: 'lipsync', label: 'Lip-sync', hint: 'Make the person in this clip say new words' },
     { id: 'edit-video', label: 'Edit video', hint: 'Change something in this clip with a prompt' },
-    { id: 'motion', label: 'Use the motion', hint: 'Open Genjutsu with this clip, to put a character of your own through its moves' },
+    { id: 'motion', label: 'Use the motion', hint: 'Open GenShitSu with this clip, to put a character of your own through its moves' },
     { id: 'change-voice', label: 'Change voice', hint: 'Same words and timing, read in another voice' },
     { id: 'translate', label: 'Translate', hint: 'Dub the clip into another language, lip-synced' },
   ],
@@ -495,10 +495,10 @@ export function editToolOf(item: HistoryItem): EditMode | null {
   return null
 }
 
-/** Whether a job was Genjutsu's (its tracked tags, or the guided swap's model): it goes back there, not to Video. */
+/** Whether a job was GenShitSu's (its tracked tags, or the guided swap's model): it goes back there, not to Video. */
 export const ofGenjutsu = (item: HistoryItem): boolean => isGenjutsuItem(item, genjutsuTasks(trackedAll()))
 
-/** The surface Reuse lands on: an Edit tool's result goes back to Edit, Genjutsu's to Genjutsu, the rest to their category's. */
+/** The surface Reuse lands on: an Edit tool's result goes back to Edit, GenShitSu's to GenShitSu, the rest to their category's. */
 export const reuseSurface = (item: HistoryItem): string => (editToolOf(item) ? 'edit' : ofGenjutsu(item) ? 'genjutsu' : item.category)
 
 /** Which tab of its surface a job came from, read off its model, so Reuse lands on the same one. */
@@ -549,7 +549,7 @@ function slotFor(surface: string, mode: string | undefined, key: string, kind: R
   if (surface === 'image') return undefined
   if (surface === 'edit') return kind === 'image' ? 'image' : undefined
   if (surface === 'audio') return kind === 'audio' ? 'audio' : undefined
-  // Genjutsu: the clip; its pictures fill img1, img2… in order (reuseSources).
+  // GenShitSu: the clip; its pictures fill img1, img2… in order (reuseSources).
   if (surface === 'genjutsu') return kind === 'video' ? 'motion' : undefined
   if (kind === 'audio') return 'audio'
   if (kind === 'video') return mode === 'motion' ? 'motion' : 'video'
@@ -748,7 +748,7 @@ export function regenerateBlocker(item: HistoryItem, models: ModelDefinition[] |
   return null
 }
 
-/** Where a re-run lands: the surface that ran it (if the queue still knows), else Genjutsu for its jobs, else its category. */
+/** Where a re-run lands: the surface that ran it (if the queue still knows), else GenShitSu for its jobs, else its category. */
 export function regenerateMeta(item: HistoryItem, job?: Pick<Job, 'meta'>): JobMeta {
   const aspect = item.input?.aspect_ratio ?? item.input?.aspectRatio ?? item.input?.image_size
   return {
@@ -800,7 +800,7 @@ export async function regenerateInput(item: HistoryItem, model: ModelDefinition)
 export async function regenerate(item: HistoryItem, model: ModelDefinition): Promise<string> {
   const input = await regenerateInput(item, model)
   const id = submitJob(model, input, regenerateMeta(item, findJobByTask(item.taskId)))
-  // A Genjutsu job's re-run stays in Genjutsu's History.
+  // A GenShitSu job's re-run stays in GenShitSu's History.
   if (ofGenjutsu(item)) trackJobs([id], GENJUTSU_TAG)
   return id
 }

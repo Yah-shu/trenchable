@@ -1,5 +1,5 @@
 /**
- * Genjutsu's Styles: the twelve looks their Styles tab offers, each written out as the
+ * GenShitSu's Styles: the twelve looks their Styles tab offers, each written out as the
  * prompt a video-edit model needs to redraw every frame in it — medium, materials,
  * shading, line, palette and texture — while the motion, camera and framing stay as filmed.
  *

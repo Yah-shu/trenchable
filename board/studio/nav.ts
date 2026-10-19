@@ -46,14 +46,14 @@ export interface Surface {
 export const SURFACES: Surface[] = [
   { id: 'image', label: 'Image', icon: ImageIcon, archetype: 'feed', kind: 'kie' },
   { id: 'video', label: 'Video', icon: Film, archetype: 'rail', kind: 'kie' },
-  // Their "Genjutsu · Top": its own lane since 2026-10-19, apart from Video (surfaces/GenjutsuSurface.tsx).
-  { id: 'genjutsu', label: 'Genjutsu', icon: Drama, archetype: 'rail', kind: 'kie', badge: 'Top' },
+  // Their "GenShitSu · Top": its own lane since 2026-10-19, apart from Video (surfaces/GenjutsuSurface.tsx).
+  { id: 'genjutsu', label: 'GenShitSu', icon: Drama, archetype: 'rail', kind: 'kie' },
   { id: 'audio', label: 'Audio', icon: Mic, archetype: 'rail', kind: 'kie' },
   // Their image tools — upscale, remove background, inpaint, reframe, relight — in one rail.
   { id: 'edit', label: 'Edit', icon: Eraser, archetype: 'rail', kind: 'kie' },
   { id: 'effects', label: 'Effects', icon: Wand2, archetype: 'rail', kind: 'kie' },
   { id: 'presets', label: 'Presets', icon: LayoutTemplate, archetype: 'catalogue', kind: 'kie' },
-  { id: 'influencer', label: 'Influencer', icon: UserRound, archetype: 'rail', kind: 'kie', badge: 'New' },
+  { id: 'influencer', label: 'Influencer', icon: UserRound, archetype: 'rail', kind: 'kie' },
   { id: 'marketing', label: 'Marketing', icon: Megaphone, archetype: 'project', kind: 'kie' },
   { id: 'cinema', label: 'Cinema', icon: Clapperboard, archetype: 'project', kind: 'kie' },
   // A node board that chains one generation into the next (React Flow, already a dependency).

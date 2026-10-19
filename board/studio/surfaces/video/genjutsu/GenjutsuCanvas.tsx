@@ -1,7 +1,7 @@
 /**
- * Genjutsu's right pane, as theirs: History · Motion Library · Styles · How it works.
+ * GenShitSu's right pane, as theirs: History · Motion Library · Styles · How it works.
  *
- * History is Genjutsu's own feed (mine.ts: its clips only; Video's History leaves them out) —
+ * History is GenShitSu's own feed (mine.ts: its clips only; Video's History leaves them out) —
  * RailStudio's own `RailCanvas`, kept mounted so its paging
  * and filters survive a visit to another tab. Its History / How it works bar is swapped
  * for these four tabs by putting them into that bar (a portal), so Filter and View stay
@@ -61,8 +61,8 @@ export function GenjutsuCanvas({ tab, onTab, style, onStyle, explain }: Genjutsu
           surface="genjutsu"
           category="video"
           historyFilter={mine}
-          emptyTitle="No Genjutsu clips yet"
-          emptySub="Add a reference video and your characters, products or clothes, then generate. Every clip you make in Genjutsu lands here; Video keeps its own."
+          emptyTitle="No GenShitSu clips yet"
+          emptySub="Add a reference video and your characters, products or clothes, then generate. Every clip you make in GenShitSu lands here; Video keeps its own."
           tileActions={saveAction}
         />
         {bar && createPortal(<div className="gj-bar-tabs">{tabs}</div>, bar)}
@@ -144,7 +144,7 @@ function MotionLibrary() {
       ) : shelf === 'saved' ? (
         <Empty icon={Bookmark} title="No saved motions yet" sub="Press Save as motion under a clip in History or here in From your videos, and it is kept on this shelf." />
       ) : (
-        <Empty icon={Clapperboard} title="No clips yet" sub="Every finished clip you make — in Video, Genjutsu or anywhere else — shows up here as a motion to reuse. You can also upload a clip straight into the reference-video slot." />
+        <Empty icon={Clapperboard} title="No clips yet" sub="Every finished clip you make — in Video, GenShitSu or anywhere else — shows up here as a motion to reuse. You can also upload a clip straight into the reference-video slot." />
       )}
     </div>
   )

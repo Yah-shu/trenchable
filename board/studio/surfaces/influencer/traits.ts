@@ -400,12 +400,12 @@ export function sheetPrompt(sheetId: string, description = '', extra = ''): stri
   return parts.join(' ')
 }
 
-/* ---------- motion: their Genjutsu ---------- */
+/* ---------- motion: their GenShitSu ---------- */
 
 export type GenjutsuMode = 'transfer' | 'swap'
 
 /**
- * Starting prompts for the two Genjutsu modes. They cite pictures as @image1, the way
+ * Starting prompts for the two GenShitSu modes. They cite pictures as @image1, the way
  * their prompt box does; the motion and swap models read the token as the first image.
  */
 export const GENJUTSU_IDEAS: Record<GenjutsuMode, { id: string; label: string; words: string }[]> = {

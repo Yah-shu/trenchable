@@ -1,6 +1,6 @@
 """Guide video for motion transfer: the depth-coloured subject (inside the SAM mask) over the ORIGINAL background,
 optional face mesh on top, pitched audio embedded.
-Composition logic ported from the Genjutsu open-source workflow (MIT, (c) 2026 Sirio Berati,
+Composition logic ported from the Genjustsu open-source workflow (MIT, (c) 2026 Sirio Berati,
 github.com/sirioberati/Genjustsu-Open-Source-Workflow - pipeline.py composite() + raw_masks.py
 clean_border_fragments() + mesh_worker.py): "What happens" steps 3-6 = normalise to 24 fps <= 960 px, coloured depth,
 SAM masks applied to the depth, depth subject composited over the original background, review preview.
@@ -16,7 +16,7 @@ import st_common as C
 
 
 def clean_border_fragments(m):
-    """Genjutsu raw_masks.clean_border_fragments: drop tiny, narrow components touching the left/right edge."""
+    """GenShitSu raw_masks.clean_border_fragments: drop tiny, narrow components touching the left/right edge."""
     import cv2, numpy as np
     h, w = m.shape
     k, lab, st, _ = cv2.connectedComponentsWithStats(m.astype(np.uint8), connectivity=8)

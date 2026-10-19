@@ -1,5 +1,5 @@
 /**
- * Edit Video's local tools (localtools.ts) and Genjutsu's Guided swap (guided.ts), under /api/studio:
+ * Edit Video's local tools (localtools.ts) and GenShitSu's Guided swap (guided.ts), under /api/studio:
  *
  *   GET    /local/doctor              are the tools installed? (doctor.py, cached 10 min; ?fresh=1 asks again)
  *   POST   /local/frame   { clipUrl } frame 0 as a PNG URL + size + length, for clicking on the subject

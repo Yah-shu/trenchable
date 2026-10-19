@@ -1,5 +1,5 @@
 /**
- * Genjutsu → Guided swap: replace the person in a clip with your character, steered by a guide video
+ * GenShitSu → Guided swap: replace the person in a clip with your character, steered by a guide video
  * instead of raw footage. A port of github.com/sirioberati/Genjustsu-Open-Source-Workflow (MIT, © Sirio
  * Berati) — its "What happens" steps, on this PC's tools and Kie's Seedance 2.5:
  *
@@ -19,7 +19,7 @@
  *     (the repo's "complete the accepted draft at 1080p"; Kie keeps a draft 7 days) → soundtrack restored again
  *     → `guided-<id>-hd`.
  *
- * A run lives in <studioDir>/guided/<id>/ (paths.ts; run.json + every file), polled by Genjutsu's rail. A Kie task id
+ * A run lives in <studioDir>/guided/<id>/ (paths.ts; run.json + every file), polled by GenShitSu's rail. A Kie task id
  * is saved the moment the job is created, so Retry after a restart collects that job instead of paying again.
  * The prompt, the Kie inputs and the fingerprint are pure and tested in guided.test.ts.
  */

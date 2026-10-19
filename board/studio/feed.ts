@@ -48,7 +48,7 @@ export interface FeedDefaults {
 }
 
 /**
- * Video opens on List like the reference app's, and so does Genjutsu (its own lane, once part of
+ * Video opens on List like the reference app's, and so does GenShitSu (its own lane, once part of
  * Video). The Image feed's rows start at their density, mid
  * slider: four squares a row on a 1920 px window (and on a 1440 px one, see `rowHeight`).
  */

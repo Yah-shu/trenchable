@@ -1,5 +1,5 @@
 /**
- * Genjutsu ("Reality manipulation") — its own lane, `#/gen/genjutsu`, apart from Video (it began as
+ * GenShitSu ("Reality manipulation") — its own lane, `#/gen/genjutsu`, apart from Video (it began as
  * a special preset of Create Video). It has its own tabs across the top of the rail, as Video does:
  *
  *   Motion transfer · Objects swap — the RailStudio form (video/genjutsu/GenjutsuMode.tsx)

@@ -11,7 +11,7 @@
  * takes the same handoff's prompt, slots and model. The very first render reads a waiting
  * handoff, so the right form mounts straight away. Tab and tool survive a reload.
  *
- * Genjutsu used to be Create Video's special preset; since 2026-10-19 it is its own lane
+ * GenShitSu used to be Create Video's special preset; since 2026-10-19 it is its own lane
  * (GenjutsuSurface.tsx) and nothing of it is left here. Video's History leaves its clips out
  * (video/genjutsu/mine.ts); Motion Control stays, the simple one-character form.
  */

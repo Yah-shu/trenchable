@@ -1,7 +1,7 @@
 /**
  * Video's forms, each a RailStudio with its own models, slots and copy: Create Video and
  * Motion Control (two of their three tabs), and the Kie-backed tools of Edit Video — Edit,
- * Extend, Upscale and Lip-sync (EditTools.tsx has the list). Genjutsu, once the special preset
+ * Extend, Upscale and Lip-sync (EditTools.tsx has the list). GenShitSu, once the special preset
  * of Create Video, is its own lane since 2026-10-19 (GenjutsuSurface.tsx).
  *
  * The rail engine already turns slots into the right fields and options into the model's
@@ -10,8 +10,8 @@
  * constants or memoised: the generator regroups the catalogue whenever the filter changes.
  *
  * Every form shows the one Video feed (no per-form history filter), so a job from any tab
- * lands in the same List / Grid, as theirs does — all but Genjutsu's clips, which stay in
- * Genjutsu's own History (`useVideoFeed`).
+ * lands in the same List / Grid, as theirs does — all but GenShitSu's clips, which stay in
+ * GenShitSu's own History (`useVideoFeed`).
  */
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { AudioLines, Film, ImagePlus, PersonStanding, Plus, Sparkles, UserRound, Video } from 'lucide-react'

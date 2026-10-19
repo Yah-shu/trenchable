@@ -233,7 +233,7 @@ function SheetTab({ tabs, character, onCharacter }: { tabs: ReactNode; character
   )
 }
 
-/* ---------- motion: their Genjutsu ---------- */
+/* ---------- motion: their GenShitSu ---------- */
 
 /** Motion transfer: a reference clip to copy, and the character's pictures (@image1…). */
 const TRANSFER_SLOTS: SlotSpec[] = [
@@ -275,7 +275,7 @@ function MotionTab({ tabs, character, onCharacter }: { tabs: ReactNode; characte
   const header = (
     <>
       {tabs}
-      <p className="sp-panel-title">Genjutsu</p>
+      <p className="sp-panel-title">GenShitSu</p>
       <TabBar
         tabs={[
           { id: 'transfer' as const, label: 'Motion transfer' },
@@ -331,7 +331,7 @@ function MotionTab({ tabs, character, onCharacter }: { tabs: ReactNode; characte
       category="video"
       klass="video-ref"
       filter={mode === 'transfer' ? isMotionControl : isSwap}
-      // Their Genjutsu opens on Kling 3.0 for both modes.
+      // Their GenShitSu opens on Kling 3.0 for both modes.
       preferModel={mode === 'transfer' ? /^kling-3\.0\/motion-control$/ : /^kling-3\.0-omni\/transformation$/}
       header={header}
       slots={slots}

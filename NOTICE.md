@@ -11,7 +11,7 @@ affiliated with kie.ai. That notice applies to Trenchable too.
 
 ### What Trenchable changed (first published October 2026)
 
-- **New front end:** the generation studio in `board/` (Image, Video, Genjutsu, Audio, Edit, Effects, Presets,
+- **New front end:** the generation studio in `board/` (Image, Video, GenShitSu, Audio, Edit, Effects, Presets,
   Influencer, Marketing, Cinema, Canvas, Layers, Assets), with its own page shell (`board/main.tsx`).
 - **New server parts** for that studio in `server/studio/` (pricing, elements and projects, uploads, local tools,
   guided swap, voice change and translate), plus `server/lib/`.

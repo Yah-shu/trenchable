@@ -1,5 +1,5 @@
 /**
- * Edit Video's local tools and Genjutsu's Guided swap, client side: the runs the server is working on
+ * Edit Video's local tools and GenShitSu's Guided swap, client side: the runs the server is working on
  * (server/studio/localtools.ts, server/studio/guided.ts), whether the tools are installed, and the
  * Kie inputs a Reframe or a guided swap will send — so Generate can show their price before anything goes.
  *

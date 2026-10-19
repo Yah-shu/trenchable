@@ -1,7 +1,7 @@
 """Original + pitch-shifted soundtrack (ffmpeg Rubber Band, same duration) - the guide video's embedded audio.
 usage: audio.py --in clip.mp4 --out DIR [--pitch 3]
 -> RESULT {"original": "DIR/original.wav", "pitched": "DIR/pitched.wav", "semitones": 3, "duration": s}
-Note: the Genjutsu workflow pitches isolated vocals (Demucs); this shifts the whole mix (no separation model)."""
+Note: the Genjustsu workflow pitches isolated vocals (Demucs); this shifts the whole mix (no separation model)."""
 import argparse, os, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

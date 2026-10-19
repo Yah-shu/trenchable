@@ -187,7 +187,7 @@ Everything that setup downloads may be used commercially.
 | SAM 2.1 Small weights + code (facebookresearch/sam2) | Remove BG, Guided swap | Apache-2.0 |
 | RIFE 4.25 weights + Practical-RIFE code (hzwer/Practical-RIFE) | FPS Boost | MIT |
 | MediaPipe Face Landmarker model + library (Google) | Guided swap face outline | Apache-2.0 |
-| Guide composite logic in `tools/guide.py`, ported from the Genjutsu open-source workflow (github.com/sirioberati/Genjustsu-Open-Source-Workflow, © 2026 Sirio Berati) | Guided swap | MIT |
+| Guide composite logic in `tools/guide.py`, ported from the Genjustsu open-source workflow (github.com/sirioberati/Genjustsu-Open-Source-Workflow, © 2026 Sirio Berati) | Guided swap | MIT |
 | PyTorch, torchvision | all model tools | BSD-3-Clause |
 | OpenCV, NumPy, Hydra and the other packages in `requirements.txt` | | Apache-2.0 / BSD / MIT |
 | ffmpeg (installed by you) | everything | LGPL or GPL, depending on the build |

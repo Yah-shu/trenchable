@@ -1,6 +1,6 @@
 /**
- * Which history items are Genjutsu's, live. Genjutsu's History shows only these and Video's
- * shows everything else (each lane keeps its own clips; both still land in Assets). A job is Genjutsu's by its tracked tag (genjutsu.ts), recorded a moment after
+ * Which history items are GenShitSu's, live. GenShitSu's History shows only these and Video's
+ * shows everything else (each lane keeps its own clips; both still land in Assets). A job is GenShitSu's by its tracked tag (genjutsu.ts), recorded a moment after
  * Generate — well before the clip is done — so the filters follow the tags as they are written.
  */
 import { useMemo } from 'react'
@@ -9,7 +9,7 @@ import { useAllTracked } from '../../track.ts'
 import { genjutsuTasks, isGenjutsuItem } from './genjutsu.ts'
 
 export interface GenjutsuFilters {
-  /** Genjutsu's History. */
+  /** GenShitSu's History. */
   mine: (item: HistoryItem) => boolean
   /** Video's History. */
   notMine: (item: HistoryItem) => boolean
@@ -23,5 +23,5 @@ export function useGenjutsuFilters(): GenjutsuFilters {
   }, [tracked])
 }
 
-/** Video's History filter: every clip but Genjutsu's. */
+/** Video's History filter: every clip but GenShitSu's. */
 export const useVideoFeed = () => useGenjutsuFilters().notMine

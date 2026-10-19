@@ -11,7 +11,7 @@ One page, every model Kie offers, your results kept on your disk.
 |---|---|
 | **Image** | Text-to-image and image editing on every Kie image model, with references (`@Image 1`), saved characters (Elements) and per-model settings that are remembered |
 | **Video** | Create Video (frames or references), Edit Video (edit, extend, upscale, lip-sync, reframe and more) and Motion Control |
-| **Genjutsu** | Motion transfer (put your character through a clip's moves), Objects swap (replace a person, product or garment in a clip), styles that redraw every frame, and Guided swap (needs the local tools extra) |
+| **GenShitSu** | Motion transfer (put your character through a clip's moves), Objects swap (replace a person, product or garment in a clip), styles that redraw every frame, and Guided swap (needs the local tools extra) |
 | **Audio** | Voices, dialogue, music, voice isolation; Voice change and Translate for clips (need the voice extra) |
 | **Edit** | Upscale, remove background, inpaint, reframe, relight, new camera angles |
 | **Effects** · **Presets** | Ready-made recipes for images and clips |

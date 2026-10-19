@@ -1,5 +1,5 @@
 /**
- * Genjutsu → Guided swap: the third tab, next to Motion transfer and Objects swap. Instead of
+ * GenShitSu → Guided swap: the third tab, next to Motion transfer and Objects swap. Instead of
  * sending raw footage, the clip is turned into a guide on this PC — the person as a coloured depth map over
  * the original background, a face mesh on top, the voice pitched +3 semitones inside — and Seedance 2.5
  * redraws that figure as your character (server/studio/guided.ts, a port of the MIT
@@ -343,6 +343,6 @@ const EXPLAIN = (
       'Make draft: Seedance 2.5 redraws the figure as your character at 480p; the clip’s original sound is put back on it.',
       'Make HD: the same take, finished at 1080p, the sound restored again.',
     ]}
-    foot="After the open-source Genjutsu workflow by Sirio Berati (MIT). Seedance gets a guide instead of raw footage, so the motion, framing and lips hold while the person changes."
+    foot="After the open-source Genjustsu workflow by Sirio Berati (MIT). Seedance gets a guide instead of raw footage, so the motion, framing and lips hold while the person changes."
   />
 )

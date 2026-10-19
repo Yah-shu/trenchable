@@ -1,4 +1,4 @@
-// Genjutsu's routing: which models each job runs on, how many pictures each takes and the
+// GenShitSu's routing: which models each job runs on, how many pictures each takes and the
 // line that says so, how @image1 is written per model, the composed prompt, what is
 // remembered, the handoffs it answers, its own lane and History apart from Video's, and the
 // Motion Library's shelves. Models are the
@@ -167,7 +167,7 @@ describe('memory and handoffs', () => {
     expect(handoffPatch({ mode: 'swap', modelId: 'happyhorse/video-edit' })).toEqual({ mode: 'swap', style: null })
     expect(handoffPatch({ mode: 'guided', modelId: GUIDED_MODEL_ID })).toEqual({ mode: 'guided', style: null })
     expect(handoffPatch({})).toBeNull()
-    // Video's own modes are not Genjutsu's.
+    // Video's own modes are not GenShitSu's.
     expect(handoffPatch({ mode: 'motion' })).toBeNull()
     expect(handoffPatch({ mode: 'create' })).toBeNull()
   })

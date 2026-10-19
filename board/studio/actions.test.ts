@@ -168,7 +168,7 @@ describe('handoffs follow the engine contract', () => {
     expect(handoffFor('upscale-video', v, url)).toEqual({ surface: 'video', mode: 'upscale', slots: { video: url }, sourceTaskId: 'task-9' })
     expect(handoffFor('lipsync', v, url)).toEqual({ surface: 'video', mode: 'lipsync', slots: { video: url } })
     expect(handoffFor('edit-video', v, url)).toEqual({ surface: 'video', mode: 'edit', slots: { video: url } })
-    // Use the motion opens Genjutsu (its own lane), on Motion transfer.
+    // Use the motion opens GenShitSu (its own lane), on Motion transfer.
     expect(handoffFor('motion', v, url)).toEqual({ surface: 'genjutsu', mode: 'transfer', slots: { motion: url } })
   })
 
@@ -197,7 +197,7 @@ describe('Reuse', () => {
     expect(reuseMode(item({ category: 'audio', modelId: 'elevenlabs/text-to-speech' }))).toBe('tts')
   })
 
-  it('sends a Genjutsu job back to Genjutsu, not Video, its clip and pictures in their slots', () => {
+  it('sends a GenShitSu job back to GenShitSu, not Video, its clip and pictures in their slots', () => {
     const guided = item({ category: 'video', modelId: 'studio/guided-swap', input: { video_url: 'https://k/clip.mp4', image_urls: ['https://k/a.png', 'https://k/b.png'] } })
     expect(reuseSurface(guided)).toBe('genjutsu')
     expect(reuseMode(guided)).toBe('guided')

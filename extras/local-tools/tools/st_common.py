@@ -276,7 +276,7 @@ def fit(w, h, max_side):
 
 
 def normalize(src, dst, max_side=960, fps=24, size=None):
-    """Working copy like the Genjutsu workflow step 3: constant `fps`, longest side <= max_side (or exact `size`),
+    """Working copy like the Genjustsu workflow step 3: constant `fps`, longest side <= max_side (or exact `size`),
     H.264 + the source audio. Returns probe() of the result."""
     info = probe(src)
     w, h = size if size else fit(info["w"], info["h"], max_side)

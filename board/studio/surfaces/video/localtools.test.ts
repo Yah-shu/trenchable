@@ -1,4 +1,4 @@
-// Edit Video's local tools and Genjutsu's Guided swap, client side: clicks → normalised points, the
+// Edit Video's local tools and GenShitSu's Guided swap, client side: clicks → normalised points, the
 // prices shown before a Kie step, and the doctor's answer in plain words. Prices below are Kie's list
 // as read on 2026-10-17. Nothing here touches the network.
 import { describe, expect, it } from 'vitest'
