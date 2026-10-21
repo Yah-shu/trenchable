@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitest/config'
+import { configDefaults, defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import { fileURLToPath } from 'node:url'
 
@@ -14,6 +14,8 @@ export default defineConfig({
     },
   },
   test: {
+    // export/*/overlay holds tests for the exported apps; they run there (export.mjs --verify), not here.
+    exclude: [...configDefaults.exclude, 'team/**'],
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
     restoreMocks: true,

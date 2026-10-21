@@ -26,6 +26,12 @@ click it to top up on Kie.
 
 > The sign-up and top-up links (here and in the app) are a Kie.ai referral link from whoever shared Trenchable with you.
 
+## Team edition
+
+The `team/` folder holds **Trenchable Team**, the hosted multi-user version: one website on Vercel and Supabase where a
+small team shares one Kie balance, one feed of results and a spend dashboard. Everything else on this page is about the
+local app. For the team version see [`team/README.md`](team/README.md).
+
 ## What you need
 
 - A **Kie.ai API key**: [sign up on Kie.ai](https://kie.ai?ref=d63ec5bbbb733f26cd5d4ced27d29ee0), add credits, copy your key from

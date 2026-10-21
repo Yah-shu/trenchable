@@ -20,6 +20,8 @@ affiliated with kie.ai. That notice applies to Trenchable too.
   (`advanced.html` → `src/`).
 - **Removed:** the desktop (Electrobun) build, its installers and auto-update packaging, and the command-line tool.
 - **Optional extras** in `extras/` (local GPU video tools, local transcription), installed by their own setup scripts.
+- **Team edition:** `team/` (Trenchable Team) began from a team studio codebase shared with permission by its author
+  and was rebuilt for Trenchable.
 
 ## Third-party parts
 
