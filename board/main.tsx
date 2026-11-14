@@ -87,19 +87,31 @@ function KeyBanner() {
   }
   return (
     <div className="tr-key">
-      <KeyRound size={16} />
-      <span>
-        Add your <a href={KIE_KEY_URL} target="_blank" rel="noreferrer">Kie.ai API key</a> to start. It is saved on this computer only, encrypted. No account yet?{' '}
-        <a href={KIE_CREDITS_URL} target="_blank" rel="noreferrer">
-          Sign up on Kie.ai
+      <div className="tr-key__head">
+        <KeyRound size={16} />
+        <b>Two steps to start</b>
+      </div>
+      <div className="tr-key__step">
+        <span className="tr-key__num">1</span>
+        <span className="tr-key__text">Make your Kie.ai account. Trenchable runs every model through it, paid with your own Kie credits.</span>
+        <a className="plinth-btn plinth-btn--sm tr-key__signup" href={KIE_CREDITS_URL} target="_blank" rel="noreferrer">
+          <span className="plinth-btn__face">
+            <span className="plinth-btn__label">Create a Kie.ai account</span>
+          </span>
         </a>
-      </span>
-      <input type="password" placeholder="Paste your Kie API key" value={key} onChange={(e) => setKey(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && key.trim() && void save()} />
-      <button type="button" className="plinth-btn plinth-btn--sm" disabled={busy || !key.trim()} onClick={() => void save()}>
-        <span className="plinth-btn__face">
-          <span className="plinth-btn__label">{busy ? 'Saving…' : 'Save key'}</span>
+      </div>
+      <div className="tr-key__step">
+        <span className="tr-key__num">2</span>
+        <span className="tr-key__text">
+          Copy your key from <a href={KIE_KEY_URL} target="_blank" rel="noreferrer">kie.ai/api-key</a> and paste it here. It is saved on this computer only, encrypted.
         </span>
-      </button>
+        <input type="password" placeholder="Paste your Kie API key" value={key} onChange={(e) => setKey(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && key.trim() && void save()} />
+        <button type="button" className="plinth-btn plinth-btn--sm" disabled={busy || !key.trim()} onClick={() => void save()}>
+          <span className="plinth-btn__face">
+            <span className="plinth-btn__label">{busy ? 'Saving…' : 'Save key'}</span>
+          </span>
+        </button>
+      </div>
       {error && <span className="tr-key__error">{error}</span>}
     </div>
   )

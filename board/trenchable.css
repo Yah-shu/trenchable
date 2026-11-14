@@ -2,8 +2,7 @@
 
 .tr-key {
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 10px;
   margin: 10px 16px 0;
   padding: 10px 14px;
@@ -26,6 +25,35 @@
   border-radius: 10px;
   background: var(--pl-canvas);
   font: inherit;
+}
+.tr-key__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+.tr-key__step {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tr-key__num {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--pl-ink);
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 12px;
+  flex: none;
+}
+.tr-key__text {
+  flex: 1 1 260px;
+}
+.tr-key a.tr-key__signup {
+  text-decoration: none;
 }
 .tr-key__error {
   width: 100%;

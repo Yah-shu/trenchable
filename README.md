@@ -5,6 +5,9 @@ One page, every model Kie offers, your results kept on your disk.
 
 > Unofficial. Trenchable is not made by, endorsed by or connected with kie.ai or any model provider.
 
+**Start here: [create your Kie.ai account](https://kie.ai?ref=d63ec5bbbb733f26cd5d4ced27d29ee0)** (Trenchable runs every
+model through it). Then follow [Install](#install). The app asks for your Kie key the first time it opens.
+
 ## What's in it
 
 | Lane | What it does |
@@ -34,7 +37,7 @@ local app. For the team version see [`team/README.md`](team/README.md).
 
 ## What you need
 
-- A **Kie.ai API key**: [sign up on Kie.ai](https://kie.ai?ref=d63ec5bbbb733f26cd5d4ced27d29ee0), add credits, copy your key from
+- A **Kie.ai API key**: [create your Kie.ai account here](https://kie.ai?ref=d63ec5bbbb733f26cd5d4ced27d29ee0), add credits, copy your key from
   [kie.ai/api-key](https://kie.ai/api-key?ref=d63ec5bbbb733f26cd5d4ced27d29ee0). Generations are paid with your Kie credits.
 - **Node.js** 20.19+ or 22.12+ (with npm): [nodejs.org](https://nodejs.org)
 - **Bun** 1.2+ (runs the local server): [bun.sh](https://bun.sh)
@@ -46,7 +49,7 @@ Works on Windows, macOS and Linux.
 ## Install
 
 ```sh
-git clone https://github.com/<you>/trenchable.git
+git clone https://github.com/Yah-shu/trenchable.git
 cd trenchable
 npm install
 ```
@@ -56,7 +59,8 @@ npm install
 - **Windows:** double-click **`Start Trenchable.bat`**. Close its window to stop.
 - **Any system:** `npm run dev`
 
-Your browser opens at <http://localhost:5173>. The first time, paste your Kie API key in the banner at the top. It is
+Your browser opens at <http://localhost:5173>. The first time, a banner at the top walks you through it: make your Kie
+account with its button, then paste your Kie API key. It is
 stored on this computer only, encrypted. You can change it later in **Advanced → Settings**.
 
 ## Where your things are kept
